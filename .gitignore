@@ -1,0 +1,23 @@
+# Dependencias de Composer
+/vendor/
+
+# Archivos de configuración local
+.env
+.env.local
+
+# Logs
+*.log
+
+# Archivos temporales
+.DS_Store
+Thumbs.db
+
+# Node modules (si usas npm en el futuro)
+node_modules/
+
+# Archivos de Docker (opcional, según prefieras)
+docker-compose.override.yml
+
+# Archivos de IDE
+.vscode/
+.idea/

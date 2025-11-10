@@ -1,0 +1,85 @@
+{
+  "obras": [
+    {
+      "id": 1,
+      "nombre": "Edificio Residencial Torre Sol",
+      "descripcion": "Construcción integral de edificio residencial de 12 pisos con carpintería en aluminio de alta gama, ventanas DVH y cerramientos de balcones.",
+      "fechaInicio": "2023-03-15",
+      "fechaFin": "2024-06-30",
+      "estado": "Completada",
+      "cliente": "Constructora del Sol S.A.",
+      "ubicacion": "Montevideo, Uruguay",
+      "categoria": "Residencial",
+      "superficie": "3500 m²",
+      "imagenes": [
+        "obra-1/imagen-1.jpg",
+        "obra-1/imagen-2.jpg",
+        "obra-1/imagen-3.jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Centro Comercial Punta Este",
+      "descripcion": "Instalación de fachada integral en aluminio y vidrio, puertas automáticas y sistema de ventanas DVH para todo el complejo comercial.",
+      "fechaInicio": "2023-08-01",
+      "fechaFin": "2024-12-15",
+      "estado": "En Progreso",
+      "cliente": "Inversiones Comerciales Uruguay",
+      "ubicacion": "Punta del Este, Uruguay",
+      "categoria": "Comercial",
+      "superficie": "5200 m²",
+      "imagenes": [
+        "obra-2/imagen-1.jpg",
+        "obra-2/imagen-2.jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Oficinas Corporativas TechHub",
+      "descripcion": "Proyecto de modernización de oficinas con carpintería en aluminio, mamparas divisorias de vidrio templado y sistema DVH de última generación.",
+      "fechaInicio": "2024-01-10",
+      "fechaFin": "2024-04-30",
+      "estado": "Completada",
+      "cliente": "TechHub Uruguay S.R.L.",
+      "ubicacion": "Montevideo, Uruguay",
+      "categoria": "Corporativo",
+      "superficie": "1800 m²",
+      "imagenes": [
+        "obra-3/imagen-1.jpg",
+        "obra-3/imagen-2.jpg",
+        "obra-3/imagen-3.jpg"
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Complejo Industrial LogiPark",
+      "descripcion": "Construcción de naves industriales con estructuras de aluminio, portones seccionales y sistemas de ventilación con ventanas DVH.",
+      "fechaInicio": "2024-02-20",
+      "fechaFin": "",
+      "estado": "En Progreso",
+      "cliente": "LogiPark S.A.",
+      "ubicacion": "Canelones, Uruguay",
+      "categoria": "Industrial",
+      "superficie": "8500 m²",
+      "imagenes": [
+        "obra-4/imagen-1.jpg"
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "Hotel Boutique Océano Azul",
+      "descripcion": "Renovación completa de fachadas con carpintería en aluminio de diseño, ventanas DVH y puertas corredizas de gran formato para habitaciones con vista al mar.",
+      "fechaInicio": "2023-05-12",
+      "fechaFin": "2023-11-25",
+      "estado": "Completada",
+      "cliente": "Hoteles del Atlántico",
+      "ubicacion": "La Paloma, Rocha",
+      "categoria": "Hotelería",
+      "superficie": "2400 m²",
+      "imagenes": [
+        "obra-5/imagen-1.jpg",
+        "obra-5/imagen-2.jpg"
+      ]
+    }
+  ]
+}

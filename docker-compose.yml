@@ -1,0 +1,9 @@
+services:
+  cps_web:
+    build: .
+    container_name: cps_web
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    restart: always

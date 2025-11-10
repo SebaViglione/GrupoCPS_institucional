@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conoce las obras realizadas por Grupo CPS en Uruguay. Proyectos residenciales, comerciales e industriales con carpintería en aluminio y vidriería de calidad.">
+    <title>Nuestras Obras | Grupo CPS Uruguay</title>
+    <link rel="icon" type="image/png" href="assets/images/Logo CPS.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/obras.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="assets/images/Logo CPS.png" alt="Grupo CPS Logo" class="logo-img">
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">GRUPO <span class="highlight">CPS</span></a></h1>
+                </div>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="index.html#nosotros" class="nav-link">Nosotros</a></li>
+                    <li><a href="obras.html" class="nav-link active">Obras</a></li>
+                    <li><a href="index.html#clientes" class="nav-link">Clientes</a></li>
+                    <li><a href="index.html#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="obras-hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="obras-hero-content">
+                <span class="section-tag fade-in-up">Portfolio</span>
+                <h1 class="obras-hero-title fade-in-up delay-1">Nuestras Obras</h1>
+                <p class="obras-hero-description fade-in-up delay-2">
+                    Descubre los proyectos que hemos realizado con excelencia y dedicación en todo Uruguay
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="obras-filter">
+        <div class="container">
+            <div class="filter-row">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="todas">Todas</button>
+                    <button class="filter-btn" data-filter="Residencial">Residencial</button>
+                    <button class="filter-btn" data-filter="Comercial">Comercial</button>
+                    <button class="filter-btn" data-filter="Corporativo">Corporativo</button>
+                    <button class="filter-btn" data-filter="Industrial">Industrial</button>
+                    <button class="filter-btn" data-filter="Hotelería">Hotelería</button>
+                </div>
+                <div class="view-buttons">
+                    <button class="view-btn active" data-view="grid" title="Vista en Grilla">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </button>
+                    <button class="view-btn" data-view="list" title="Vista en Lista">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                        </svg>
+                    </button>
+                    <button class="view-btn" data-view="timeline" title="Vista en Timeline">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="filter-status">
+                <button class="status-btn active" data-status="todas">Todas</button>
+                <button class="status-btn" data-status="Completada">Completadas</button>
+                <button class="status-btn" data-status="En Progreso">En Progreso</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Obras Grid -->
+    <section class="obras-section">
+        <div class="container">
+            <div id="obrasGrid" class="obras-grid">
+                <!-- Las obras se cargarán dinámicamente aquí -->
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Cargando obras...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Detalle de Obra -->
+    <div id="obraModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div id="modalBody" class="modal-body">
+                <!-- El contenido se cargará dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>¿Tienes un proyecto en mente?</h2>
+                <p>Contáctanos y hagamos realidad tu próxima obra</p>
+                <a href="index.html#contacto" class="btn btn-primary">Contactar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>GRUPO <span class="highlight">CPS</span></h3>
+                    <p>Construcción y Aluminio de Calidad</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Inicio</a>
+                    <a href="index.html#nosotros">Nosotros</a>
+                    <a href="obras.html">Obras</a>
+                    <a href="index.html#clientes">Clientes</a>
+                    <a href="index.html#contacto">Contacto</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Grupo CPS Uruguay. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/obras.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+{
+  "clientes": [
+    {
+      "nombre": "Arca",
+      "logo": "Constructoras y desarrolladoras/Arca.jpeg",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "CIEMSA",
+      "logo": "Constructoras y desarrolladoras/CIEMSA.png",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "Ebital",
+      "logo": "Constructoras y desarrolladoras/Ebital.png",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "Enkel",
+      "logo": "Constructoras y desarrolladoras/Enkel.svg",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "Stiler",
+      "logo": "Constructoras y desarrolladoras/Stiler.jpg",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "Teyma",
+      "logo": "Constructoras y desarrolladoras/Teyma.svg",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "Fecovi",
+      "logo": "Cooperativas/Fecovi.jpg",
+      "categoria": "Cooperativas"
+    },
+    {
+      "nombre": "ASSE",
+      "logo": "Estado/ASSE.png",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "Antel",
+      "logo": "Estado/Antel.svg",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "BSE",
+      "logo": "Estado/BSE.png",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "MSP",
+      "logo": "Estado/MSP.png",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "MTOP",
+      "logo": "Estado/MTOP.png",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "MTSS",
+      "logo": "Estado/MTSS.png",
+      "categoria": "Estado",
+      "clase": "wide"
+    },
+    {
+      "nombre": "Mides",
+      "logo": "Estado/Mides.jpg",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "UDELAR",
+      "logo": "Estado/UDELAR.png",
+      "categoria": "Estado",
+      "clase": "compact"
+    },
+    {
+      "nombre": "Proa Carrasco",
+      "logo": "Privados/Proa Carrasco.png",
+      "categoria": "Privados",
+      "clase": "wide"
+    },
+    {
+      "nombre": "Sinergia",
+      "logo": "Privados/Sinergia.jpg",
+      "categoria": "Privados"
+    },
+    {
+      "nombre": "Summum",
+      "logo": "Privados/Summum.png",
+      "categoria": "Privados"
+    }
+  ]
+}
