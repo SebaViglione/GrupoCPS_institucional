@@ -14,7 +14,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar scrolled" id="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-content">
                 <div class="logo">
@@ -38,16 +38,23 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="obras-hero">
+    <section class="obras-hero" id="obrasHero">
+        <div class="hero-background-images">
+            <!-- Las imágenes se cargarán dinámicamente aquí -->
+        </div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="obras-hero-content">
                 <span class="section-tag fade-in-up">Portfolio</span>
-                <h1 class="obras-hero-title fade-in-up delay-1">Nuestras Obras</h1>
+                <h1 class="obras-hero-title fade-in-up delay-1">NUESTRAS OBRAS</h1>
                 <p class="obras-hero-description fade-in-up delay-2">
                     Descubre los proyectos que hemos realizado con excelencia y dedicación en todo Uruguay
                 </p>
             </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <span>Scroll</span>
         </div>
     </section>
 
@@ -80,12 +87,6 @@
                             <line x1="3" y1="6" x2="3.01" y2="6"></line>
                             <line x1="3" y1="12" x2="3.01" y2="12"></line>
                             <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                        </svg>
-                    </button>
-                    <button class="view-btn" data-view="timeline" title="Vista en Timeline">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
                     </button>
                 </div>

@@ -1,85 +1,402 @@
-{
-  "obras": [
-    {
-      "id": 1,
-      "nombre": "Edificio Residencial Torre Sol",
-      "descripcion": "Construcción integral de edificio residencial de 12 pisos con carpintería en aluminio de alta gama, ventanas DVH y cerramientos de balcones.",
-      "fechaInicio": "2023-03-15",
-      "fechaFin": "2024-06-30",
-      "estado": "Completada",
-      "cliente": "Constructora del Sol S.A.",
-      "ubicacion": "Montevideo, Uruguay",
-      "categoria": "Residencial",
-      "superficie": "3500 m²",
-      "imagenes": [
-        "obra-1/imagen-1.jpg",
-        "obra-1/imagen-2.jpg",
-        "obra-1/imagen-3.jpg"
-      ]
-    },
-    {
-      "id": 2,
-      "nombre": "Centro Comercial Punta Este",
-      "descripcion": "Instalación de fachada integral en aluminio y vidrio, puertas automáticas y sistema de ventanas DVH para todo el complejo comercial.",
-      "fechaInicio": "2023-08-01",
-      "fechaFin": "2024-12-15",
-      "estado": "En Progreso",
-      "cliente": "Inversiones Comerciales Uruguay",
-      "ubicacion": "Punta del Este, Uruguay",
-      "categoria": "Comercial",
-      "superficie": "5200 m²",
-      "imagenes": [
-        "obra-2/imagen-1.jpg",
-        "obra-2/imagen-2.jpg"
-      ]
-    },
-    {
-      "id": 3,
-      "nombre": "Oficinas Corporativas TechHub",
-      "descripcion": "Proyecto de modernización de oficinas con carpintería en aluminio, mamparas divisorias de vidrio templado y sistema DVH de última generación.",
-      "fechaInicio": "2024-01-10",
-      "fechaFin": "2024-04-30",
-      "estado": "Completada",
-      "cliente": "TechHub Uruguay S.R.L.",
-      "ubicacion": "Montevideo, Uruguay",
-      "categoria": "Corporativo",
-      "superficie": "1800 m²",
-      "imagenes": [
-        "obra-3/imagen-1.jpg",
-        "obra-3/imagen-2.jpg",
-        "obra-3/imagen-3.jpg"
-      ]
-    },
-    {
-      "id": 4,
-      "nombre": "Complejo Industrial LogiPark",
-      "descripcion": "Construcción de naves industriales con estructuras de aluminio, portones seccionales y sistemas de ventilación con ventanas DVH.",
-      "fechaInicio": "2024-02-20",
-      "fechaFin": "",
-      "estado": "En Progreso",
-      "cliente": "LogiPark S.A.",
-      "ubicacion": "Canelones, Uruguay",
-      "categoria": "Industrial",
-      "superficie": "8500 m²",
-      "imagenes": [
-        "obra-4/imagen-1.jpg"
-      ]
-    },
-    {
-      "id": 5,
-      "nombre": "Hotel Boutique Océano Azul",
-      "descripcion": "Renovación completa de fachadas con carpintería en aluminio de diseño, ventanas DVH y puertas corredizas de gran formato para habitaciones con vista al mar.",
-      "fechaInicio": "2023-05-12",
-      "fechaFin": "2023-11-25",
-      "estado": "Completada",
-      "cliente": "Hoteles del Atlántico",
-      "ubicacion": "La Paloma, Rocha",
-      "categoria": "Hotelería",
-      "superficie": "2400 m²",
-      "imagenes": [
-        "obra-5/imagen-1.jpg",
-        "obra-5/imagen-2.jpg"
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "nombre": "Hospital del Cerro",
+    "descripcion": "Infraestructura hospitalaria de última generación desarrollada por TEYMA y GMS Arquitectos. CPS ejecutó carpintería de aluminio, herrería especializada, vidriería técnica y apoyo MEP, contribuyendo al cumplimiento del cronograma general del proyecto.",
+    "estado": "Completada",
+    "cliente": "ASSE / TEYMA / GMS Arquitectos",
+    "ubicacion": "Villa del Cerro, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "2500 m²",
+    "imagenes": [
+      "obras-optimized/hospital-cerro/1.webp",
+      "obras-optimized/hospital-cerro/2.webp",
+      "obras-optimized/hospital-cerro/3.webp"
+    ]
+  },
+  {
+    "id": 2,
+    "nombre": "Hospital El Filtro",
+    "descripcion": "Centro de salud de referencia de ASSE intervenido por TEYMA con participación de CPS en cerramientos sanitarios, aberturas anodizadas con DVH y herrería técnica para anclajes estructurales.",
+    "estado": "Completada",
+    "cliente": "ASSE / TEYMA",
+    "ubicacion": "Barrio Reducto, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "2300 m²",
+    "imagenes": [
+      "obras-optimized/hospital-filtro/1.webp",
+      "obras-optimized/hospital-filtro/2.webp",
+      "obras-optimized/hospital-filtro/3.webp"
+    ]
+  },
+  {
+    "id": 3,
+    "nombre": "Congreso de Intendentes",
+    "descripcion": "Transformación completa del edificio institucional con fachadas vidriadas templadas, cerramientos anodizados y puertas automáticas, manteniendo la identidad arquitectónica urbana.",
+    "estado": "Completada",
+    "cliente": "TEYMA / Estudio Mántaras",
+    "ubicacion": "Av. 18 de Julio y Convención, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "3000 m²",
+    "imagenes": [
+      "obras-optimized/congreso-intendentes/1.webp",
+      "obras-optimized/congreso-intendentes/2.webp"
+    ]
+  },
+  {
+    "id": 4,
+    "nombre": "Facultad de Enfermería UdelaR",
+    "descripcion": "Nueva sede académica de la Facultad de Enfermería desarrollada por TEYMA. CPS ejecutó aberturas anodizadas, cerramientos exteriores e interiores y herrería de precisión para áreas técnicas.",
+    "estado": "Completada",
+    "cliente": "UdelaR / TEYMA",
+    "ubicacion": "Parque Batlle, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "3200 m²",
+    "imagenes": [
+      "obras-optimized/facultad-enfermeria/1.webp",
+      "obras-optimized/facultad-enfermeria/2.webp",
+      "obras-optimized/facultad-enfermeria/3.webp"
+    ]
+  },
+  {
+    "id": 5,
+    "nombre": "Centro de Realojos Piedras Blancas",
+    "descripcion": "Proyecto social en ejecución con instalación de aberturas en PVC importadas por CPS, adaptadas a vivienda social y coordinadas con cronogramas públicos.",
+    "estado": "En Progreso",
+    "cliente": "TEYMA / Ministerio de Vivienda",
+    "ubicacion": "Piedras Blancas, Montevideo, Uruguay",
+    "categoria": "Residencial",
+    "superficie": "4000 m²",
+    "imagenes": [
+      "obras-optimized/realojos-piedrasblancas/1.webp",
+      "obras-optimized/realojos-piedrasblancas/2.webp",
+      "obras-optimized/realojos-piedrasblancas/3.webp"
+    ]
+  },
+  {
+    "id": 6,
+    "nombre": "Círculo Católico - Policlínica",
+    "descripcion": "Provisión e instalación de aberturas de aluminio en la ampliación de servicios de atención primaria, cumpliendo exigencias sanitarias y de confort térmico.",
+    "estado": "Completada",
+    "cliente": "Círculo Católico / TEYMA",
+    "ubicacion": "Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "1500 m²",
+    "imagenes": [
+      "obras-optimized/circulo-catolico/1.webp",
+      "obras-optimized/circulo-catolico/2.webp",
+      "obras-optimized/circulo-catolico/3.webp"
+    ]
+  },
+  {
+    "id": 7,
+    "nombre": "Cárcel de Libertad",
+    "descripcion": "Proyecto penitenciario en curso. CPS provee cerramientos especiales, herrería de seguridad y aberturas reforzadas para uso carcelario.",
+    "estado": "En Progreso",
+    "cliente": "TEYMA / Ministerio del Interior",
+    "ubicacion": "Libertad, San José, Uruguay",
+    "categoria": "Industrial",
+    "superficie": "8000 m²",
+    "imagenes": [
+      "obras-optimized/carcel-libertad/1.webp",
+      "obras-optimized/carcel-libertad/2.webp",
+      "obras-optimized/carcel-libertad/3.webp"
+    ]
+  },
+  {
+    "id": 8,
+    "nombre": "The Garzón School (TGS)",
+    "descripcion": "Institución educativa de alto nivel en José Ignacio. CPS ejecutó fachadas vidriadas con DVH laminado, aberturas de alta prestación y curvado de perfiles personalizados.",
+    "estado": "Completada",
+    "cliente": "Enkel",
+    "ubicacion": "José Ignacio, Maldonado, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "1800 m²",
+    "imagenes": [
+      "obras-optimized/garzon-school/1.webp",
+      "obras-optimized/garzon-school/2.webp",
+      "obras-optimized/garzon-school/3.webp",
+      "obras-optimized/garzon-school/4.webp",
+      "obras-optimized/garzon-school/5.webp"
+    ]
+  },
+  {
+    "id": 9,
+    "nombre": "Colegio Aldeas",
+    "descripcion": "Proyecto educativo en El Pinar con estructuras tipo domo. CPS realizó cerramientos curvos, fachadas en sistema Suprema y aberturas móviles personalizadas.",
+    "estado": "Completada",
+    "cliente": "Enkel",
+    "ubicacion": "El Pinar, Canelones, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "2000 m²",
+    "imagenes": [
+      "obras-optimized/colegio-aldeas/1.webp"
+    ],
+    "videos": [
+      "obras/colegio-aldeas/2.mp4"
+    ]
+  },
+  {
+    "id": 10,
+    "nombre": "Vivo Life Cordón",
+    "descripcion": "Edificio de vivienda promovida en Cordón. CPS diseñó y fabricó parasoles arquitectónicos, barandas de aluminio y vidrio, y elementos metálicos exteriores.",
+    "estado": "Completada",
+    "cliente": "ARCA",
+    "ubicacion": "Cordón, Montevideo, Uruguay",
+    "categoria": "Residencial",
+    "superficie": "3500 m²",
+    "imagenes": [
+      "obras-optimized/vivo-life/2.webp",
+      "obras-optimized/vivo-life/3.webp",
+      "obras-optimized/vivo-life/4.webp"
+    ],
+    "videos": [
+      "obras/vivo-life/1.mp4"
+    ]
+  },
+  {
+    "id": 11,
+    "nombre": "Avita Libertador",
+    "descripcion": "Edificio de vivienda promovida con cerramiento técnico en azotea. CPS diseñó e instaló estructuras metálicas con terminaciones resistentes a la intemperie.",
+    "estado": "Completada",
+    "cliente": "ARCA",
+    "ubicacion": "Av. Libertador, Montevideo, Uruguay",
+    "categoria": "Residencial",
+    "superficie": "2800 m²",
+    "imagenes": [
+      "obras-optimized/avita-libertador/1.webp",
+      "obras-optimized/avita-libertador/2.webp"
+    ]
+  },
+  {
+    "id": 12,
+    "nombre": "Uruguayan American School (UAS)",
+    "descripcion": "Centro educativo desarrollado junto a CIEMSA. CPS ejecutó cerramientos vidriados y aberturas de alta prestación bajo estrictos estándares de calidad institucional.",
+    "estado": "Completada",
+    "cliente": "CIEMSA",
+    "ubicacion": "Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "2500 m²",
+    "imagenes": [
+      "obras-optimized/uas/1.webp",
+      "obras-optimized/uas/2.webp",
+      "obras-optimized/uas/3.webp"
+    ]
+  },
+  {
+    "id": 13,
+    "nombre": "Proa Carrasco",
+    "descripcion": "Edificio residencial premium con barandas de aluminio curvadas, pérgolas, portones y rejas perimetrales. Trabajo realizado en altura con precisión milimétrica.",
+    "estado": "Completada",
+    "cliente": "Proa Carrasco S.A.",
+    "ubicacion": "Carrasco Norte, Montevideo, Uruguay",
+    "categoria": "Residencial",
+    "superficie": "4200 m²",
+    "imagenes": [
+      "obras-optimized/proa-carrasco/1.webp",
+      "obras-optimized/proa-carrasco/2.webp",
+      "obras-optimized/proa-carrasco/3.webp",
+      "obras-optimized/proa-carrasco/4.webp"
+    ]
+  },
+  {
+    "id": 14,
+    "nombre": "Sinergia Faro (ex Sheraton)",
+    "descripcion": "Reconversión del ex Hotel Sheraton en hub de innovación. CPS realizó restauración de fachada, curtain wall, rooftop técnico y la primera fachada fotovoltaica de Uruguay.",
+    "estado": "Completada",
+    "cliente": "Sinergia Faro",
+    "ubicacion": "Punta Carretas, Montevideo, Uruguay",
+    "categoria": "Hotelería",
+    "superficie": "5000 m²",
+    "imagenes": [
+      "obras-optimized/sinergia-faro/1.jpg"
+    ]
+  },
+  {
+    "id": 15,
+    "nombre": "MIDES - Fachada Institucional",
+    "descripcion": "Renovación integral de la fachada del Ministerio de Desarrollo Social, con accesos automáticos, cortinas metálicas y planificación en altura sin interrumpir actividades.",
+    "estado": "Completada",
+    "cliente": "Ministerio de Desarrollo Social (MIDES)",
+    "ubicacion": "Centro, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "1500 m²",
+    "imagenes": [
+      "obras-optimized/mides/1.jpg"
+    ]
+  },
+  {
+    "id": 16,
+    "nombre": "Edificio Merville",
+    "descripcion": "Intervención integral en edificio residencial frente a la Rambla, con barandas de aluminio resistentes a la corrosión, restauración de fachada y mejoras estéticas.",
+    "estado": "Completada",
+    "cliente": "Consorcio Merville",
+    "ubicacion": "Rambla de Montevideo, Uruguay",
+    "categoria": "Residencial",
+    "superficie": "3800 m²",
+    "imagenes": [
+      "obras-optimized/merville/1.jpg"
+    ]
+  },
+  {
+    "id": 17,
+    "nombre": "Summum - World Trade Center",
+    "descripcion": "Renovación de fachada vidriada y cerramientos de oficinas en el complejo WTC. CPS ejecutó carpinterías de aluminio DVH y montaje limpio en entorno corporativo.",
+    "estado": "Completada",
+    "cliente": "Summum Seguros",
+    "ubicacion": "World Trade Center, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "1200 m²",
+    "imagenes": [
+      "obras-optimized/summum-wtc/1.jpg"
+    ]
+  },
+  {
+    "id": 18,
+    "nombre": "Hospital de Clínicas",
+    "descripcion": "Intervención en el CTI del piso 15. CPS instaló aberturas de alta prestación, parasoles y revestimientos en panel compuesto, mejorando confort térmico y protección solar.",
+    "estado": "Completada",
+    "cliente": "MTOP / Dirección Nacional de Arquitectura",
+    "ubicacion": "Av. Italia, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "2000 m²",
+    "imagenes": [
+      "obras-optimized/hospital-clinicas/1.jpg"
+    ]
+  },
+  {
+    "id": 19,
+    "nombre": "Hospital Pasteur",
+    "descripcion": "Readecuación de cerramientos, mamparas y servicios hospitalarios durante pandemia COVID-19. CPS reemplazó más de 1000 m² de aberturas y cerramientos técnicos.",
+    "estado": "Completada",
+    "cliente": "MSP / Dirección Nacional de Arquitectura",
+    "ubicacion": "Av. Centenario, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "4000 m²",
+    "imagenes": [
+      "obras-optimized/hospital-pasteur/1.webp",
+      "obras-optimized/hospital-pasteur/2.webp",
+      "obras-optimized/hospital-pasteur/3.webp",
+      "obras-optimized/hospital-pasteur/4.webp",
+      "obras-optimized/hospital-pasteur/5.webp",
+      "obras-optimized/hospital-pasteur/6.webp"
+    ]
+  },
+  {
+    "id": 20,
+    "nombre": "ANTEL - Sede Cerrito",
+    "descripcion": "Sustitución integral de aberturas respetando la fachada patrimonial de la sede en Ciudad Vieja. CPS instaló DVH y carpinterías de aluminio de alto desempeño.",
+    "estado": "Completada",
+    "cliente": "ANTEL",
+    "ubicacion": "Ciudad Vieja, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "1800 m²",
+    "imagenes": [
+      "obras-optimized/antel-cerrito/1.webp"
+    ]
+  },
+  {
+    "id": 21,
+    "nombre": "Ministerio de Trabajo y Seguridad Social (MTSS)",
+    "descripcion": "Renovación de cerramientos y restauración de fachada del edificio central, con nuevas carpinterías de aluminio y trabajos de silleta planificados por sectores.",
+    "estado": "Completada",
+    "cliente": "MTSS",
+    "ubicacion": "Centro, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "2600 m²",
+    "imagenes": [
+      "obras-optimized/mtss/1.jpg"
+    ]
+  },
+  {
+    "id": 22,
+    "nombre": "Banco de Seguros del Estado (BSE)",
+    "descripcion": "Readecuación de oficinas en pisos 6 y 8 con nuevas aberturas de aluminio y mamparas divisorias de vidrio templado. Ejecución con mínima interferencia operativa.",
+    "estado": "Completada",
+    "cliente": "BSE",
+    "ubicacion": "Centro, Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "1500 m²",
+    "imagenes": [
+      "obras-optimized/bse/1.jpg"
+    ]
+  },
+  {
+    "id": 23,
+    "nombre": "Nostrum Malvín Torre 2",
+    "descripcion": "Torre residencial desarrollada por Ebital. CPS instaló barandas, parasoles y separadores de balcones, contribuyendo al diseño y control solar de la fachada.",
+    "estado": "En Progreso",
+    "cliente": "Ebital S.A.",
+    "ubicacion": "Av. Italia y Colombes, Montevideo, Uruguay",
+    "categoria": "Residencial",
+    "superficie": "6000 m²",
+    "imagenes": [
+      "obras-optimized/nostrum-malvin/1.jpg"
+    ]
+  },
+  {
+    "id": 24,
+    "nombre": "Cooperativas de Vivienda",
+    "descripcion": "Participación en múltiples cooperativas de vivienda en todo el país, aportando carpintería de aluminio, herrería y cerramientos técnicos adaptados a cada sistema constructivo.",
+    "estado": "Completada",
+    "cliente": "Diversas Cooperativas",
+    "ubicacion": "Uruguay",
+    "categoria": "Residencial",
+    "superficie": "25000 m²",
+    "imagenes": [
+      "obras-optimized/cooperativas/1.jpg"
+    ]
+  },
+  {
+    "id": 25,
+    "nombre": "INISA Academia",
+    "descripcion": "Construcción de sede educativa especializada en convenio con MTOP, integrando obra civil y carpintería de aluminio bajo estándares públicos.",
+    "estado": "Completada",
+    "cliente": "MTOP / INISA",
+    "ubicacion": "Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "2000 m²",
+    "imagenes": [
+      "obras-optimized/inisa/1.jpg"
+    ]
+  },
+  {
+    "id": 26,
+    "nombre": "Comisaría de Salinas",
+    "descripcion": "Obra funcional ejecutada junto al MTOP, con cerramientos de seguridad, herrería técnica y carpinterías de aluminio adaptadas a requerimientos policiales.",
+    "estado": "Completada",
+    "cliente": "MTOP / Ministerio del Interior",
+    "ubicacion": "Salinas, Canelones, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "1700 m²",
+    "imagenes": [
+      "obras-optimized/comisaria-salinas/1.jpg"
+    ]
+  },
+  {
+    "id": 27,
+    "nombre": "Hogar Horneros (INISA)",
+    "descripcion": "Centro de reclusión para menores infractores con cerramientos de seguridad, barandas y herrería de alta resistencia.",
+    "estado": "Completada",
+    "cliente": "MTOP / INISA",
+    "ubicacion": "Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "2400 m²",
+    "imagenes": [
+      "obras-optimized/hogar-horneros/1.jpg"
+    ]
+  },
+  {
+    "id": 28,
+    "nombre": "Escuela Integral STILER",
+    "descripcion": "Proyecto educativo de gran impacto social desarrollado junto a STILER. CPS realiza provisión e instalación de aberturas y cerramientos adaptados al entorno escolar.",
+    "estado": "En Progreso",
+    "cliente": "STILER",
+    "ubicacion": "Montevideo, Uruguay",
+    "categoria": "Corporativo",
+    "superficie": "3000 m²",
+    "imagenes": [
+      "obras-optimized/stiler-escuela-integral/1.jpg"
+    ]
+  }
+]
