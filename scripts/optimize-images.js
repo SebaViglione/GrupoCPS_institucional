@@ -3,65 +3,37 @@ const path = require('path');
 const sharp = require('sharp');
 
 // Configuración
-const OBRAS_DIR = path.join(__dirname, '../assets/images/obras');
+const OBRAS_DIR = path.join(__dirname, '../assets/images/obras-upscaled'); // Leer de obras-upscaled
+const FALLBACK_DIR = path.join(__dirname, '../assets/images/obras'); // Fallback si no existe upscaled
 const OUTPUT_DIR = path.join(__dirname, '../assets/images/obras-optimized');
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
 
-// Configuración de optimización
-const OPTIMIZATION_CONFIG = {
-    // Para imágenes del hero (grandes)
-    hero: {
-        width: 1920,
-        height: 1080,
-        quality: 90,
-        format: 'webp'
-    },
-    // Para imágenes de cards (medianas)
-    card: {
-        width: 800,
-        height: 600,
-        quality: 85,
-        format: 'webp'
-    }
-};
+// Ya no redimensionamos - solo convertimos a WebP manteniendo resolución original
 
 // Crear directorio de salida si no existe
 if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
-// Función para optimizar una imagen
-async function optimizeImage(inputPath, outputPath, config) {
+// Función para optimizar una imagen (SOLO FORMATO, SIN REDIMENSIONAR)
+async function optimizeImage(inputPath, outputPath) {
     try {
         const image = sharp(inputPath);
         const metadata = await image.metadata();
 
-        // Determinar si es horizontal o vertical
-        const isLandscape = metadata.width > metadata.height;
-
-        let processedImage = image;
-
-        // Redimensionar manteniendo aspect ratio
-        if (isLandscape) {
-            processedImage = processedImage.resize(config.width, null, {
-                fit: 'inside',
-                withoutEnlargement: true
-            });
-        } else {
-            processedImage = processedImage.resize(null, config.height, {
-                fit: 'inside',
-                withoutEnlargement: true
-            });
-        }
-
-        // Aplicar sharpening para evitar pixelación
-        processedImage = processedImage.sharpen();
-
-        // Convertir a WebP con alta calidad
-        await processedImage
-            .webp({ quality: config.quality, effort: 6 })
+        // NO REDIMENSIONAR - mantener resolución original del upscale
+        // Solo convertir a WebP con alta calidad y optimización
+        await image
+            .webp({
+                quality: 95,  // Calidad muy alta para preservar detalles del upscale
+                effort: 6,    // Máximo esfuerzo de compresión
+                lossless: false,
+                nearLossless: false,
+                smartSubsample: true  // Mejor compresión sin pérdida visible
+            })
             .toFile(outputPath);
 
+        console.log(`  ✓ ${metadata.width}x${metadata.height} → WebP (${Math.round(metadata.width * metadata.height / 1000000)}MP)`);
         return true;
     } catch (error) {
         console.error(`Error optimizando ${inputPath}:`, error.message);
@@ -69,20 +41,18 @@ async function optimizeImage(inputPath, outputPath, config) {
     }
 }
 
-// Función para determinar el tipo de optimización
-function getOptimizationConfig(filename) {
-    // Si el nombre tiene 'hero' o es el primer archivo, usa config hero
-    if (filename.includes('hero') || filename === '1.webp' || filename === '1.jpg') {
-        return OPTIMIZATION_CONFIG.hero;
-    }
-    return OPTIMIZATION_CONFIG.card;
-}
+// Ya no se necesita configuración por tipo (hero/card)
+// Todas las imágenes mantienen su resolución original
 
 // Función principal
 async function optimizeAllImages() {
     console.log('🚀 Iniciando optimización de imágenes...\n');
 
-    const folders = fs.readdirSync(OBRAS_DIR, { withFileTypes: true })
+    // Usar directorio upscaled si existe, sino usar obras original
+    const sourceDir = fs.existsSync(OBRAS_DIR) ? OBRAS_DIR : FALLBACK_DIR;
+    console.log(`📂 Leyendo imágenes desde: ${sourceDir}\n`);
+
+    const folders = fs.readdirSync(sourceDir, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory())
         .map(dirent => dirent.name);
 
@@ -90,7 +60,7 @@ async function optimizeAllImages() {
     let totalFailed = 0;
 
     for (const folder of folders) {
-        const folderPath = path.join(OBRAS_DIR, folder);
+        const folderPath = path.join(sourceDir, folder);
         const outputFolderPath = path.join(OUTPUT_DIR, folder);
 
         // Crear carpeta de salida
@@ -112,8 +82,7 @@ async function optimizeAllImages() {
             const outputFilename = path.basename(file, path.extname(file)) + '.webp';
             const outputPath = path.join(outputFolderPath, outputFilename);
 
-            const config = getOptimizationConfig(file);
-            const success = await optimizeImage(inputPath, outputPath, config);
+            const success = await optimizeImage(inputPath, outputPath);
 
             if (success) {
                 totalProcessed++;

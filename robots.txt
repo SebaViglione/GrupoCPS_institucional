@@ -1,0 +1,20 @@
+# robots.txt for Grupo CPS Uruguay
+# https://grupocps.com.uy
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /obras.html
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+
+Disallow: /scripts/
+Disallow: /node_modules/
+Disallow: /*.json$
+
+# Sitemap
+Sitemap: https://grupocps.com.uy/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1

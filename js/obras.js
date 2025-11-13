@@ -40,10 +40,14 @@ function setupHeroBackground() {
 
     if (allImages.length === 0) return;
 
-    // Filter high-quality images (preferring JPG and WebP over PNG)
-    // Also avoid thumbnail-sized images by checking filename patterns
+    // Filter only high-quality images from obras-optimized/ (WebP format with good resolution)
     const highQualityImages = allImages.filter(img => {
         const lowercaseImg = img.toLowerCase();
+
+        // Only use images from obras-optimized/ directory
+        if (!lowercaseImg.includes('obras-optimized/')) {
+            return false;
+        }
 
         // Exclude common thumbnail patterns
         if (lowercaseImg.includes('thumb') ||
@@ -52,14 +56,14 @@ function setupHeroBackground() {
             return false;
         }
 
-        // Prefer webp and jpg over png (webp and jpg are usually better compressed)
-        return lowercaseImg.endsWith('.webp') ||
-               lowercaseImg.endsWith('.jpg') ||
-               lowercaseImg.endsWith('.jpeg');
+        // Only use WebP images (these are the upscaled and optimized ones)
+        return lowercaseImg.endsWith('.webp');
     });
 
     // Use filtered images, or fall back to all images if no high-quality ones found
     const imagesToUse = highQualityImages.length > 0 ? highQualityImages : allImages;
+
+    console.log(`Hero: Usando ${imagesToUse.length} imágenes de alta calidad de obras-optimized/`);
 
     // Shuffle images randomly
     const shuffledImages = imagesToUse.sort(() => Math.random() - 0.5);
@@ -72,6 +76,8 @@ function setupHeroBackground() {
 
     // Preload images to avoid pixelation during transitions
     const preloadedImages = [];
+    let loadedCount = 0;
+
     selectedImages.forEach((imgSrc, index) => {
         const img = new Image();
         img.src = `assets/images/${imgSrc}`;
@@ -82,12 +88,17 @@ function setupHeroBackground() {
         img.onload = () => {
             heroContainer.appendChild(img);
             preloadedImages.push(img);
+            loadedCount++;
 
             // Activate first image with delay for smooth fade-in
             if (index === 0) {
                 setTimeout(() => {
                     img.classList.add('active');
                 }, 100); // Small delay to ensure CSS transition applies
+            }
+
+            // Start rotation only when all images are loaded
+            if (loadedCount === selectedImages.length) {
                 startHeroRotation();
             }
         };
@@ -97,7 +108,12 @@ function setupHeroBackground() {
         let currentImageIndex = 0;
         const images = heroContainer.querySelectorAll('.hero-bg-image');
 
-        if (images.length <= 1) return;
+        console.log('Hero rotation starting with', images.length, 'images');
+
+        if (images.length <= 1) {
+            console.log('Not enough images for rotation');
+            return;
+        }
 
         heroBackgroundInterval = setInterval(() => {
             // Fade out current image
@@ -105,6 +121,8 @@ function setupHeroBackground() {
 
             // Move to next image
             currentImageIndex = (currentImageIndex + 1) % images.length;
+
+            console.log('Switching to image', currentImageIndex);
 
             // Fade in next image
             images[currentImageIndex].classList.add('active');
@@ -144,7 +162,11 @@ function renderObras() {
             <div class="obra-card" style="animation-delay: ${index * 0.1}s" data-obra-id="${obra.id}" onclick="openModal(${obra.id})">
                 <div class="obra-image" data-images='${JSON.stringify(obra.imagenes || [])}' data-videos='${JSON.stringify(obra.videos || [])}'>
                     ${obra.imagenes && obra.imagenes.length > 0
-                        ? `<img class="obra-img-main" src="assets/images/${obra.imagenes[0]}"
+                        ? `<div class="obra-image-loader">
+                                <div class="obra-spinner"></div>
+                                <p>Cargando obras</p>
+                            </div>
+                            <img class="obra-img-main lazy-load" data-src="assets/images/${obra.imagenes[0]}"
                                 alt="${obra.nombre}"
                                 onerror="this.parentElement.innerHTML='<div class=\\'obra-placeholder\\'><svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'2\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\' ry=\\'2\\'></rect><circle cx=\\'8.5\\' cy=\\'8.5\\' r=\\'1.5\\'></circle><polyline points=\\'21 15 16 10 5 21\\'></polyline></svg></div>'">`
                         : `<div class="obra-placeholder">
@@ -154,6 +176,15 @@ function renderObras() {
                                     <polyline points="21 15 16 10 5 21"></polyline>
                                 </svg>
                             </div>`
+                    }
+                    ${((obra.imagenes && obra.imagenes.length > 1) || (obra.videos && obra.videos.length > 0))
+                        ? `<div class="obra-image-indicators">
+                            ${obra.videos && obra.videos.length > 0 ? '<span class="indicator-dot"></span>' : ''}
+                            ${obra.imagenes ? obra.imagenes.map((_, index) =>
+                                `<span class="indicator-dot${index === 0 ? ' active' : ''}"></span>`
+                            ).join('') : ''}
+                           </div>`
+                        : ''
                     }
                     <span class="obra-status-badge status-${obra.estado.toLowerCase().replace(' ', '-')}">
                         ${obra.estado}
@@ -192,6 +223,74 @@ function renderObras() {
 
     // Setup image carousel on hover
     setupImageCarousel();
+
+    // Setup lazy loading for images
+    setupLazyLoading();
+}
+
+// Setup lazy loading for images using Intersection Observer
+function setupLazyLoading() {
+    const lazyImages = document.querySelectorAll('.lazy-load');
+
+    if (!lazyImages.length) return;
+
+    // Configuración del Intersection Observer
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                const loader = img.previousElementSibling; // El spinner
+
+                // Crear una nueva imagen para precargar
+                const tempImg = new Image();
+
+                tempImg.onload = () => {
+                    // Una vez cargada, asignar el src a la imagen real
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+
+                    // Ocultar el loader con transición suave
+                    if (loader && loader.classList.contains('obra-image-loader')) {
+                        loader.style.opacity = '0';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                        }, 300);
+                    }
+                };
+
+                tempImg.onerror = () => {
+                    // Si falla la carga, mostrar placeholder
+                    if (loader && loader.classList.contains('obra-image-loader')) {
+                        loader.innerHTML = `
+                            <div class="obra-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <polyline points="21 15 16 10 5 21"></polyline>
+                                </svg>
+                            </div>
+                        `;
+                    }
+                    img.style.display = 'none';
+                };
+
+                // Iniciar la carga de la imagen
+                tempImg.src = img.dataset.src;
+
+                // Dejar de observar esta imagen
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        // Cargar las imágenes cuando estén a 200px de entrar en el viewport
+        rootMargin: '200px 0px',
+        threshold: 0.01
+    });
+
+    // Observar todas las imágenes lazy
+    lazyImages.forEach(img => {
+        imageObserver.observe(img);
+    });
 }
 
 // Setup image carousel on hover with video support
@@ -219,9 +318,72 @@ function setupImageCarousel() {
         }
 
         const obraId = card.getAttribute('data-obra-id');
+        const indicators = card.querySelectorAll('.indicator-dot');
         let currentIndex = 0;
         let videoPlayed = false;
         let currentVideoElement = null;
+
+        // Add click handlers to indicator dots
+        indicators.forEach((dot, dotIndex) => {
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent card click event
+
+                // Clear any running interval
+                if (imageIntervals[obraId]) {
+                    clearInterval(imageIntervals[obraId]);
+                    delete imageIntervals[obraId];
+                }
+
+                // Calculate which image to show (account for video offset)
+                const offset = videos.length > 0 ? 1 : 0;
+                const imageIndex = dotIndex - offset;
+
+                // If it's a video dot (first dot when videos exist)
+                if (videos.length > 0 && dotIndex === 0) {
+                    // Play video
+                    videoPlayed = false;
+                    playVideo(videos[0]);
+                    currentIndex = 0;
+                } else if (imageIndex >= 0 && imageIndex < images.length) {
+                    // Show the selected image with same transition as hover
+                    const img = obraImage.querySelector('.obra-img-main');
+                    if (img && img.style.display !== 'none') {
+                        // Update current index
+                        currentIndex = imageIndex;
+
+                        // Update active dot
+                        indicators.forEach(d => d.classList.remove('active'));
+                        dot.classList.add('active');
+
+                        // Stop any playing video
+                        if (currentVideoElement) {
+                            currentVideoElement.pause();
+                            currentVideoElement.style.opacity = '0';
+                            setTimeout(() => {
+                                if (currentVideoElement) {
+                                    currentVideoElement.remove();
+                                    currentVideoElement = null;
+                                }
+                            }, 300);
+                        }
+
+                        // Preload next image before transition (same as hover carousel)
+                        const preloadImg = new Image();
+                        preloadImg.onload = () => {
+                            // Fade out current image
+                            img.style.opacity = '0';
+
+                            // Change src and fade in after transition completes
+                            setTimeout(() => {
+                                img.src = preloadImg.src;
+                                img.style.opacity = '1';
+                            }, 300);
+                        };
+                        preloadImg.src = `assets/images/${images[imageIndex]}`;
+                    }
+                }
+            });
+        });
 
         card.addEventListener('mouseenter', async () => {
             // Clear any existing interval for this card
@@ -234,6 +396,11 @@ function setupImageCarousel() {
 
             // If there's a video, play it first
             if (videos.length > 0 && !videoPlayed) {
+                // Activate first dot (video indicator)
+                if (indicators.length > 0) {
+                    indicators[0].classList.add('active');
+                    if (indicators.length > 1) indicators[1].classList.remove('active');
+                }
                 await playVideo(videos[0]);
             }
 
@@ -264,9 +431,18 @@ function setupImageCarousel() {
             videoPlayed = false;
             currentIndex = 0;
 
+            // Reset indicators to first image
+            if (indicators.length > 0) {
+                const offset = videos.length > 0 ? 1 : 0;
+                indicators.forEach((dot, index) => {
+                    dot.classList.remove('active');
+                    if (index === offset) dot.classList.add('active');
+                });
+            }
+
             // Reset to first image with smooth fade-in
             const img = obraImage.querySelector('.obra-img-main');
-            if (img && images.length > 0) {
+            if (img && images.length > 0 && img.src) {
                 img.style.display = 'block';
                 img.style.opacity = '0';
 
@@ -377,15 +553,31 @@ function setupImageCarousel() {
                 currentIndex = (currentIndex + 1) % images.length;
                 const img = obraImage.querySelector('.obra-img-main');
 
-                if (img && img.style.display !== 'none') {
-                    // Fade out
-                    img.style.opacity = '0';
+                // Update indicator dots
+                if (indicators.length > 0) {
+                    const offset = videos.length > 0 ? 1 : 0; // Account for video dot
+                    indicators.forEach((dot, index) => {
+                        dot.classList.remove('active');
+                        if (index === currentIndex + offset) {
+                            dot.classList.add('active');
+                        }
+                    });
+                }
 
-                    // Change image and fade in
-                    setTimeout(() => {
-                        img.src = `assets/images/${images[currentIndex]}`;
-                        img.style.opacity = '1';
-                    }, 300);
+                if (img && img.style.display !== 'none' && img.src) {
+                    // Preload next image before transition
+                    const preloadImg = new Image();
+                    preloadImg.onload = () => {
+                        // Fade out current image
+                        img.style.opacity = '0';
+
+                        // Change src and fade in after transition completes
+                        setTimeout(() => {
+                            img.src = preloadImg.src;
+                            img.style.opacity = '1';
+                        }, 300);
+                    };
+                    preloadImg.src = `assets/images/${images[currentIndex]}`;
                 }
             }, 2000);
         }

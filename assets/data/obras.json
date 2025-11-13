@@ -131,9 +131,6 @@
     "superficie": "2000 m²",
     "imagenes": [
       "obras-optimized/colegio-aldeas/1.webp"
-    ],
-    "videos": [
-      "obras/colegio-aldeas/2.mp4"
     ]
   },
   {
@@ -149,9 +146,6 @@
       "obras-optimized/vivo-life/2.webp",
       "obras-optimized/vivo-life/3.webp",
       "obras-optimized/vivo-life/4.webp"
-    ],
-    "videos": [
-      "obras/vivo-life/1.mp4"
     ]
   },
   {
@@ -209,7 +203,8 @@
     "categoria": "Hotelería",
     "superficie": "5000 m²",
     "imagenes": [
-      "obras-optimized/sinergia-faro/1.jpg"
+      "obras-optimized/sinergia-faro/1.webp",
+      "obras-optimized/sinergia-faro/2.webp"
     ]
   },
   {
@@ -222,7 +217,9 @@
     "categoria": "Corporativo",
     "superficie": "1500 m²",
     "imagenes": [
-      "obras-optimized/mides/1.jpg"
+      "obras-optimized/mides/1.webp",
+      "obras-optimized/mides/2.webp",
+      "obras-optimized/mides/3.webp"
     ]
   },
   {
@@ -235,7 +232,9 @@
     "categoria": "Residencial",
     "superficie": "3800 m²",
     "imagenes": [
-      "obras-optimized/merville/1.jpg"
+      "obras-optimized/merville/1.webp",
+      "obras-optimized/merville/2.webp",
+      "obras-optimized/merville/3.webp"
     ]
   },
   {
@@ -248,7 +247,9 @@
     "categoria": "Corporativo",
     "superficie": "1200 m²",
     "imagenes": [
-      "obras-optimized/summum-wtc/1.jpg"
+      "obras-optimized/summum-wtc/1.webp",
+      "obras-optimized/summum-wtc/2.webp",
+      "obras-optimized/summum-wtc/3.webp"
     ]
   },
   {
@@ -261,7 +262,8 @@
     "categoria": "Corporativo",
     "superficie": "2000 m²",
     "imagenes": [
-      "obras-optimized/hospital-clinicas/1.jpg"
+      "obras-optimized/hospital-clinicas/1.webp",
+      "obras-optimized/hospital-clinicas/2.webp"
     ]
   },
   {
@@ -277,9 +279,7 @@
       "obras-optimized/hospital-pasteur/1.webp",
       "obras-optimized/hospital-pasteur/2.webp",
       "obras-optimized/hospital-pasteur/3.webp",
-      "obras-optimized/hospital-pasteur/4.webp",
-      "obras-optimized/hospital-pasteur/5.webp",
-      "obras-optimized/hospital-pasteur/6.webp"
+      "obras-optimized/hospital-pasteur/4.webp"
     ]
   },
   {
@@ -305,7 +305,9 @@
     "categoria": "Corporativo",
     "superficie": "2600 m²",
     "imagenes": [
-      "obras-optimized/mtss/1.jpg"
+      "obras-optimized/mtss/1.webp",
+      "obras-optimized/mtss/2.webp",
+      "obras-optimized/mtss/3.webp"
     ]
   },
   {
@@ -318,7 +320,9 @@
     "categoria": "Corporativo",
     "superficie": "1500 m²",
     "imagenes": [
-      "obras-optimized/bse/1.jpg"
+      "obras-optimized/bse/1.webp",
+      "obras-optimized/bse/2.webp",
+      "obras-optimized/bse/3.webp"
     ]
   },
   {
@@ -331,20 +335,9 @@
     "categoria": "Residencial",
     "superficie": "6000 m²",
     "imagenes": [
-      "obras-optimized/nostrum-malvin/1.jpg"
-    ]
-  },
-  {
-    "id": 24,
-    "nombre": "Cooperativas de Vivienda",
-    "descripcion": "Participación en múltiples cooperativas de vivienda en todo el país, aportando carpintería de aluminio, herrería y cerramientos técnicos adaptados a cada sistema constructivo.",
-    "estado": "Completada",
-    "cliente": "Diversas Cooperativas",
-    "ubicacion": "Uruguay",
-    "categoria": "Residencial",
-    "superficie": "25000 m²",
-    "imagenes": [
-      "obras-optimized/cooperativas/1.jpg"
+      "obras-optimized/nostrum-malvin/1.webp",
+      "obras-optimized/nostrum-malvin/2.webp",
+      "obras-optimized/nostrum-malvin/3.webp"
     ]
   },
   {
@@ -357,7 +350,7 @@
     "categoria": "Corporativo",
     "superficie": "2000 m²",
     "imagenes": [
-      "obras-optimized/inisa/1.jpg"
+      "obras-optimized/inisa/1.webp"
     ]
   },
   {
@@ -370,20 +363,7 @@
     "categoria": "Corporativo",
     "superficie": "1700 m²",
     "imagenes": [
-      "obras-optimized/comisaria-salinas/1.jpg"
-    ]
-  },
-  {
-    "id": 27,
-    "nombre": "Hogar Horneros (INISA)",
-    "descripcion": "Centro de reclusión para menores infractores con cerramientos de seguridad, barandas y herrería de alta resistencia.",
-    "estado": "Completada",
-    "cliente": "MTOP / INISA",
-    "ubicacion": "Montevideo, Uruguay",
-    "categoria": "Corporativo",
-    "superficie": "2400 m²",
-    "imagenes": [
-      "obras-optimized/hogar-horneros/1.jpg"
+      "obras-optimized/comisaria-salinas/1.webp"
     ]
   },
   {
@@ -396,7 +376,24 @@
     "categoria": "Corporativo",
     "superficie": "3000 m²",
     "imagenes": [
-      "obras-optimized/stiler-escuela-integral/1.jpg"
+      "obras-optimized/stiler-escuela-integral/1.webp",
+      "obras-optimized/stiler-escuela-integral/2.webp",
+      "obras-optimized/stiler-escuela-integral/3.webp"
+    ]
+  },
+  {
+    "id": 29,
+    "nombre": "Proyecto Laguna de los Cisnes",
+    "descripcion": "Conjunto de viviendas unifamiliares de alta gama con soluciones a medida en aluminio, vidrio, barandas, parasoles y terminaciones finas. La intervención incluye diseños personalizados para cada unidad, priorizando estética, amplitud visual y durabilidad en un entorno natural de alto valor paisajístico.",
+    "estado": "En Progreso",
+    "cliente": "Privado",
+    "ubicacion": "Laguna de los Cisnes, Maldonado, Uruguay",
+    "categoria": "Residencial",
+    "superficie": "5000 m²",
+    "imagenes": [
+      "obras-optimized/laguna-cisnes/1.webp",
+      "obras-optimized/laguna-cisnes/2.webp",
+      "obras-optimized/laguna-cisnes/3.webp"
     ]
   }
 ]

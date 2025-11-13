@@ -23,7 +23,7 @@ function getMediaFromFolder(folderName) {
     let imagenes = [];
     let videos = [];
 
-    // Obtener imágenes de la carpeta optimizada
+    // Obtener imágenes de la carpeta optimized
     if (fs.existsSync(optimizedPath)) {
         const files = fs.readdirSync(optimizedPath);
         imagenes = files
@@ -89,24 +89,20 @@ obrasData.forEach(obra => {
     if (folderName) {
         const { imagenes, videos } = getMediaFromFolder(folderName);
 
-        // Reemplazar rutas existentes que usen 'obras/' con 'obras-optimized/'
-        if (obra.imagenes) {
-            obra.imagenes = obra.imagenes.map(img =>
-                img.replace(/^obras\//, 'obras-optimized/')
-            );
-        }
-        if (obra.videos) {
-            obra.videos = obra.videos.map(video =>
-                video.replace(/^obras\//, 'obras/')
-            );
-        }
-
-        // Actualizar con las nuevas rutas encontradas
+        // SIEMPRE sobrescribir con las rutas encontradas SI existen
         if (imagenes.length > 0) {
             obra.imagenes = imagenes;
             console.log(`✓ ${obra.nombre}: ${imagenes.length} imágenes encontradas`);
         } else {
-            console.log(`⚠ ${obra.nombre}: No se encontraron imágenes en la carpeta '${folderName}'`);
+            // Si no hay imágenes en obras-optimized, reemplazar rutas antiguas
+            if (obra.imagenes && obra.imagenes.length > 0) {
+                obra.imagenes = obra.imagenes.map(img =>
+                    img.replace(/^obras(-upscaled|-optimized)?\//, 'obras-optimized/')
+                );
+                console.log(`⚠ ${obra.nombre}: No se encontraron imágenes optimizadas, rutas actualizadas a obras-optimized/`);
+            } else {
+                console.log(`⚠ ${obra.nombre}: No se encontraron imágenes en la carpeta '${folderName}'`);
+            }
         }
 
         if (videos.length > 0) {

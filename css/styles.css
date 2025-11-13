@@ -1209,6 +1209,47 @@ body {
   }
 }
 
+/* Selector de idioma */
+.lang-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--white);
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.lang-btn.active {
+  background: var(--primary-color);
+  color: var(--black);
+}
+
+.lang-btn:hover {
+  background: var(--primary-dark);
+  color: var(--black);
+}
+
+/* MODO MÓVIL */
+@media (max-width: 768px) {
+  .lang-selector {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .lang-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+  }
+}
+
 /* ======================================
    SCROLL ANIMATIONS
    ====================================== */

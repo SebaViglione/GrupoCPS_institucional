@@ -12,12 +12,20 @@
 .DS_Store
 Thumbs.db
 
-# Node modules (si usas npm en el futuro)
+# Node modules
 node_modules/
 
-# Archivos de Docker (opcional, según prefieras)
+# Archivos de Docker
 docker-compose.override.yml
 
 # Archivos de IDE
 .vscode/
 .idea/
+
+# Carpetas de imagenes (ignoramos todo menos obras-optimized)
+assets/images/obras/
+assets/images/obras-upscaled/
+assets/images/obras-*/
+
+# Pero permitir obras-optimized
+!assets/images/obras-optimized/

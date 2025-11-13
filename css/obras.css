@@ -33,21 +33,23 @@
     object-position: center;
     opacity: 0;
     transform: scale(1);
-    transition: opacity 1.5s ease-in-out, transform 15s ease-out;
+    /* Solo transición en opacity, el zoom lo maneja la animación */
+    transition: opacity 1.5s ease-in-out;
 }
 
 .hero-bg-image.active {
     opacity: 1;
-    transform: scale(1.1);
-    animation: zoomIn 15s ease-out forwards;
+    /* La animación mantiene el último estado con 'forwards' */
+    animation: smoothZoom 15s ease-out forwards;
 }
 
-@keyframes zoomIn {
-    from {
+/* Zoom suave que se mantiene al finalizar */
+@keyframes smoothZoom {
+    0% {
         transform: scale(1);
     }
-    to {
-        transform: scale(1.1);
+    100% {
+        transform: scale(1.15);
     }
 }
 
@@ -66,41 +68,60 @@
     z-index: 1;
 }
 
+.obras-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
 .obras-hero-content {
     position: relative;
     z-index: 2;
     text-align: center;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.section-tag {
-    display: inline-block;
-    padding: 0.4rem 1.2rem;
-    background: rgba(239, 138, 30, 0.1);
-    border: 1px solid rgba(239, 138, 30, 0.5);
-    color: var(--primary-color);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-radius: 50px;
-    margin-bottom: 1.5rem;
-    backdrop-filter: blur(10px);
-}
-
-.obras-hero-title {
-    font-family: var(--font-secondary);
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 1.5rem;
+/* Use same styles as index.html hero */
+.obras-hero-content .hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
     letter-spacing: 3px;
     text-transform: uppercase;
-    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
-    line-height: 1.2;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
 }
 
-.obras-hero-description {
+.obras-hero-content .hero-title {
+    margin-bottom: 0.8rem;
+    font-family: var(--font-secondary);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: linear-gradient(
+        135deg,
+        var(--white) 0%,
+        var(--primary-light) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.obras-hero-content .hero-location {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--very-light-gray);
+    margin-bottom: 2rem;
+}
+
+.obras-hero-content .hero-description {
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.9);
     max-width: 700px;
@@ -404,6 +425,51 @@
     transition: transform var(--transition-slow), opacity 0.3s ease;
 }
 
+/* Lazy loading styles */
+.obra-image img.lazy-load {
+    opacity: 0;
+}
+
+.obra-image img.lazy-load.loaded {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* Spinner de carga para imágenes */
+.obra-image-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark-gray);
+    z-index: 5;
+    transition: opacity 0.3s ease;
+}
+
+.obra-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(239, 138, 30, 0.2);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+.obra-image-loader p {
+    color: var(--primary-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
 .obra-card:hover .obra-image img {
     transform: scale(1.1);
 }
@@ -445,6 +511,52 @@
 .status-en-progreso {
     background: rgba(239, 138, 30, 0.9);
     color: var(--white);
+}
+
+/* Image Indicators (Carousel Dots) */
+.obra-image-indicators {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    z-index: 10;
+    padding: 0.5rem 0.75rem;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    transition: opacity var(--transition-normal);
+    opacity: 0.7;
+}
+
+.obra-card:hover .obra-image-indicators {
+    opacity: 1;
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.indicator-dot.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: scale(1.3);
+    box-shadow: 0 0 8px rgba(239, 138, 30, 0.6);
+}
+
+.indicator-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
 }
 
 .obra-content {
@@ -858,6 +970,11 @@
         padding: 0 1rem;
     }
 
+    /* Ocultar selector de vista en mobile */
+    .view-buttons {
+        display: none;
+    }
+
     .filter-buttons {
         display: flex;
         overflow-x: auto;
@@ -923,6 +1040,18 @@
 
     .view-btn {
         padding: 0.75rem 1rem;
+    }
+
+    /* Responsive image indicators for mobile */
+    .obra-image-indicators {
+        bottom: 0.75rem;
+        padding: 0.4rem 0.6rem;
+        gap: 0.4rem;
+    }
+
+    .indicator-dot {
+        width: 7px;
+        height: 7px;
     }
 
     .view-btn svg {

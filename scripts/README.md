@@ -1,119 +1,104 @@
-# Scripts de Automatización - Grupo CPS
+# 📂 Scripts de Procesamiento de Obras
 
-## optimize-images.js
+Este directorio contiene todas las herramientas automatizadas utilizadas para procesar imágenes de obras y actualizar el archivo `obras.json` del sitio institucional de **Grupo CPS**.
 
-Este script optimiza automáticamente todas las imágenes de las obras, convirtiendo a WebP de alta calidad y eliminando la pixelación.
+Los scripts realizan cuatro tareas principales:
 
-### Instalación
+---
 
-Primero instala Sharp (librería de procesamiento de imágenes):
+## 🔼 1. `upscale-images.js`
+Aumenta la resolución de las imágenes originales ubicadas en `assets/images/obras/`.
 
+### Funciones:
+- Analiza cada imagen y calcula si necesita upscale.
+- Aumenta la resolución usando interpolación Lanczos3.
+- Reduce ruido, mejora contraste y nitidez.
+- Exporta todo en **PNG de alta calidad**.
+- Guarda las imágenes en `assets/images/obras-upscaled/`.
+
+### Uso:
 ```bash
-npm install sharp
+node scripts/upscale-images.js
 ```
 
-### Uso
+---
 
+## 🗜️ 2. `optimize-images.js`
+Optimiza las imágenes upscaled convirtiéndolas a **WebP de alta calidad**, sin redimensionar.
+
+### Funciones:
+- Lee imágenes desde `obras-upscaled/` (o `obras/` si no existe).
+- Convierte a WebP con calidad 95%.
+- Reduce drásticamente el tamaño manteniendo nitidez.
+- Exporta resultado a `assets/images/obras-optimized/`.
+
+### Uso:
 ```bash
 node scripts/optimize-images.js
 ```
 
-### Características
-
-- ✅ Convierte todas las imágenes a WebP de alta calidad (85-90%)
-- ✅ Redimensiona automáticamente a tamaños óptimos para web
-- ✅ Aplica sharpening para evitar pixelación
-- ✅ Mantiene aspect ratio original
-- ✅ Reduce tamaño de archivo significativamente
-- ✅ Procesa JPG, PNG, WebP originales
-- ✅ Crea carpeta separada para revisar antes de reemplazar
-
-### Tamaños de optimización
-
-- **Hero/Primera imagen**: 1920x1080px @ 90% calidad
-- **Cards/Resto**: 800x600px @ 85% calidad
-
-### Proceso
-
-1. Ejecuta el script
-2. Revisa las imágenes optimizadas en `assets/images/obras-optimized/`
-3. Si te gustan, reemplaza la carpeta `obras/` con `obras-optimized/`
-4. Ejecuta `generate-obras-images.js` para actualizar el JSON
-
-### Resultado esperado
-
-- Imágenes nítidas sin pixelación
-- 40-70% de reducción en tamaño de archivo
-- Carga más rápida de la página
-- Mejor calidad visual
-
 ---
 
-## generate-obras-images.js
+## 🗂️ 3. `generate-obras-images.js`
+Actualiza automáticamente el archivo `assets/data/obras.json` con todas las imágenes y videos reales que existen en el proyecto.
 
-Este script escanea automáticamente la carpeta `assets/images/obras/` y actualiza el archivo `obras.json` con todas las imágenes y videos encontrados.
+### Funciones:
+- Escanea carpetas de obras optimizadas.
+- Detecta imágenes (WebP, JPG, PNG).
+- Detecta videos originales (MP4, WEBM, MOV).
+- Sobrescribe las rutas antiguas del JSON.
+- Mantiene orden alfabético y estructura limpia.
 
-### Uso
-
+### Uso:
 ```bash
 node scripts/generate-obras-images.js
 ```
 
-### Características
+---
 
-- ✅ Detecta automáticamente todas las imágenes (jpg, jpeg, png, webp, gif, svg)
-- ✅ Detecta automáticamente todos los videos (mp4, webm, mov)
-- ✅ No necesitas especificar extensiones manualmente
-- ✅ Ordena las imágenes y videos alfabéticamente
-- ✅ Actualiza el JSON automáticamente
-- ✅ Muestra un reporte de qué obras tienen imágenes/videos
+## 🔄 4. `process-all-obras.js`
+Ejecuta **todo el pipeline completo** en orden:
 
-### Agregar imágenes/videos a una obra
+1. Upscale  
+2. Optimización  
+3. Actualización del JSON  
 
-1. Coloca las imágenes o videos en la carpeta correspondiente:
-   ```
-   assets/images/obras/nombre-de-la-obra/
-   ```
+### Funciones:
+- Automatización total del flujo.
+- Logs en tiempo real.
+- Detiene el proceso si detecta errores.
 
-2. Ejecuta el script:
+### Uso (recomendado):
+```bash
+node scripts/process-all-obras.js
+```
+
+---
+
+# 📁 Flujo General de Trabajo
+
+1. Colocar imágenes originales en  
+   `assets/images/obras/<nombre-obra>/`.
+
+2. Ejecutar el pipeline:
    ```bash
-   node scripts/generate-obras-images.js
+   node scripts/process-all-obras.js
    ```
 
-3. Las imágenes y videos se agregarán automáticamente al JSON
+3. Revisar resultados:
+   - Imágenes mejoradas → `obras-upscaled/`
+   - Imágenes optimizadas → `obras-optimized/`
+   - JSON final → `assets/data/obras.json`
 
-### Formatos soportados
+---
 
-**Imágenes:**
-- JPG/JPEG
-- PNG
-- WebP
-- GIF
-- SVG
+# ✔ Objetivo de estos scripts
+Estos scripts permiten:
 
-**Videos:**
-- MP4 (recomendado)
-- WebM
-- MOV
+- Mantener calidad visual alta en la web  
+- Reducir el peso de imágenes para acelerar carga  
+- Evitar editar manualmente el JSON  
+- Automatizar todo el manejo de obras nuevas o modificadas  
+- Reducir errores humanos al mínimo  
 
-### Convenciones de nombres
-
-Las carpetas deben seguir este formato:
-- Minúsculas
-- Palabras separadas por guiones
-- Sin espacios ni caracteres especiales
-
-Ejemplos:
-- ✅ `hospital-cerro`
-- ✅ `garzon-school`
-- ✅ `antel-cerrito`
-- ❌ `Hospital Cerro`
-- ❌ `hospital_cerro`
-
-### Ventajas de este enfoque
-
-1. **Automatización**: No necesitas editar el JSON manualmente
-2. **Flexibilidad**: Acepta cualquier formato de imagen
-3. **Escalabilidad**: Fácil agregar nuevas obras o imágenes
-4. **Mantenibilidad**: Menos propenso a errores humanos
-5. **Performance**: El navegador carga cualquier formato sin problemas
+Son herramientas internas esenciales para mantener actualizado y optimizado el módulo **Obras** del sitio institucional de Grupo CPS.

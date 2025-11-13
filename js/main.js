@@ -118,14 +118,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const heroVideo = document.getElementById("heroVideo");
     if (!heroVideo) return;
 
-    const isMobile = window.innerWidth < 768;
-    const resolution = isMobile ? "720p" : "1080p";
     const videos = [
-        `assets/videos/optimizados/Video1_${resolution}.webm`,
-        `assets/videos/optimizados/Video2_${resolution}.webm`,
-        `assets/videos/optimizados/Video3_${resolution}.webm`,
-        `assets/videos/optimizados/Video4_${resolution}.webm`,
-        `assets/videos/optimizados/Video5_${resolution}.webm`
+        `assets/videos/Video 1.mp4`,
+        `assets/videos/Video 2.mp4`,
+        `assets/videos/Video 3.mp4`,
+        `assets/videos/Video 4.mp4`,
+        `assets/videos/Video 5.mp4`,
     ];
 
     const source = heroVideo.querySelector("source");
