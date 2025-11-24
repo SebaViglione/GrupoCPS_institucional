@@ -2,6 +2,13 @@
 // OBRAS PAGE - Dynamic Loading
 // ======================================
 
+// Helper function to get translated field based on current language
+function getObraField(obra, fieldName) {
+    const lang = typeof getCurrentLanguage === 'function' ? getCurrentLanguage() : 'es';
+    const translatedField = `${fieldName}_${lang}`;
+    return obra[translatedField] || obra[fieldName];
+}
+
 let obrasData = [];
 let currentFilter = 'todas';
 let currentStatus = 'todas';
@@ -167,7 +174,7 @@ function renderObras() {
                                 <p>Cargando obras</p>
                             </div>
                             <img class="obra-img-main lazy-load" data-src="assets/images/${obra.imagenes[0]}"
-                                alt="${obra.nombre}"
+                                alt="${getObraField(obra, 'nombre')}"
                                 onerror="this.parentElement.innerHTML='<div class=\\'obra-placeholder\\'><svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'2\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\' ry=\\'2\\'></rect><circle cx=\\'8.5\\' cy=\\'8.5\\' r=\\'1.5\\'></circle><polyline points=\\'21 15 16 10 5 21\\'></polyline></svg></div>'">`
                         : `<div class="obra-placeholder">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -193,20 +200,20 @@ function renderObras() {
                 <div class="obra-content">
                     <div class="obra-header">
                         <span class="obra-categoria">${obra.categoria}</span>
-                        <h3 class="obra-nombre">${obra.nombre}</h3>
+                        <h3 class="obra-nombre">${getObraField(obra, 'nombre')}</h3>
                         <div class="obra-cliente">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
-                            <span>${obra.cliente}</span>
+                            <span>${getObraField(obra, 'cliente')}</span>
                         </div>
                     </div>
-                    <p class="obra-descripcion">${obra.descripcion}</p>
+                    <p class="obra-descripcion">${getObraField(obra, 'descripcion')}</p>
                     <div class="obra-details">
                         <div class="obra-detail-item">
                             <span class="detail-label">Ubicación</span>
-                            <span class="detail-value">${obra.ubicacion}</span>
+                            <span class="detail-value">${getObraField(obra, 'ubicacion')}</span>
                         </div>
                         <div class="obra-detail-item">
                             <span class="detail-label">Superficie</span>
@@ -642,13 +649,13 @@ function openModal(obraId) {
     modalBody.innerHTML = `
         <div class="modal-header">
             <span class="modal-categoria">${obra.categoria}</span>
-            <h2 class="modal-title">${obra.nombre}</h2>
+            <h2 class="modal-title">${getObraField(obra, 'nombre')}</h2>
             <div class="modal-cliente">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
-                <span>${obra.cliente}</span>
+                <span>${getObraField(obra, 'cliente')}</span>
             </div>
         </div>
 
@@ -657,7 +664,7 @@ function openModal(obraId) {
                 ${obra.imagenes ? obra.imagenes.map(img => `
                     <div class="modal-image">
                         <img src="assets/images/${img}"
-                             alt="${obra.nombre}"
+                             alt="${getObraField(obra, 'nombre')}"
                              onerror="this.parentElement.innerHTML='<div class=\\'obra-placeholder\\'><svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'2\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\' ry=\\'2\\'></rect></svg></div>'">
                     </div>
                 `).join('') : ''}
@@ -684,7 +691,7 @@ function openModal(obraId) {
                 </svg>
                 Descripción del Proyecto
             </h3>
-            <p>${obra.descripcion}</p>
+            <p>${getObraField(obra, 'descripcion')}</p>
         </div>
 
         <div class="modal-details-grid">
@@ -708,7 +715,7 @@ function openModal(obraId) {
                     </svg>
                     Ubicación
                 </span>
-                <span class="modal-detail-value">${obra.ubicacion}</span>
+                <span class="modal-detail-value">${getObraField(obra, 'ubicacion')}</span>
             </div>
             <div class="modal-detail-item">
                 <span class="modal-detail-label">
@@ -728,7 +735,7 @@ function openModal(obraId) {
                     </svg>
                     Cliente
                 </span>
-                <span class="modal-detail-value">${obra.cliente}</span>
+                <span class="modal-detail-value">${getObraField(obra, 'cliente')}</span>
             </div>
         </div>
     `;
@@ -769,4 +776,9 @@ document.addEventListener('DOMContentLoaded', () => {
     loadObras();
     setupFilters();
     setupModal();
+});
+
+// Listen for language changes
+document.addEventListener('languageChanged', () => {
+    renderObras();
 });

@@ -1,4 +1,87 @@
 // ======================================
+// PAGE LOADER
+// ======================================
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const pageLoader = document.getElementById('pageLoader');
+    const body = document.body;
+
+    // Añadir clase loading al body para prevenir scroll
+    body.classList.add('loading');
+
+    try {
+        // Crear array de promesas para todas las imágenes esenciales
+        const imagePromises = [];
+
+        // 1. Esperar a que cargue el logo del loader
+        const loaderLogo = pageLoader.querySelector('.loader-logo img');
+        if (loaderLogo && !loaderLogo.complete) {
+            imagePromises.push(new Promise((resolve) => {
+                loaderLogo.onload = resolve;
+                loaderLogo.onerror = resolve; // Resolver incluso si falla
+            }));
+        }
+
+        // 2. Precargar las imágenes del mosaico desde obras.json
+        const obrasResponse = await fetch('assets/data/obras.json');
+        if (obrasResponse.ok) {
+            const obras = await obrasResponse.json();
+            const mosaicImages = new Set();
+
+            obras.forEach(obra => {
+                if (obra.imagenes && obra.imagenes.length > 0) {
+                    // Solo precargar la primera imagen de cada categoría (las más importantes)
+                    mosaicImages.add(`assets/images/${obra.imagenes[0]}`);
+                }
+            });
+
+            // Cargar las imágenes del mosaico
+            mosaicImages.forEach(src => {
+                imagePromises.push(new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = resolve;
+                    img.onerror = resolve; // Resolver incluso si falla
+                    img.src = src;
+                }));
+            });
+        }
+
+        // 3. Esperar a todas las imágenes críticas del DOM (logo navbar, etc)
+        const criticalImages = document.querySelectorAll('img[src*="Logo CPS"]');
+        criticalImages.forEach(img => {
+            if (!img.complete) {
+                imagePromises.push(new Promise((resolve) => {
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                }));
+            }
+        });
+
+        // Esperar a que todas las promesas se resuelvan o timeout de 5 segundos
+        await Promise.race([
+            Promise.all(imagePromises),
+            new Promise(resolve => setTimeout(resolve, 5000)) // Timeout de 5 segundos máximo
+        ]);
+
+        // Pequeño delay adicional para suavizar la transición
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+    } catch (error) {
+        console.error('Error durante la carga:', error);
+        // Continuar de todas formas
+    }
+
+    // Ocultar el loader con animación
+    pageLoader.classList.add('hidden');
+    body.classList.remove('loading');
+
+    // Remover el loader del DOM después de la transición
+    setTimeout(() => {
+        pageLoader.style.display = 'none';
+    }, 500);
+});
+
+// ======================================
 // NAVIGATION
 // ======================================
 
@@ -323,9 +406,12 @@ function animateCounter(element, target, duration = 2000) {
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const statNumber = entry.target.querySelector('.stat-number');
-            const targetValue = parseInt(statNumber.textContent);
-            animateCounter(statNumber, targetValue);
+            // Animar todos los stat-number dentro de hero-stats
+            const statNumbers = entry.target.querySelectorAll('.stat-number');
+            statNumbers.forEach(statNumber => {
+                const targetValue = parseInt(statNumber.textContent);
+                animateCounter(statNumber, targetValue);
+            });
             statsObserver.unobserve(entry.target);
         }
     });
@@ -416,6 +502,72 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         element.style.transition = 'none';
     });
 }
+
+// ======================================
+// MOSAICO SLIDESHOW
+// ======================================
+
+async function loadMosaicSlideshows() {
+    try {
+        const response = await fetch('assets/data/obras.json');
+        if (!response.ok) throw new Error('Error al cargar obras.json');
+        const obras = await response.json();
+
+        // Agrupar imágenes por categoría
+        const grouped = {};
+
+        obras.forEach(obra => {
+            if (!grouped[obra.categoria]) grouped[obra.categoria] = [];
+            if (obra.imagenes && obra.imagenes.length > 0) {
+                grouped[obra.categoria].push(...obra.imagenes);
+            }
+        });
+
+        // Activar slideshow en cada bloque del mosaico con delays aleatorios
+        document.querySelectorAll('.mosaic-item').forEach((item, itemIndex) => {
+            const category = item.dataset.category;
+            const images = grouped[category];
+            const bgElement = item.querySelector('.mosaic-bg');
+
+            if (!images || images.length === 0 || !bgElement) return;
+
+            let idx = 0;
+            // Establecer primera imagen
+            bgElement.style.backgroundImage = `url(assets/images/${images[0]})`;
+
+            // Solo crear slideshow si hay más de 1 imagen
+            if (images.length > 1) {
+                // Delay aleatorio inicial para desincronizar (0-2.5 segundos)
+                const initialDelay = Math.random() * 2500;
+
+                setTimeout(() => {
+                    setInterval(() => {
+                        idx = (idx + 1) % images.length;
+
+                        // Hacer fade out solo de la imagen de fondo
+                        bgElement.style.opacity = '0';
+
+                        setTimeout(() => {
+                            // Cambiar la imagen de fondo
+                            bgElement.style.backgroundImage = `url(assets/images/${images[idx]})`;
+
+                            // Hacer fade in
+                            bgElement.style.opacity = '1';
+                        }, 1200); // Esperar a que termine el fade out (1.2s)
+
+                    }, 3500); // Cambiar cada 3.5 segundos
+                }, initialDelay);
+            }
+        });
+    } catch (error) {
+        console.error('Error cargando mosaico de obras:', error);
+    }
+}
+
+// Cargar mosaico al cargar el DOM
+document.addEventListener('DOMContentLoaded', () => {
+    loadMosaicSlideshows();
+});
 
 // ======================================
 // CONSOLE MESSAGE (Optional)
@@ -511,4 +663,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Iniciar animación
     animate();
+});
+
+// ======================================
+// LANGUAGE SWITCHER (i18n)
+// ======================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar el idioma desde localStorage, URL o navegador
+    if (typeof initLanguage === 'function') {
+        initLanguage();
+    }
+
+    // Event listeners para los botones de idioma
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const lang = e.target.getAttribute('data-lang');
+            if (typeof setLanguage === 'function') {
+                setLanguage(lang);
+            }
+        });
+    });
 });

@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Grupo CPS - Líderes en carpintería de aluminio, vidriería y construcción en Uruguay. 10+ años de experiencia, planta DVH propia. Obras corporativas, residenciales e industriales." />
-    <meta name="keywords" content="carpintería aluminio uruguay, vidriería montevideo, construcción uruguay, DVH uruguay, fachadas vidriadas, obra corporativa uruguay, carpintería metalica" />
+    <meta name="description"
+        content="Grupo CPS - Líderes en carpintería de aluminio, vidriería y construcción en Uruguay. 10+ años de experiencia, planta DVH propia. Obras corporativas, residenciales e industriales." />
+    <meta name="keywords"
+        content="carpintería aluminio uruguay, vidriería montevideo, construcción uruguay, DVH uruguay, fachadas vidriadas, obra corporativa uruguay, carpintería metalica" />
     <meta name="author" content="Grupo CPS Uruguay" />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="Spanish" />
@@ -19,7 +21,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://grupocps.com.uy/" />
     <meta property="og:title" content="Grupo CPS Uruguay | Construcción y Carpintería de Aluminio" />
-    <meta property="og:description" content="Soluciones integrales en aluminio, vidriería y construcción. 10+ años transformando espacios en Uruguay." />
+    <meta property="og:description"
+        content="Soluciones integrales en aluminio, vidriería y construcción. 10+ años transformando espacios en Uruguay." />
     <meta property="og:image" content="https://grupocps.com.uy/assets/images/preview.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -30,7 +33,8 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://grupocps.com.uy/" />
     <meta name="twitter:title" content="Grupo CPS Uruguay | Construcción y Carpintería de Aluminio" />
-    <meta name="twitter:description" content="Soluciones integrales en aluminio, vidriería y construcción. 10+ años transformando espacios en Uruguay." />
+    <meta name="twitter:description"
+        content="Soluciones integrales en aluminio, vidriería y construcción. 10+ años transformando espacios en Uruguay." />
     <meta name="twitter:image" content="https://grupocps.com.uy/assets/images/preview.webp" />
 
     <title>Grupo CPS Uruguay | Construcción y Carpintería de Aluminio - DVH, Fachadas, Vidriería</title>
@@ -141,6 +145,17 @@
 </head>
 
 <body>
+    <!-- Page Loader -->
+    <div id="pageLoader" class="page-loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <img src="assets/images/Logo CPS.png" alt="Grupo CPS Logo">
+            </div>
+            <div class="loader-spinner"></div>
+            <p data-i18n="loader.loading">Cargando</p>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
@@ -155,11 +170,15 @@
                     <span></span>
                 </button>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="#inicio" class="nav-link active">Inicio</a></li>
-                    <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
-                    <li><a href="obras.html" class="nav-link">Obras</a></li>
-                    <li><a href="#clientes" class="nav-link">Clientes</a></li>
-                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                    <li><a href="#inicio" class="nav-link active" data-i18n="nav.home">Inicio</a></li>
+                    <li><a href="#nosotros" class="nav-link" data-i18n="nav.about">Nosotros</a></li>
+                    <li><a href="obras.html" class="nav-link" data-i18n="nav.projects">Obras</a></li>
+                    <li><a href="#clientes" class="nav-link" data-i18n="clients.tag">Nuestros Clientes</a></li>
+                    <li><a href="#contacto" class="nav-link" data-i18n="nav.contact">Contacto</a></li>
+                    <li class="lang-selector">
+                        <button class="lang-btn active" data-lang="es">ES</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -177,27 +196,35 @@
 
         <div class="hero-content">
             <div class="hero-text">
-                <h2 class="hero-subtitle fade-in-up">Construcción y Aluminio de Calidad</h2>
-                <h1 class="hero-title fade-in-up delay-1">GRUPO CPS</h1>
-                <p class="hero-location fade-in-up delay-2">Uruguay</p>
-                <p class="hero-description fade-in-up delay-3">
-                    Carpintería en Aluminio · Vidriería · Planta DVH Propia
+                <h2 class="hero-subtitle fade-in-up" data-i18n="hero.subtitle">Construyendo el futuro</h2>
+                <h1 class="hero-title fade-in-up delay-1" data-i18n="hero.title">GRUPO CPS</h1>
+                <p class="hero-location fade-in-up delay-2" data-i18n="hero.location">Montevideo, Uruguay</p>
+                <p class="hero-description fade-in-up delay-3" data-i18n="hero.description">
+                    Líderes en carpintería de aluminio, vidriería y construcción en Uruguay
                 </p>
                 <div class="hero-stats fade-in-up delay-4">
                     <div class="stat-item">
-                        <span class="stat-number">10+</span>
-                        <span class="stat-label">Años de Experiencia</span>
+                        <span class="stat-number">10</span>
+                        <span class="stat-label" data-i18n="hero.stats.experience">Años</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5000</span>
+                        <span class="stat-label" data-i18n="hero.stats.projects">Proyectos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50</span>
+                        <span class="stat-label" data-i18n="hero.stats.clients">Clientes</span>
                     </div>
                 </div>
                 <div class="hero-cta fade-in-up delay-5">
-                    <a href="#contacto" class="btn btn-primary">Contáctanos</a>
-                    <a href="#nosotros" class="btn btn-secondary">Conocer más</a>
+                    <a href="#contacto" class="btn btn-primary" data-i18n="hero.ctaSecondary">Contactar</a>
+                    <a href="#nosotros" class="btn btn-secondary" data-i18n="common.learnMore">Conoce más</a>
                 </div>
             </div>
         </div>
         <div class="scroll-indicator">
             <div class="mouse"></div>
-            <span>Scroll</span>
+            <span data-i18n="hero.scroll">Desliza</span>
         </div>
     </section>
 
@@ -205,20 +232,21 @@
     <section class="about-section" id="nosotros">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Quiénes Somos</span>
-                <h2 class="section-title">Líderes en Construcción y Aluminio</h2>
+                <span class="section-tag" data-i18n="about.tag">Sobre Nosotros</span>
+                <h2 class="section-title" data-i18n="about.title">Más de 10 años construyendo el futuro de Uruguay</h2>
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <p class="lead">
-                        Con casi 10 años de experiencia en el mercado uruguayo, <strong>Grupo CPS</strong>
-                        se ha consolidado como referente en construcción y soluciones en aluminio.
+                    <p class="lead" data-i18n="about.lead">
+                        Somos una empresa uruguaya especializada en carpintería de aluminio, vidriería y construcción.
                     </p>
-                    <p>
-                        Contamos con infraestructura propia que incluye carpintería especializada en aluminio,
-                        vidriería de alta precisión y planta DVH (Doble Vidriado Hermético), lo que nos permite
-                        ofrecer soluciones integrales con los más altos estándares de calidad.
+
+
+                    <p data-i18n="about.description">
+                        Con planta DVH propia, ofrecemos soluciones integrales para proyectos corporativos, residenciales e industriales. Nuestro compromiso es entregar obras de la más alta calidad, cumpliendo con los plazos establecidos y superando las expectativas de nuestros clientes.
                     </p>
+
+
                     <div class="about-features">
                         <div class="feature-item">
                             <div class="feature-icon">
@@ -229,8 +257,8 @@
                                 </svg>
                             </div>
                             <div class="feature-text">
-                                <h4>Carpintería en Aluminio</h4>
-                                <p>Soluciones a medida con materiales de primera calidad</p>
+                                <h4 data-i18n="about.features.quality.title">Calidad Garantizada</h4>
+                                <p data-i18n="about.features.quality.description">Utilizamos materiales de primera línea y seguimos estrictos controles de calidad en cada proyecto.</p>
                             </div>
                         </div>
                         <div class="feature-item">
@@ -242,8 +270,8 @@
                                 </svg>
                             </div>
                             <div class="feature-text">
-                                <h4>Vidriería Profesional</h4>
-                                <p>Instalación y mantenimiento especializado</p>
+                                <h4 data-i18n="about.features.experience.title">Experiencia Comprobada</h4>
+                                <p data-i18n="about.features.experience.description">Más de una década de experiencia en proyectos de gran envergadura en todo Uruguay.</p>
                             </div>
                         </div>
                         <div class="feature-item">
@@ -255,8 +283,8 @@
                                 </svg>
                             </div>
                             <div class="feature-text">
-                                <h4>Planta DVH Propia</h4>
-                                <p>Tecnología de punta en doble vidriado hermético</p>
+                                <h4 data-i18n="about.features.innovation.title">Innovación Constante</h4>
+                                <p data-i18n="about.features.innovation.description">Incorporamos las últimas tecnologías y técnicas constructivas para garantizar resultados superiores.</p>
                             </div>
                         </div>
                     </div>
@@ -265,70 +293,72 @@
         </div>
     </section>
 
-    <!-- Obras Preview Section -->
-    <section class="obras-preview-section" id="obras">
+
+    <!-- Obras Preview Section - Mosaico -->
+    <section class="sectors-mosaic" id="obras">
         <div class="container">
             <div class="section-header center">
-                <span class="section-tag">Portfolio</span>
-                <h2 class="section-title">Nuestras Obras</h2>
-                <p class="section-description">
-                    Proyectos que nos enorgullecen y demuestran nuestra experiencia y compromiso con la excelencia
+                <span class="section-tag" data-i18n="mosaic.tag">Sectores</span>
+                <h2 class="section-title" data-i18n="mosaic.title">Especializados en múltiples industrias</h2>
+                <p class="section-description" data-i18n="mosaic.description">
+                    Adaptamos nuestras soluciones a las necesidades específicas de cada sector
                 </p>
+
             </div>
-            <div class="obras-preview-grid">
-                <div class="obra-preview-card">
-                    <div class="obra-preview-image">
-                        <div class="obra-preview-placeholder">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="obra-preview-content">
-                        <span class="obra-preview-tag">Residencial</span>
-                        <h3>Edificios Modernos</h3>
-                        <p>Construcción integral con carpintería en aluminio y sistemas DVH</p>
-                    </div>
-                </div>
-                <div class="obra-preview-card">
-                    <div class="obra-preview-image">
-                        <div class="obra-preview-placeholder">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="obra-preview-content">
-                        <span class="obra-preview-tag">Comercial</span>
-                        <h3>Centros Comerciales</h3>
-                        <p>Fachadas integrales en aluminio y vidrio de gran formato</p>
-                    </div>
-                </div>
-                <div class="obra-preview-card">
-                    <div class="obra-preview-image">
-                        <div class="obra-preview-placeholder">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="7" height="7"></rect>
-                                <rect x="14" y="3" width="7" height="7"></rect>
-                                <rect x="14" y="14" width="7" height="7"></rect>
-                                <rect x="3" y="14" width="7" height="7"></rect>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="obra-preview-content">
-                        <span class="obra-preview-tag">Corporativo</span>
-                        <h3>Oficinas Premium</h3>
-                        <p>Espacios modernos con mamparas y sistemas de última generación</p>
-                    </div>
+        </div>
+
+        <div class="mosaic-grid">
+
+            <div class="mosaic-item" data-category="salud">
+                <div class="mosaic-bg"></div>
+                <div class="mosaic-overlay"></div>
+                <div class="mosaic-content">
+                    <span class="mosaic-tag">SALUD</span>
+                    <h3 data-i18n="mosaic.sectors.health">Sector Salud</h3>
                 </div>
             </div>
+
+            <div class="mosaic-item" data-category="educacion">
+                <div class="mosaic-bg"></div>
+                <div class="mosaic-overlay"></div>
+                <div class="mosaic-content">
+                    <span class="mosaic-tag">EDUCACIÓN</span>
+                    <h3 data-i18n="mosaic.sectors.education">Educación</h3>
+                </div>
+            </div>
+
+            <div class="mosaic-item" data-category="vivienda">
+                <div class="mosaic-bg"></div>
+                <div class="mosaic-overlay"></div>
+                <div class="mosaic-content">
+                    <span class="mosaic-tag">VIVIENDA</span>
+                    <h3 data-i18n="mosaic.sectors.retail">Comercial</h3>
+                </div>
+            </div>
+
+            <div class="mosaic-item" data-category="obras_publicas">
+                <div class="mosaic-bg"></div>
+                <div class="mosaic-overlay"></div>
+                <div class="mosaic-content">
+                    <span class="mosaic-tag">OBRAS PÚBLICAS</span>
+                    <h3 data-i18n="mosaic.sectors.hospitality">Hotelería</h3>
+                </div>
+            </div>
+
+            <div class="mosaic-item" data-category="corporativo">
+                <div class="mosaic-bg"></div>
+                <div class="mosaic-overlay"></div>
+                <div class="mosaic-content">
+                    <span class="mosaic-tag">CORPORATIVO</span>
+                    <h3 data-i18n="mosaic.sectors.corporate">Corporativo</h3>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
             <div class="obras-preview-cta">
-                <a href="obras.html" class="btn btn-primary">Ver Todas las Obras</a>
+                <a href="obras.html" class="btn btn-primary" data-i18n="mosaic.cta">Explorar Nuestras Obras</a>
             </div>
         </div>
     </section>
@@ -337,9 +367,9 @@
     <section class="clients-section" id="clientes">
         <div class="container">
             <div class="section-header center">
-                <span class="section-tag">Confían en Nosotros</span>
-                <h2 class="section-title">Nuestros Clientes</h2>
-                <p class="section-description">
+                <span class="section-tag" data-i18n="clients.tag">Nuestros Clientes</span>
+                <h2 class="section-title" data-i18n="clients.title">Confianza que construye relaciones</h2>
+                <p class="section-description" data-i18n="clients.description">
                     Empresas e instituciones que han confiado en la calidad de nuestro trabajo
                 </p>
             </div>
@@ -356,13 +386,13 @@
     <section class="contact-section" id="contacto">
         <div class="container">
             <div class="section-header center">
-                <span class="section-tag">Hablemos</span>
-                <h2 class="section-title">Contacto</h2>
+                <span class="section-tag" data-i18n="contact.tag">Contacto</span>
+                <h2 class="section-title" data-i18n="contact.title">Conversemos sobre tu proyecto</h2>
             </div>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Estamos para ayudarte</h3>
-                    <p>Contáctanos y uno de nuestros especialistas te asesorará en tu proyecto.</p>
+                    <h3 data-i18n="contact.info.title">Información de contacto</h3>
+                    <p data-i18n="contact.description">Estamos aquí para responder tus consultas y ayudarte a hacer realidad tu proyecto</p>
                     <div class="contact-item">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
@@ -387,22 +417,22 @@
                     <div class="contact-form">
                         <form id="contactForm" method="POST" action="php/send_mail.php">
                             <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                                <label for="nombre" data-i18n="contact.form.name">Nombre completo</label>
+                                <input type="text" id="nombre" name="nombre" required data-i18n="contact.form.name" placeholder="Nombre completo">
                             </div>
 
                             <div class="form-group">
-                                <label for="email">Correo electrónico</label>
-                                <input type="email" id="email" name="email" required placeholder="tu@correo.com">
+                                <label for="email" data-i18n="contact.form.email">Correo electrónico</label>
+                                <input type="email" id="email" name="email" required data-i18n="contact.form.email" placeholder="Correo electrónico">
                             </div>
 
                             <div class="form-group">
-                                <label for="mensaje">Mensaje</label>
+                                <label for="mensaje" data-i18n="contact.form.message">Cuéntanos sobre tu proyecto</label>
                                 <textarea id="mensaje" name="mensaje" rows="5" required
-                                    placeholder="Escribe tu mensaje..."></textarea>
+                                    data-i18n="contact.form.message" placeholder="Cuéntanos sobre tu proyecto"></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                            <button type="submit" class="btn btn-primary" data-i18n="contact.form.send">Enviar Mensaje</button>
 
                             <p id="formResponse" class="form-response"></p>
                         </form>
@@ -419,18 +449,18 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>GRUPO <span class="highlight">CPS</span></h3>
-                    <p>Construcción y Aluminio de Calidad</p>
+                    <p data-i18n="footer.description">Líderes en carpintería de aluminio, vidriería y construcción en Uruguay</p>
                 </div>
                 <div class="footer-links">
-                    <a href="#inicio">Inicio</a>
-                    <a href="#nosotros">Nosotros</a>
-                    <a href="obras.html">Obras</a>
-                    <a href="#clientes">Clientes</a>
-                    <a href="#contacto">Contacto</a>
+                    <a href="#inicio" data-i18n="nav.home">Inicio</a>
+                    <a href="#nosotros" data-i18n="nav.about">Nosotros</a>
+                    <a href="obras.html" data-i18n="nav.projects">Obras</a>
+                    <a href="#clientes" data-i18n="clients.tag">Nuestros Clientes</a>
+                    <a href="#contacto" data-i18n="nav.contact">Contacto</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Grupo CPS Uruguay. Todos los derechos reservados.</p>
+                <p>&copy; 2025 Grupo CPS Uruguay. <span data-i18n="footer.rights">Todos los derechos reservados</span>.</p>
             </div>
         </div>
     </footer>
