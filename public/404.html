@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada | Grupo CPS Uruguay</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/Logo_CPS_nuevo.ico">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f2e 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-content {
+            max-width: 600px;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(33, 153, 213, 0.3);
+        }
+
+        .error-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .error-description {
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-page">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Página no encontrada</h1>
+            <p class="error-description">Lo sentimos, la página que estás buscando no existe o ha sido movida.</p>
+            <a href="index.html" class="btn btn-primary">Volver al Inicio</a>
+        </div>
+    </div>
+</body>
+
+</html>
