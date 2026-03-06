@@ -61,6 +61,18 @@ const translations = {
             },
             cta: "Explorar Nuestras Obras"
         },
+        // Ecommerce Section
+        ecommerce: {
+            tag: "Tienda Online",
+            title: "Electrodomésticos para tus proyectos",
+            description: "Descubre nuestra tienda online exclusiva con la línea completa de electrodomésticos ENXUTA. Equipa tus proyectos con línea blanca, marrón y pequeños electrodomésticos de la mejor calidad.",
+            benefits: {
+                shipping: "Envíos a todo el país",
+                warranty: "Garantía oficial",
+                catalog: "Catálogo completo"
+            },
+            cta: "Visitar Tienda Online"
+        },
         // Clients Section
         clients: {
             tag: "Nuestros Clientes",
@@ -299,6 +311,18 @@ const translations = {
                 hospitality: "Public Works"
             },
             cta: "Explore Our Projects"
+        },
+        // Ecommerce Section
+        ecommerce: {
+            tag: "Online Store",
+            title: "Home Appliances for your projects",
+            description: "Discover our exclusive online store featuring the complete line of ENXUTA appliances. Equip your projects with white goods, brown goods, and high-quality small appliances.",
+            benefits: {
+                shipping: "Nationwide shipping",
+                warranty: "Official warranty",
+                catalog: "Complete catalog"
+            },
+            cta: "Visit Online Store"
         },
         // Clients Section
         clients: {

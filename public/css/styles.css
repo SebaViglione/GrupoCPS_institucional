@@ -1576,6 +1576,210 @@ body.loading {
 }
 
 /* ======================================
+   ECOMMERCE SECTION
+   ====================================== */
+
+.ecommerce-section {
+  padding: var(--spacing-xl) 0;
+  background: var(--bg-card);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ecommerce-bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.ecommerce-bg-shape.shape-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(33, 213, 181, 0.2);
+  top: -100px;
+  right: -100px;
+  animation: floatBackground 15s ease-in-out infinite alternate;
+}
+
+.ecommerce-bg-shape.shape-2 {
+  width: 500px;
+  height: 500px;
+  background: rgba(33, 153, 213, 0.15);
+  bottom: -200px;
+  left: -200px;
+  animation: floatBackground 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatBackground {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(50px, 50px) scale(1.1);
+  }
+}
+
+.ecommerce-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ecommerce-text {
+  flex: 1;
+  max-width: 550px;
+}
+
+.ecommerce-text .section-title {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  text-align: left;
+  line-height: 1.2;
+}
+
+.ecommerce-text .section-description {
+  text-align: left;
+  margin: 0 0 2rem 0;
+  color: var(--lighter-gray);
+  font-size: 1.15rem;
+}
+
+.ecommerce-benefits {
+  list-style: none;
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.ecommerce-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+  color: var(--white);
+  font-weight: 500;
+}
+
+.ecommerce-benefits li i {
+  color: var(--primary-color);
+  font-size: 1.35rem;
+  width: 24px;
+  text-align: center;
+}
+
+.ecommerce-mockups {
+  flex: 1.2;
+  position: relative;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* Ensure container has full width */
+}
+
+.ecommerce-mockups .mockup-container {
+  position: absolute;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ecommerce-mockups .laptop-mockup {
+  width: 80%;
+  /* Takes 80% of the container space */
+  max-width: 900px;
+  z-index: 1;
+  right: 0;
+  animation: floatMockup 6s ease-in-out infinite;
+}
+
+.ecommerce-mockups .mobile-mockup {
+  width: 65%;
+  /* Fixed ratio relative to the container, so it shrinks with the laptop */
+  max-width: 500px;
+  z-index: 2;
+  left: 0;
+  bottom: 0%;
+  animation: floatMockup 5s ease-in-out infinite alternate-reverse;
+  filter: drop-shadow(-15px 20px 40px rgba(0, 0, 0, 0.6));
+}
+
+.ecommerce-mockups .mockup-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes floatMockup {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@media (max-width: 992px) {
+  .ecommerce-content-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ecommerce-text {
+    max-width: 100%;
+  }
+
+  .ecommerce-text .section-title,
+  .ecommerce-text .section-description {
+    text-align: center;
+  }
+
+  .ecommerce-benefits {
+    align-items: center;
+  }
+
+  .ecommerce-mockups {
+    width: 100%;
+    max-width: 900px;
+    height: 400px;
+    margin: 2rem auto 0;
+  }
+
+  .ecommerce-mockups .laptop-mockup {
+    position: relative;
+    width: 85%;
+    right: 0;
+  }
+
+  .ecommerce-mockups .mobile-mockup {
+    left: 0;
+    bottom: -10%;
+    width: 45%;
+  }
+}
+
+@media (max-width: 576px) {
+  .ecommerce-mockups {
+    height: 500px;
+  }
+
+  .ecommerce-mockups .mobile-mockup {
+    width: 55%;
+  }
+}
+
+/* ======================================
    SCROLL ANIMATIONS
    ====================================== */
 

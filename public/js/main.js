@@ -1,23 +1,4 @@
 // ======================================
-// ======================================
-// AVIF COMPATIBILITY CHECK
-// ======================================
-
-(function checkAvifSupport() {
-    const canvas = document.createElement('canvas');
-    const avifSupported = canvas.toDataURL('image/avif')
-        .indexOf('data:image/avif') === 0;
-    
-    if (avifSupported) {
-        document.documentElement.classList.add('avif-supported');
-        console.log('✅ AVIF supported by this browser');
-    } else {
-        document.documentElement.classList.add('avif-not-supported');
-        console.log('⚠️  AVIF not supported, using WebP fallback');
-    }
-})();
-
-// ======================================
 // PAGE LOADER
 // ======================================
 
@@ -41,10 +22,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             }));
         }
 
-        // 2. Precargar las imágenes del mosaico desde obras.json (usando thumbnails optimizados)
-        // NOTA: Las imágenes del mosaico ahora se cargan bajo demanda con lazy loading
-        // a través del archivo mosaic-optimized.js para mejorar el rendimiento
-        // Solo cargamos 5 imágenes representativas en lugar de todas
+        // 2. Precargar las imágenes del mosaico desde obras.json
+        const obrasResponse = await fetch('assets/data/obras.json');
+        if (obrasResponse.ok) {
+            const obras = await obrasResponse.json();
+            const mosaicImages = new Set();
+
+            obras.forEach(obra => {
+                if (obra.imagenes && obra.imagenes.length > 0) {
+                    // Solo precargar la primera imagen de cada categoría (las más importantes)
+                    mosaicImages.add(`assets/images/${obra.imagenes[0]}`);
+                }
+            });
+
+            // Cargar las imágenes del mosaico
+            mosaicImages.forEach(src => {
+                imagePromises.push(new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = resolve;
+                    img.onerror = resolve; // Resolver incluso si falla
+                    img.src = src;
+                }));
+            });
+        }
 
         // 3. Esperar a todas las imágenes críticas del DOM (logo navbar, etc)
         const criticalImages = document.querySelectorAll('img[src*="Logo CPS"]');
@@ -112,7 +112,7 @@ document.querySelectorAll('img').forEach(media => {
 
 // Carga los logos del carrusel de clientes, usando cache local para evitar múltiples requests al servidor
 async function loadClientsCarousel() {
-    const cacheKey = "clientsCacheV2"; // Cambiar nombre para invalidar cache anterior
+    const cacheKey = "clientsCache";
     const cached = localStorage.getItem(cacheKey);
     if (cached) {
         renderClientsCarousel(JSON.parse(cached), document.getElementById("clientsCarousel"));
@@ -216,28 +216,12 @@ document.addEventListener("DOMContentLoaded", () => {
         heroVideo.classList.add("fade-out");
 
         setTimeout(() => {
-            // Solo el primer video tiene preload="metadata"
-            if (index === 0) {
-                source.src = videos[index];
-                heroVideo.load();
-                heroVideo.oncanplay = () => {
-                    heroVideo.classList.remove("fade-out");
-                    heroVideo.play().catch(() => { });
-                };
-            } else {
-                // Videos posteriores cargan con lazy loading
-                const lazySource = document.createElement('source');
-                lazySource.src = videos[index];
-                lazySource.type = 'video/mp4';
-
-                heroVideo.innerHTML = '';
-                heroVideo.appendChild(lazySource);
-                heroVideo.load();
-                heroVideo.oncanplay = () => {
-                    heroVideo.classList.remove("fade-out");
-                    heroVideo.play().catch(() => { });
-                };
-            }
+            source.src = videos[index];
+            heroVideo.load();
+            heroVideo.oncanplay = () => {
+                heroVideo.classList.remove("fade-out");
+                heroVideo.play().catch(() => { });
+            };
         }, 400);
     }
 
@@ -357,7 +341,18 @@ document.addEventListener('DOMContentLoaded', () => {
 // CLIENTS CAROUSEL - DYNAMIC LOADING WITH PRELOAD
 // ======================================
 
-
+async function loadClientsCarousel() {
+    try {
+        const response = await fetch('assets/data/clients.json');
+        if (!response.ok) {
+            throw new Error('Error al cargar los logos de clientes');
+        }
+        const data = await response.json();
+        await preloadAndRenderCarousel(data.clientes);
+    } catch (error) {
+        console.error('Error cargando logos:', error);
+    }
+}
 
 // Precargar todas las imágenes antes de renderizar
 async function preloadAndRenderCarousel(clientes) {
@@ -367,14 +362,12 @@ async function preloadAndRenderCarousel(clientes) {
     // Mostrar loader mientras se cargan las imágenes
     carousel.innerHTML = '<div class="clients-loader"><div class="loader-spinner"></div></div>';
 
-    // Precargar todas las imágenes con lazy loading
+    // Precargar todas las imágenes
     const imagePromises = clientes.map(cliente => {
         return new Promise((resolve, reject) => {
             const img = new Image();
-            img.loading = 'lazy'; // Añadir lazy loading
             img.onload = () => resolve({ cliente, success: true });
             img.onerror = () => resolve({ cliente, success: false }); // No rechazar, solo marcar como fallida
-            // Actualizar ruta para usar el nuevo directorio
             img.src = `assets/images/${cliente.logo}`;
         });
     });
@@ -396,14 +389,11 @@ function renderClientsCarousel(clientes, carousel) {
     const logosHTML = clientes.map(cliente => {
         // Si el JSON tiene una clase personalizada, la usamos
         const claseExtra = cliente.clase ? ` ${cliente.clase}` : '';
-        // Añadir lazy loading y usar la ruta actualizada del JSON
         return `
         <div class="client-logo-item${claseExtra}">
-            <img src="assets/images/${cliente.logo}"
+            <img src="assets/images/clients-logos/${cliente.logo}"
                  alt="${cliente.nombre}"
-                 title="${cliente.nombre}"
-                 loading="lazy"
-                 decoding="async">
+                 title="${cliente.nombre}">
         </div>
     `;
     }).join('');
@@ -416,44 +406,6 @@ function renderClientsCarousel(clientes, carousel) {
 document.addEventListener('DOMContentLoaded', () => {
     loadClientsCarousel();
 });
-
-// ======================================
-// AVIF/WEBP RESPONSIVE IMAGES
-// ======================================
-
-function generateSrcset(imagePath, baseDir = 'obras-optimized') {
-    const imageName = imagePath.split('/').pop();
-    const imageNameWithoutExt = imageName.replace(/\.[^/.]+$/, '');
-    const folderPath = imagePath.substring(0, imagePath.lastIndexOf('/'));
-    const folderName = folderPath.substring(folderPath.lastIndexOf('/') + 1);
-    
-    // Solo tenemos versión 640w para AVIF (generada en el script simplificado)
-    const avifSrcset = `assets/images/obras-avif/${folderName}/${imageNameWithoutExt}-640w.avif 640w`;
-    
-    // Para WebP, usamos la imagen original como única versión
-    const webpSrcset = `assets/images/${baseDir}/${folderName}/${imageNameWithoutExt}.webp 1920w`;
-    
-    return {
-        avif: avifSrcset,
-        webp: webpSrcset,
-        fallback: `assets/images/${baseDir}/${folderName}/${imageName}`
-    };
-}
-
-function createPictureTag(imagePath, altText, loading = 'lazy') {
-    const srcsets = generateSrcset(imagePath);
-    
-    return `
-        <picture>
-            <source srcset="${srcsets.avif}" type="image/avif">
-            <source srcset="${srcsets.webp}" type="image/webp">
-            <img src="${srcsets.fallback}" 
-                 alt="${altText}" 
-                 loading="${loading}"
-                 decoding="async">
-        </picture>
-    `;
-}
 
 // ======================================
 // SMOOTH SCROLL
@@ -598,111 +550,46 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 }
 
 // ======================================
-// MOSAICO SUPER SIMPLE - IMÁGENES FIJAS SIN JAVASCRIPT COMPLEJO
+// MOSAICO IMÁGENES ESTÁTICAS
 // ======================================
 
-// Configuración DIRECTA de imágenes (sin fetch, sin lógica compleja)
-const MOSAIC_IMAGES_DIRECT = {
-    salud: 'assets/images/mosaic-thumbs/hospital-cerro/1.webp',
-    educacion: 'assets/images/mosaic-thumbs/facultad-enfermeria/1.webp',
-    vivienda: 'assets/images/mosaic-thumbs/realojos-piedrasblancas/1.webp',
-    obras_publicas: 'assets/images/mosaic-thumbs/congreso-intendentes/1.webp',
-    corporativo: 'assets/images/mosaic-thumbs/summum-wtc/1.webp'
-};
+async function loadMosaicImages() {
+    try {
+        const response = await fetch('assets/data/obras.json');
+        if (!response.ok) throw new Error('Error al cargar obras.json');
+        const obras = await response.json();
 
-// Colores de fallback por si las imágenes no cargan
-const MOSAIC_FALLBACK_COLORS = {
-    salud: 'rgba(33, 150, 243, 0.7)',
-    educacion: 'rgba(76, 175, 80, 0.7)',
-    vivienda: 'rgba(255, 152, 0, 0.7)',
-    obras_publicas: 'rgba(156, 39, 176, 0.7)',
-    corporativo: 'rgba(96, 125, 139, 0.7)'
-};
+        // Agrupar imágenes por categoría
+        const grouped = {};
 
-// Función SUPER SIMPLE para cargar el mosaico
-function setupMosaicSimple() {
-    console.log('🎯 Configurando mosaico SUPER SIMPLE (sin slideshow)');
-    
-    document.querySelectorAll('.mosaic-item').forEach((item) => {
-        const category = item.dataset.category;
-        const bgElement = item.querySelector('.mosaic-bg');
-        
-        if (!bgElement) return;
-        
-        // Obtener la imagen DIRECTAMENTE de la configuración
-        const imageUrl = MOSAIC_IMAGES_DIRECT[category];
-        
-        if (!imageUrl) {
-            console.warn(`No hay imagen configurada para categoría: ${category}`);
-            bgElement.style.backgroundColor = MOSAIC_FALLBACK_COLORS[category] || 'rgba(51, 51, 51, 0.7)';
-            bgElement.style.opacity = '1';
-            return;
-        }
-        
-        // Cargar la imagen de manera SIMPLE
-        const img = new Image();
-        img.loading = 'lazy';
-        img.src = imageUrl;
-        
-        img.onload = () => {
-            bgElement.style.backgroundImage = `url(${imageUrl})`;
-            bgElement.style.opacity = '1';
-            console.log(`✅ Imagen cargada para ${category}: ${imageUrl}`);
-        };
-        
-        img.onerror = () => {
-            console.error(`❌ Error cargando imagen para ${category}: ${imageUrl}`);
-            bgElement.style.backgroundColor = MOSAIC_FALLBACK_COLORS[category] || 'rgba(51, 51, 51, 0.7)';
-            bgElement.style.opacity = '1';
-        };
-        
-        // Agregar evento de click para redirigir
-        item.addEventListener('click', () => {
-            window.location.href = `obras.html?categoria=${category}`;
+        obras.forEach(obra => {
+            if (!grouped[obra.categoria]) grouped[obra.categoria] = [];
+            if (obra.imagenes && obra.imagenes.length > 0) {
+                grouped[obra.categoria].push(...obra.imagenes);
+            }
         });
-        
-        // Efecto hover simple
-        item.addEventListener('mouseenter', () => {
-            bgElement.style.transform = 'scale(1.05)';
+
+        // Establecer imagen estática en cada bloque del mosaico
+        document.querySelectorAll('.mosaic-item').forEach((item) => {
+            const category = item.dataset.category;
+            const images = grouped[category];
+            const bgElement = item.querySelector('.mosaic-bg');
+
+            if (!images || images.length === 0 || !bgElement) return;
+
+            // Elegimos una imagen aleatoria de la categoría para mostrar como fondo fijo
+            const randomIndex = Math.floor(Math.random() * images.length);
+            bgElement.style.backgroundImage = `url(assets/images/${images[randomIndex]})`;
+            bgElement.style.opacity = '1';
         });
-        
-        item.addEventListener('mouseleave', () => {
-            bgElement.style.transform = 'scale(1)';
-        });
-    });
-    
-    console.log('✅ Mosaico simple configurado: 5 imágenes FIJAS (sin rotación)');
+    } catch (error) {
+        console.error('Error cargando mosaico de obras:', error);
+    }
 }
 
-// Inicializar cuando el DOM esté listo
+// Cargar mosaico al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 DOM cargado - Iniciando mosaico simple');
-    setupMosaicSimple();
-});
-
-// Medida de seguridad EXTREMA: Bloquear cualquier slideshow
-window.addEventListener('load', () => {
-    console.log('🛡️  Activando protección contra slideshow...');
-    
-    // Deshabilitar setInterval para delays largos (posibles slideshows)
-    const originalSetInterval = window.setInterval;
-    window.setInterval = function(callback, delay) {
-        if (delay > 2000) { // Si el delay es mayor a 2 segundos
-            console.warn('🚫 BLOQUEADO: setInterval con delay largo detectado:', delay, 'ms');
-            // No ejecutar el callback
-            return 0;
-        }
-        return originalSetInterval.call(this, callback, delay);
-    };
-    
-    // También limpiar cualquier intervalo existente
-    const maxIntervalId = 1000;
-    for (let i = 0; i < maxIntervalId; i++) {
-        clearInterval(i);
-        clearTimeout(i);
-    }
-    
-    console.log('✅ Protección activada - No habrá slideshow en el mosaico');
+    loadMosaicImages();
 });
 
 // ======================================
@@ -833,73 +720,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-// ======================================
-// PWA & SERVICE WORKER REGISTRATION
-// ======================================
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then((registration) => {
-        console.log('✅ SW registrado con alcance:', registration.scope);
-      })
-      .catch((error) => {
-        console.error('❌ SW fallo al registrar:', error);
-      });
-  });
-}
-
-// ======================================
-// INTELLIGENT PREFETCHING
-// ======================================
-
-// Prefetch de obras.js cuando el usuario hace hover en "Obras"
-const obrasLink = document.querySelector('a[href*="obras.html"]');
-if (obrasLink) {
-  obrasLink.addEventListener('mouseenter', () => {
-    // Prefetch de obras.js
-    const obrasScript = document.createElement('link');
-    obrasScript.rel = 'prefetch';
-    obrasScript.href = 'js/obras.min.js';
-    obrasScript.as = 'script';
-    document.head.appendChild(obrasScript);
-
-    // Prefetch de obras.html
-    const obrasPage = document.createElement('link');
-    obrasPage.rel = 'prefetch';
-    obrasPage.href = 'obras.html';
-    document.head.appendChild(obrasPage);
-  }, { once: true }); // Solo prefetch una vez
-}
-
-// Prefetch de imágenes del mosaico cuando es visible
-const mosaicObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      // Las imágenes del mosaico ya se cargan por el script existente
-      // Prefetch adicional de imágenes de alta calidad
-      fetch('assets/data/obras.json')
-        .then(response => response.json())
-        .then(obras => {
-          const firstObras = obras.slice(0, 3); // Prefetch primeras 3 obras
-          firstObras.forEach(obra => {
-            if (obra.imagenes && obra.imagenes.length > 0) {
-              obra.imagenes.slice(0, 2).forEach(imgPath => {
-                const prefetchImg = document.createElement('link');
-                prefetchImg.rel = 'prefetch';
-                prefetchImg.href = `assets/images/${imgPath}`;
-                document.head.appendChild(prefetchImg);
-              });
-            }
-          });
-        });
-      mosaicObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-
-const mosaicSection = document.querySelector('.sectors-mosaic');
-if (mosaicSection) {
-  mosaicObserver.observe(mosaicSection);
-}
