@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+<!-- Homepage -->
+<url>
+  <loc>https://grupocps.com.uy/</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/logos-optimized/icon-512.webp</image:loc>
+    <image:title>Grupo CPS - Logo</image:title>
+    <image:caption>Líderes en carpintería de aluminio, vidriería y construcción en Uruguay</image:caption>
+  </image:image>
+</url>
+
+<!-- Obras Page -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html</loc>
+</url>
+
+
+<!-- Hospital del Cerro -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-1</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-cerro/1.webp</image:loc>
+    <image:title>Hospital del Cerro</image:title>
+    <image:caption>Infraestructura hospitalaria de última generación desarrollada por TEYMA y GMS Arquitectos. CPS ejecutó carpintería de aluminio, herrería especializada, vidriería técnica y apoyo MEP, contribuyendo al</image:caption>
+    <image:geo_location>Villa del Cerro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-cerro/2.webp</image:loc>
+    <image:title>Hospital del Cerro - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Villa del Cerro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-cerro/3.webp</image:loc>
+    <image:title>Hospital del Cerro - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Villa del Cerro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Hospital El Filtro -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-2</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-filtro/1.webp</image:loc>
+    <image:title>Hospital El Filtro</image:title>
+    <image:caption>Centro de salud de referencia de ASSE intervenido por TEYMA con participación de CPS en cerramientos sanitarios, aberturas anodizadas con DVH y herrería técnica para anclajes estructurales.</image:caption>
+    <image:geo_location>Barrio Reducto, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-filtro/2.webp</image:loc>
+    <image:title>Hospital El Filtro - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Barrio Reducto, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-filtro/3.webp</image:loc>
+    <image:title>Hospital El Filtro - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Barrio Reducto, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Congreso de Intendentes -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-3</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/congreso-intendentes/1.webp</image:loc>
+    <image:title>Congreso de Intendentes</image:title>
+    <image:caption>Transformación completa del edificio institucional con fachadas vidriadas templadas, cerramientos anodizados y puertas automáticas, manteniendo la identidad arquitectónica urbana.</image:caption>
+    <image:geo_location>Av. 18 de Julio y Convención, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/congreso-intendentes/2.webp</image:loc>
+    <image:title>Congreso de Intendentes - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Av. 18 de Julio y Convención, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Facultad de Enfermería UdelaR -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-4</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/facultad-enfermeria/1.webp</image:loc>
+    <image:title>Facultad de Enfermería UdelaR</image:title>
+    <image:caption>Nueva sede académica de la Facultad de Enfermería desarrollada por TEYMA. CPS ejecutó aberturas anodizadas, cerramientos exteriores e interiores y herrería de precisión para áreas técnicas.</image:caption>
+    <image:geo_location>Parque Batlle, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/facultad-enfermeria/2.webp</image:loc>
+    <image:title>Facultad de Enfermería UdelaR - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Parque Batlle, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/facultad-enfermeria/3.webp</image:loc>
+    <image:title>Facultad de Enfermería UdelaR - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Parque Batlle, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Centro de Realojos Piedras Blancas -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-5</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/realojos-piedrasblancas/1.webp</image:loc>
+    <image:title>Centro de Realojos Piedras Blancas</image:title>
+    <image:caption>Proyecto social en ejecución con instalación de aberturas en PVC importadas por CPS, adaptadas a vivienda social y coordinadas con cronogramas públicos.</image:caption>
+    <image:geo_location>Piedras Blancas, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/realojos-piedrasblancas/2.webp</image:loc>
+    <image:title>Centro de Realojos Piedras Blancas - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Piedras Blancas, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/realojos-piedrasblancas/3.webp</image:loc>
+    <image:title>Centro de Realojos Piedras Blancas - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Piedras Blancas, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Círculo Católico - Policlínica -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-6</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/circulo-catolico/1.webp</image:loc>
+    <image:title>Círculo Católico - Policlínica</image:title>
+    <image:caption>Provisión e instalación de aberturas de aluminio en la ampliación de servicios de atención primaria, cumpliendo exigencias sanitarias y de confort térmico.</image:caption>
+    <image:geo_location>Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/circulo-catolico/2.webp</image:loc>
+    <image:title>Círculo Católico - Policlínica - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/circulo-catolico/3.webp</image:loc>
+    <image:title>Círculo Católico - Policlínica - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Cárcel de Libertad -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-7</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/carcel-libertad/1.webp</image:loc>
+    <image:title>Cárcel de Libertad</image:title>
+    <image:caption>Proyecto penitenciario en curso. CPS provee cerramientos especiales, herrería de seguridad y aberturas reforzadas para uso carcelario.</image:caption>
+    <image:geo_location>Libertad, San José, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/carcel-libertad/2.webp</image:loc>
+    <image:title>Cárcel de Libertad - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Libertad, San José, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/carcel-libertad/3.webp</image:loc>
+    <image:title>Cárcel de Libertad - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Libertad, San José, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- The Garzón School (TGS) -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-8</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/garzon-school/1.webp</image:loc>
+    <image:title>The Garzón School (TGS)</image:title>
+    <image:caption>Institución educativa de alto nivel en José Ignacio. CPS ejecutó fachadas vidriadas con DVH laminado, aberturas de alta prestación y curvado de perfiles personalizados.</image:caption>
+    <image:geo_location>José Ignacio, Maldonado, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/garzon-school/2.webp</image:loc>
+    <image:title>The Garzón School (TGS) - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>José Ignacio, Maldonado, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/garzon-school/3.webp</image:loc>
+    <image:title>The Garzón School (TGS) - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>José Ignacio, Maldonado, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/garzon-school/4.webp</image:loc>
+    <image:title>The Garzón School (TGS) - Imagen 4</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>José Ignacio, Maldonado, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/garzon-school/5.webp</image:loc>
+    <image:title>The Garzón School (TGS) - Imagen 5</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>José Ignacio, Maldonado, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Colegio Aldeas -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-9</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/colegio-aldeas/1.webp</image:loc>
+    <image:title>Colegio Aldeas</image:title>
+    <image:caption>Proyecto educativo en El Pinar con estructuras tipo domo. CPS realizó cerramientos curvos, fachadas en sistema Suprema y aberturas móviles personalizadas.</image:caption>
+    <image:geo_location>El Pinar, Canelones, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Vivo Life Cordón -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-10</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/vivo-life/2.webp</image:loc>
+    <image:title>Vivo Life Cordón</image:title>
+    <image:caption>Edificio de vivienda promovida en Cordón. CPS diseñó y fabricó parasoles arquitectónicos, barandas de aluminio y vidrio, y elementos metálicos exteriores.</image:caption>
+    <image:geo_location>Cordón, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/vivo-life/3.webp</image:loc>
+    <image:title>Vivo Life Cordón - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Cordón, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/vivo-life/4.webp</image:loc>
+    <image:title>Vivo Life Cordón - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Cordón, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Avita Libertador -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-11</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/avita-libertador/1.webp</image:loc>
+    <image:title>Avita Libertador</image:title>
+    <image:caption>Edificio de vivienda promovida con cerramiento técnico en azotea. CPS diseñó e instaló estructuras metálicas con terminaciones resistentes a la intemperie.</image:caption>
+    <image:geo_location>Av. Libertador, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/avita-libertador/2.webp</image:loc>
+    <image:title>Avita Libertador - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Av. Libertador, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Uruguayan American School (UAS) -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-12</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/uas/1.webp</image:loc>
+    <image:title>Uruguayan American School (UAS)</image:title>
+    <image:caption>Centro educativo desarrollado junto a CIEMSA. CPS ejecutó cerramientos vidriados y aberturas de alta prestación bajo estrictos estándares de calidad institucional.</image:caption>
+    <image:geo_location>Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/uas/2.webp</image:loc>
+    <image:title>Uruguayan American School (UAS) - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/uas/3.webp</image:loc>
+    <image:title>Uruguayan American School (UAS) - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Proa Carrasco -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-13</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/proa-carrasco/1.webp</image:loc>
+    <image:title>Proa Carrasco</image:title>
+    <image:caption>Edificio residencial premium con barandas de aluminio curvadas, pérgolas, portones y rejas perimetrales. Trabajo realizado en altura con precisión milimétrica.</image:caption>
+    <image:geo_location>Carrasco Norte, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/proa-carrasco/2.webp</image:loc>
+    <image:title>Proa Carrasco - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Carrasco Norte, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/proa-carrasco/3.webp</image:loc>
+    <image:title>Proa Carrasco - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Carrasco Norte, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/proa-carrasco/4.webp</image:loc>
+    <image:title>Proa Carrasco - Imagen 4</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Carrasco Norte, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Sinergia Faro (ex Sheraton) -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-14</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/sinergia-faro/1.webp</image:loc>
+    <image:title>Sinergia Faro (ex Sheraton)</image:title>
+    <image:caption>Reconversión del ex Hotel Sheraton en hub de innovación. CPS realizó restauración de fachada, curtain wall, rooftop técnico y la primera fachada fotovoltaica de Uruguay.</image:caption>
+    <image:geo_location>Punta Carretas, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/sinergia-faro/2.webp</image:loc>
+    <image:title>Sinergia Faro (ex Sheraton) - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Punta Carretas, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- MIDES - Fachada Institucional -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-15</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/mides/1.webp</image:loc>
+    <image:title>MIDES - Fachada Institucional</image:title>
+    <image:caption>Renovación integral de la fachada del Ministerio de Desarrollo Social, con accesos automáticos, cortinas metálicas y planificación en altura sin interrumpir actividades.</image:caption>
+    <image:geo_location>Centro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/mides/2.webp</image:loc>
+    <image:title>MIDES - Fachada Institucional - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Centro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/mides/3.webp</image:loc>
+    <image:title>MIDES - Fachada Institucional - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Centro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Edificio Merville -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-16</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/merville/1.webp</image:loc>
+    <image:title>Edificio Merville</image:title>
+    <image:caption>Intervención integral en edificio residencial frente a la Rambla, con barandas de aluminio resistentes a la corrosión, restauración de fachada y mejoras estéticas.</image:caption>
+    <image:geo_location>Rambla de Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/merville/2.webp</image:loc>
+    <image:title>Edificio Merville - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Rambla de Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/merville/3.webp</image:loc>
+    <image:title>Edificio Merville - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Rambla de Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Summum - World Trade Center -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-17</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/summum-wtc/1.webp</image:loc>
+    <image:title>Summum - World Trade Center</image:title>
+    <image:caption>Renovación de fachada vidriada y cerramientos de oficinas en el complejo WTC. CPS ejecutó carpinterías de aluminio DVH y montaje limpio en entorno corporativo.</image:caption>
+    <image:geo_location>World Trade Center, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/summum-wtc/2.webp</image:loc>
+    <image:title>Summum - World Trade Center - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>World Trade Center, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/summum-wtc/3.webp</image:loc>
+    <image:title>Summum - World Trade Center - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>World Trade Center, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Hospital de Clínicas -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-18</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-clinicas/1.webp</image:loc>
+    <image:title>Hospital de Clínicas</image:title>
+    <image:caption>Intervención en el CTI del piso 15. CPS instaló aberturas de alta prestación, parasoles y revestimientos en panel compuesto, mejorando confort térmico y protección solar.</image:caption>
+    <image:geo_location>Av. Italia, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-clinicas/2.webp</image:loc>
+    <image:title>Hospital de Clínicas - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Av. Italia, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Hospital Pasteur -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-19</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-pasteur/1.webp</image:loc>
+    <image:title>Hospital Pasteur</image:title>
+    <image:caption>Readecuación de cerramientos, mamparas y servicios hospitalarios durante pandemia COVID-19. CPS reemplazó más de 1000 m² de aberturas y cerramientos técnicos.</image:caption>
+    <image:geo_location>Av. Centenario, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-pasteur/2.webp</image:loc>
+    <image:title>Hospital Pasteur - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Av. Centenario, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-pasteur/3.webp</image:loc>
+    <image:title>Hospital Pasteur - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Av. Centenario, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/hospital-pasteur/4.webp</image:loc>
+    <image:title>Hospital Pasteur - Imagen 4</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Av. Centenario, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- ANTEL - Sede Cerrito -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-20</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/antel-cerrito/1.webp</image:loc>
+    <image:title>ANTEL - Sede Cerrito</image:title>
+    <image:caption>Sustitución integral de aberturas respetando la fachada patrimonial de la sede en Ciudad Vieja. CPS instaló DVH y carpinterías de aluminio de alto desempeño.</image:caption>
+    <image:geo_location>Ciudad Vieja, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Ministerio de Trabajo y Seguridad Social (MTSS) -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-21</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/mtss/1.webp</image:loc>
+    <image:title>Ministerio de Trabajo y Seguridad Social (MTSS)</image:title>
+    <image:caption>Renovación de cerramientos y restauración de fachada del edificio central, con nuevas carpinterías de aluminio y trabajos de silleta planificados por sectores.</image:caption>
+    <image:geo_location>Centro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/mtss/2.webp</image:loc>
+    <image:title>Ministerio de Trabajo y Seguridad Social (MTSS) - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Centro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/mtss/3.webp</image:loc>
+    <image:title>Ministerio de Trabajo y Seguridad Social (MTSS) - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Centro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Banco de Seguros del Estado (BSE) -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-22</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/bse/1.webp</image:loc>
+    <image:title>Banco de Seguros del Estado (BSE)</image:title>
+    <image:caption>Readecuación de oficinas en pisos 6 y 8 con nuevas aberturas de aluminio y mamparas divisorias de vidrio templado. Ejecución con mínima interferencia operativa.</image:caption>
+    <image:geo_location>Centro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/bse/2.webp</image:loc>
+    <image:title>Banco de Seguros del Estado (BSE) - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Centro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/bse/3.webp</image:loc>
+    <image:title>Banco de Seguros del Estado (BSE) - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Centro, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Nostrum Malvín Torre 2 -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-23</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/nostrum-malvin/1.webp</image:loc>
+    <image:title>Nostrum Malvín Torre 2</image:title>
+    <image:caption>Torre residencial desarrollada por Ebital. CPS instaló barandas, parasoles y separadores de balcones, contribuyendo al diseño y control solar de la fachada.</image:caption>
+    <image:geo_location>Av. Italia y Colombes, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/nostrum-malvin/2.webp</image:loc>
+    <image:title>Nostrum Malvín Torre 2 - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Av. Italia y Colombes, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/nostrum-malvin/3.webp</image:loc>
+    <image:title>Nostrum Malvín Torre 2 - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Av. Italia y Colombes, Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- INISA Academia -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-25</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/inisa/1.webp</image:loc>
+    <image:title>INISA Academia</image:title>
+    <image:caption>Construcción de sede educativa especializada en convenio con MTOP, integrando obra civil y carpintería de aluminio bajo estándares públicos.</image:caption>
+    <image:geo_location>Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Comisaría de Salinas -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-26</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/comisaria-salinas/1.webp</image:loc>
+    <image:title>Comisaría de Salinas</image:title>
+    <image:caption>Obra funcional ejecutada junto al MTOP, con cerramientos de seguridad, herrería técnica y carpinterías de aluminio adaptadas a requerimientos policiales.</image:caption>
+    <image:geo_location>Salinas, Canelones, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Escuela Integral STILER -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-28</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/stiler-escuela-integral/1.webp</image:loc>
+    <image:title>Escuela Integral STILER</image:title>
+    <image:caption>Proyecto educativo de gran impacto social desarrollado junto a STILER. CPS realiza provisión e instalación de aberturas y cerramientos adaptados al entorno escolar.</image:caption>
+    <image:geo_location>Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/stiler-escuela-integral/2.webp</image:loc>
+    <image:title>Escuela Integral STILER - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/stiler-escuela-integral/3.webp</image:loc>
+    <image:title>Escuela Integral STILER - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Montevideo, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+
+<!-- Proyecto Laguna de los Cisnes -->
+<url>
+  <loc>https://grupocps.com.uy/obras.html#obra-29</loc>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/laguna-cisnes/1.webp</image:loc>
+    <image:title>Proyecto Laguna de los Cisnes</image:title>
+    <image:caption>Conjunto de viviendas unifamiliares de alta gama con soluciones a medida en aluminio, vidrio, barandas, parasoles y terminaciones finas. La intervención incluye diseños personalizados para cada unidad</image:caption>
+    <image:geo_location>Laguna de los Cisnes, Maldonado, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/laguna-cisnes/2.webp</image:loc>
+    <image:title>Proyecto Laguna de los Cisnes - Imagen 2</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Laguna de los Cisnes, Maldonado, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+  <image:image>
+    <image:loc>https://grupocps.com.uy/assets/images/obras-optimized/laguna-cisnes/3.webp</image:loc>
+    <image:title>Proyecto Laguna de los Cisnes - Imagen 3</image:title>
+    <image:caption></image:caption>
+    <image:geo_location>Laguna de los Cisnes, Maldonado, Uruguay</image:geo_location>
+    <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+  </image:image>
+</url>
+</urlset>

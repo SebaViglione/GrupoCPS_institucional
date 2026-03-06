@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Final - Mosaico Sin Slideshow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: white;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #333;
+            border-radius: 5px;
+        }
+        .success {
+            border-left: 5px solid #4CAF50;
+        }
+        .warning {
+            border-left: 5px solid #FF9800;
+        }
+        .error {
+            border-left: 5px solid #F44336;
+        }
+        .mosaic-test {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .mosaic-test-item {
+            height: 100px;
+            background: #444;
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+        .mosaic-test-item .bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .status-ok {
+            background: #4CAF50;
+            color: white;
+        }
+        .status-fail {
+            background: #F44336;
+            color: white;
+        }
+        .status-warn {
+            background: #FF9800;
+            color: white;
+        }
+        code {
+            background: #000;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>✅ Test Final - Mosaico Sin Slideshow</h1>
+        
+        <div class="test-section success">
+            <h3>🎯 Objetivo del Test</h3>
+            <p>Verificar que el mosaico <strong>NO tiene slideshow</strong> y muestra <strong>5 imágenes fijas</strong> (1 por categoría).</p>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔍 Verificación de Código</h3>
+            <div id="codeCheck">
+                <p>Verificando código JavaScript...</p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🖼️ Vista Previa del Mosaico</h3>
+            <div class="mosaic-test" id="mosaicTest">
+                <!-- Se llenará con JavaScript -->
+            </div>
+            <p style="margin-top: 10px; font-size: 12px; color: #aaa;">
+                Cada cuadro muestra 1 imagen FIJA. Si las imágenes cambian/rotan, el test falla.
+            </p>
+        </div>
+        
+        <div class="test-section">
+            <h3>⏱️ Monitoreo de Intervalos</h3>
+            <div id="intervalMonitor">
+                <p>Iniciando monitoreo de setInterval/setTimeout...</p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 Resultado Final</h3>
+            <div id="finalResult">
+                <p>Ejecutando pruebas...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cargar el mismo JS que index.html -->
+    <script src="js/main.min.js"></script>
+
+    <script>
+        // Test 1: Verificar que no haya código de slideshow
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeCheck = document.getElementById('codeCheck');
+            
+            // Verificar en el código fuente (aproximación)
+            fetch('js/main.min.js')
+                .then(response => response.text())
+                .then(code => {
+                    const hasSetInterval = code.includes('setInterval');
+                    const has3500 = code.includes('3500');
+                    const hasSlideshow = code.includes('slideshow');
+                    
+                    let html = '<p>';
+                    
+                    if (!hasSetInterval || (hasSetInterval && !has3500)) {
+                        html += '✅ <strong>setInterval para slideshow:</strong> NO encontrado <span class="status status-ok">OK</span><br>';
+                    } else {
+                        html += '❌ <strong>setInterval para slideshow:</strong> ENCONTRADO <span class="status status-fail">FALLO</span><br>';
+                    }
+                    
+                    if (!has3500) {
+                        html += '✅ <strong>Delay de 3500ms:</strong> NO encontrado <span class="status status-ok">OK</span><br>';
+                    } else {
+                        html += '❌ <strong>Delay de 3500ms:</strong> ENCONTRADO <span class="status status-fail">FALLO</span><br>';
+                    }
+                    
+                    if (!hasSlideshow) {
+                        html += '✅ <strong>Texto "slideshow":</strong> NO encontrado <span class="status status-ok">OK</span><br>';
+                    } else {
+                        html += '❌ <strong>Texto "slideshow":</strong> ENCONTRADO <span class="status status-fail">FALLO</span><br>';
+                    }
+                    
+                    html += '</p>';
+                    codeCheck.innerHTML = html;
+                });
+            
+            // Test 2: Crear vista previa del mosaico
+            const categories = ['salud', 'educacion', 'vivienda', 'obras_publicas', 'corporativo'];
+            const mosaicTest = document.getElementById('mosaicTest');
+            
+            categories.forEach(category => {
+                const item = document.createElement('div');
+                item.className = 'mosaic-test-item';
+                item.dataset.category = category;
+                
+                const bg = document.createElement('div');
+                bg.className = 'bg';
+                bg.id = `bg-${category}`;
+                
+                item.appendChild(bg);
+                mosaicTest.appendChild(item);
+            });
+            
+            // Test 3: Monitorear intervalos
+            const intervalMonitor = document.getElementById('intervalMonitor');
+            let intervalCount = 0;
+            let timeoutCount = 0;
+            
+            const originalSetInterval = window.setInterval;
+            const originalSetTimeout = window.setTimeout;
+            
+            window.setInterval = function(callback, delay) {
+                intervalCount++;
+                intervalMonitor.innerHTML = `
+                    <p>🚨 <strong>setInterval detectado #${intervalCount}:</strong> ${delay}ms</p>
+                    <p style="font-size: 12px; color: #ff6b6b;">Si esto aparece, hay un slideshow activo</p>
+                `;
+                return originalSetInterval.call(this, callback, delay);
+            };
+            
+            window.setTimeout = function(callback, delay) {
+                timeoutCount++;
+                if (delay > 1000) {
+                    intervalMonitor.innerHTML = `
+                        <p>⚠️ <strong>setTimeout largo detectado #${timeoutCount}:</strong> ${delay}ms</p>
+                        <p style="font-size: 12px; color: #ffa726;">Delay largo podría ser para slideshow</p>
+                    `;
+                }
+                return originalSetTimeout.call(this, callback, delay);
+            };
+            
+            // Test 4: Monitorear cambios en las imágenes
+            const observers = [];
+            categories.forEach(category => {
+                const bgElement = document.getElementById(`bg-${category}`);
+                if (bgElement) {
+                    const observer = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                                intervalMonitor.innerHTML += `
+                                    <p style="font-size: 11px; color: #ffeb3b;">
+                                        🔄 Cambio detectado en ${category}: ${mutation.target.style.backgroundImage ? 'imagen cambiada' : 'opacidad cambiada'}
+                                    </p>
+                                `;
+                            }
+                        });
+                    });
+                    
+                    observer.observe(bgElement, { attributes: true, attributeFilter: ['style'] });
+                    observers.push(observer);
+                }
+            });
+            
+            // Esperar 10 segundos y mostrar resultado final
+            setTimeout(() => {
+                const finalResult = document.getElementById('finalResult');
+                
+                let resultHTML = '<h4>📈 Resumen después de 10 segundos:</h4>';
+                
+                if (intervalCount === 0) {
+                    resultHTML += '<p>✅ <strong>setInterval:</strong> 0 detectados <span class="status status-ok">EXCELENTE</span></p>';
+                } else {
+                    resultHTML += `<p>❌ <strong>setInterval:</strong> ${intervalCount} detectados <span class="status status-fail">FALLO</span></p>`;
+                }
+                
+                if (timeoutCount === 0) {
+                    resultHTML += '<p>✅ <strong>setTimeout largos:</strong> 0 detectados <span class="status status-ok">EXCELENTE</span></p>';
+                } else {
+                    resultHTML += `<p>⚠️ <strong>setTimeout largos:</strong> ${timeoutCount} detectados <span class="status status-warn">ADVERTENCIA</span></p>`;
+                }
+                
+                // Verificar si las imágenes se cargaron
+                const loadedImages = categories.filter(cat => {
+                    const bg = document.getElementById(`bg-${cat}`);
+                    return bg && bg.style.backgroundImage;
+                }).length;
+                
+                resultHTML += `<p>🖼️ <strong>Imágenes cargadas:</strong> ${loadedImages}/5 <span class="status ${loadedImages === 5 ? 'status-ok' : 'status-warn'}">${loadedImages === 5 ? 'OK' : 'PARCIAL'}</span></p>`;
+                
+                // Conclusión
+                if (intervalCount === 0 && timeoutCount === 0) {
+                    resultHTML += '<div class="test-section success" style="margin-top: 15px;">';
+                    resultHTML += '<h4>🎉 ¡TEST EXITOSO!</h4>';
+                    resultHTML += '<p>El mosaico <strong>NO tiene slideshow</strong> y muestra imágenes fijas.</p>';
+                    resultHTML += '<p>✅ La página cargará más rápido</p>';
+                    resultHTML += '<p>✅ No hay rotación automática de imágenes</p>';
+                    resultHTML += '<p>✅ Solo 5 imágenes cargadas (1 por categoría)</p>';
+                    resultHTML += '</div>';
+                } else {
+                    resultHTML += '<div class="test-section error" style="margin-top: 15px;">';
+                    resultHTML += '<h4>❌ TEST FALLIDO</h4>';
+                    resultHTML += '<p>Todavía hay código de slideshow activo.</p>';
+                    resultHTML += '</div>';
+                }
+                
+                finalResult.innerHTML = resultHTML;
+                
+                // Limpiar observers
+                observers.forEach(observer => observer.disconnect());
+            }, 10000); // 10 segundos
+        });
+        
+        // Mostrar hora actual para referencia
+        console.log('🕐 Test iniciado a las:', new Date().toLocaleTimeString());
+        console.log('🔍 Monitoreando actividad del mosaico...');
+    </script>
+</body>
+</html>

@@ -2,95 +2,95 @@
   "clientes": [
     {
       "nombre": "Arca",
-      "logo": "Constructoras y desarrolladoras/Arca.png",
+      "logo": "clients-logos-webp/Constructoras y desarrolladoras/Arca.webp",
       "categoria": "Constructoras"
     },
     {
       "nombre": "CIEMSA",
-      "logo": "Constructoras y desarrolladoras/CIEMSA.png",
+      "logo": "clients-logos-webp/Constructoras y desarrolladoras/CIEMSA.webp",
       "categoria": "Constructoras"
     },
     {
       "nombre": "Ebital",
-      "logo": "Constructoras y desarrolladoras/Ebital.png",
+      "logo": "clients-logos-webp/Constructoras y desarrolladoras/Ebital.webp",
       "categoria": "Constructoras"
     },
     {
       "nombre": "Enkel",
-      "logo": "Constructoras y desarrolladoras/Enkel.svg",
+      "logo": "clients-logos-webp/Constructoras y desarrolladoras/Enkel.svg",
       "categoria": "Constructoras"
     },
     {
       "nombre": "Stiler",
-      "logo": "Constructoras y desarrolladoras/Stiler.png",
+      "logo": "clients-logos-webp/Constructoras y desarrolladoras/Stiler.webp",
       "categoria": "Constructoras"
     },
     {
       "nombre": "Teyma",
-      "logo": "Constructoras y desarrolladoras/Teyma.svg",
+      "logo": "clients-logos-webp/Constructoras y desarrolladoras/Teyma.svg",
       "categoria": "Constructoras"
     },
     {
       "nombre": "Fecovi",
-      "logo": "Cooperativas/Fecovi.png",
+      "logo": "clients-logos-webp/Cooperativas/Fecovi.webp",
       "categoria": "Cooperativas"
     },
     {
       "nombre": "ASSE",
-      "logo": "Estado/ASSE.png",
+      "logo": "clients-logos-webp/Estado/ASSE.webp",
       "categoria": "Estado"
     },
     {
       "nombre": "Antel",
-      "logo": "Estado/Antel.svg",
+      "logo": "clients-logos-webp/Estado/Antel.svg",
       "categoria": "Estado"
     },
     {
       "nombre": "BSE",
-      "logo": "Estado/BSE.png",
+      "logo": "clients-logos-webp/Estado/BSE.webp",
       "categoria": "Estado"
     },
     {
       "nombre": "MSP",
-      "logo": "Estado/MSP.png",
+      "logo": "clients-logos-webp/Estado/MSP.webp",
       "categoria": "Estado"
     },
     {
       "nombre": "MTOP",
-      "logo": "Estado/MTOP.png",
+      "logo": "clients-logos-webp/Estado/MTOP.webp",
       "categoria": "Estado"
     },
     {
       "nombre": "MTSS",
-      "logo": "Estado/MTSS.png",
+      "logo": "clients-logos-webp/Estado/MTSS.webp",
       "categoria": "Estado",
       "clase": "wide"
     },
     {
       "nombre": "Mides",
-      "logo": "Estado/Mides.png",
+      "logo": "clients-logos-webp/Estado/Mides.webp",
       "categoria": "Estado"
     },
     {
       "nombre": "UDELAR",
-      "logo": "Estado/UDELAR.png",
+      "logo": "clients-logos-webp/Estado/UDELAR.webp",
       "categoria": "Estado",
       "clase": "compact"
     },
     {
       "nombre": "Proa Carrasco",
-      "logo": "Privados/Proa Carrasco.png",
+      "logo": "clients-logos-webp/Privados/Proa Carrasco.webp",
       "categoria": "Privados",
       "clase": "wide"
     },
     {
       "nombre": "Sinergia",
-      "logo": "Privados/Sinergia.png",
+      "logo": "clients-logos-webp/Privados/Sinergia.webp",
       "categoria": "Privados"
     },
     {
       "nombre": "Summum",
-      "logo": "Privados/Summum.png",
+      "logo": "clients-logos-webp/Privados/Summum.webp",
       "categoria": "Privados"
     }
   ]

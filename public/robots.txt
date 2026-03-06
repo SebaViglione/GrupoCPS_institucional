@@ -3,18 +3,33 @@
 
 User-agent: *
 Allow: /
-Allow: /index.html
-Allow: /obras.html
-Allow: /css/
-Allow: /js/
-Allow: /assets/
 
+# Disallow scripts y node_modules
 Disallow: /scripts/
 Disallow: /node_modules/
+Disallow: /docker/
+Disallow: /docs/
+
+# Disallow archivos JSON (data)
+Disallow: /assets/data/*.json$
 Disallow: /*.json$
 
-# Sitemap
-Sitemap: https://grupocps.com.uy/sitemap.xml
+# Disallow archivos de build
+Disallow: /package*.json
+Disallow: /package-lock.json
+Disallow: /postcss.config.js
 
-# Crawl-delay
+# Sitemaps
+Sitemap: https://grupocps.com.uy/sitemap.xml
+Sitemap: https://grupocps.com.uy/sitemap-main.xml
+Sitemap: https://grupocps.com.uy/sitemap-images.xml
+
+# Crawl delay (1 segundo entre requests)
 Crawl-delay: 1
+
+# No permitir crawlers agresivos
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /

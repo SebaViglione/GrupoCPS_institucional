@@ -777,7 +777,7 @@ body.loading {
 
 .mosaic-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 0;
   width: 100%;
   margin-top: var(--spacing-lg);
@@ -785,10 +785,9 @@ body.loading {
 
 .mosaic-item {
   position: relative;
-  height: 350px;
+  height: 300px;
   overflow: hidden;
   cursor: pointer;
-  grid-column: span 2;
 }
 
 .mosaic-bg {
@@ -796,19 +795,15 @@ body.loading {
   inset: 0;
   background-size: cover;
   background-position: center;
-  transition: opacity 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1), 
+              opacity 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
   z-index: 0;
-  filter: blur(3px);
-  will-change: opacity;
+  opacity: 0;
+  will-change: transform, opacity;
 }
 
-/* Los últimos 2 bloques ocupan 3 columnas cada uno (mitad del ancho) */
-.mosaic-item:nth-child(4) {
-  grid-column: span 3;
-}
-
-.mosaic-item:nth-child(5) {
-  grid-column: span 3;
+.mosaic-bg.loaded {
+  opacity: 1;
 }
 
 /* Overlay oscuro */
@@ -863,16 +858,21 @@ body.loading {
 /* Responsive */
 @media (max-width: 768px) {
   .mosaic-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .mosaic-item:nth-child(4),
-  .mosaic-item:nth-child(5) {
-    grid-column: span 1;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .mosaic-item {
-    height: 300px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mosaic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mosaic-item {
+    height: 200px;
   }
 }
 
