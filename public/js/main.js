@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const pageLoader = document.getElementById('pageLoader');
     const body = document.body;
 
+    if (!pageLoader) return;
+
     // Añadir clase loading al body para prevenir scroll
     body.classList.add('loading');
 
@@ -391,7 +393,7 @@ function renderClientsCarousel(clientes, carousel) {
         const claseExtra = cliente.clase ? ` ${cliente.clase}` : '';
         return `
         <div class="client-logo-item${claseExtra}">
-            <img src="assets/images/clients-logos/${cliente.logo}"
+            <img src="assets/images/${cliente.logo}"
                  alt="${cliente.nombre}"
                  title="${cliente.nombre}">
         </div>

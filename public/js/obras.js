@@ -15,7 +15,7 @@ function getCategoryName(categoria) {
         'salud': 'obrasPage.filter.health',
         'educacion': 'obrasPage.filter.education',
         'vivienda': 'obrasPage.filter.retail',
-        'obras_publicas': 'obrasPage.filter.public',
+        'obras_publicas': 'obrasPage.filter.hospitality',
         'corporativo': 'obrasPage.filter.corporate'
     };
 
@@ -61,14 +61,10 @@ function generateSrcset(imagePath, baseDir = 'obras-optimized') {
     const folderPath = imagePath.substring(0, imagePath.lastIndexOf('/'));
     const folderName = folderPath.substring(folderPath.lastIndexOf('/') + 1);
     
-    // Solo tenemos versión 640w para AVIF (generada en el script simplificado)
-    const avifSrcset = `assets/images/obras-avif/${folderName}/${imageNameWithoutExt}-640w.avif 640w`;
-    
     // Para WebP, usamos la imagen original como única versión
     const webpSrcset = `assets/images/${baseDir}/${folderName}/${imageNameWithoutExt}.webp 1920w`;
     
     return {
-        avif: avifSrcset,
         webp: webpSrcset,
         fallback: `assets/images/${baseDir}/${folderName}/${imageName}`
     };
@@ -132,15 +128,8 @@ function setupHeroBackground() {
         // Usar la función generateSrcset actualizada
         const srcsets = generateSrcset(imgSrc);
         
-        // Verificar soporte AVIF
-        const supportsAvif = document.createElement('canvas')
-            .toDataURL('image/avif')
-            .indexOf('data:image/avif') === 0;
-        
-        if (supportsAvif) {
-            img.srcset = srcsets.avif;
-        }
-        img.src = `assets/images/${imgSrc}`;
+        img.srcset = srcsets.webp;
+        img.src = srcsets.fallback;
         img.alt = 'Obra Grupo CPS';
         img.className = 'hero-bg-image';
 
@@ -235,7 +224,6 @@ function renderObras(append = false) {
                                 <p>Cargando</p>
                             </div>
                             <picture class="obra-img-main">
-                                <source data-srcset="${generateSrcset(obra.imagenes[0]).avif}" type="image/avif">
                                 <source data-srcset="${generateSrcset(obra.imagenes[0]).webp}" type="image/webp">
                                 <img class="lazy-load" 
                                      data-src="${generateSrcset(obra.imagenes[0]).fallback}"
@@ -362,12 +350,22 @@ function setupLazyLoading() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                const loader = img.previousElementSibling; // El spinner
+                const loader = img.closest('.obra-image')?.querySelector('.obra-image-loader'); // El spinner
 
                 // Crear una nueva imagen para precargar
                 const tempImg = new Image();
 
                 tempImg.onload = () => {
+                    // Si la imagen está dentro de un picture, actualizar los source siblings
+                    if (img.parentElement && img.parentElement.tagName === 'PICTURE') {
+                        const sources = img.parentElement.querySelectorAll('source');
+                        sources.forEach(source => {
+                            if (source.dataset.srcset) {
+                                source.srcset = source.dataset.srcset;
+                            }
+                        });
+                    }
+                    
                     // Una vez cargada, asignar el src a la imagen real
                     img.src = img.dataset.src;
                     img.classList.add('loaded');
@@ -701,9 +699,8 @@ function setupImageCarousel() {
                         }, 300);
                     };
                     const srcsets = generateSrcset(`assets/images/${images[currentIndex]}`);
-                    preloadImg.srcset = srcsets.avif;
+                    preloadImg.srcset = srcsets.webp;
                     preloadImg.onerror = () => {
-                        preloadImg.srcset = srcsets.webp;
                         preloadImg.src = srcsets.fallback;
                     };
                     preloadImg.src = srcsets.fallback;
