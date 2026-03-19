@@ -1780,6 +1780,88 @@ body.loading {
 }
 
 /* ======================================
+   ESTUDIO PROMO SECTION
+   ====================================== */
+
+.estudio-promo-section {
+  padding: var(--spacing-xl) 0;
+  background: var(--bg-card);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.estudio-promo-section::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(33, 153, 213, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.estudio-promo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.estudio-promo-icon {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(33, 153, 213, 0.15), rgba(33, 153, 213, 0.05));
+  border-radius: 20px;
+  border: 1px solid rgba(33, 153, 213, 0.2);
+}
+
+.estudio-promo-icon svg {
+  width: 50px;
+  height: 50px;
+  stroke: var(--primary-color);
+}
+
+.estudio-promo-content .section-tag {
+  margin-bottom: 0.8rem;
+}
+
+.estudio-promo-content .section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  margin-bottom: 1rem;
+}
+
+.estudio-promo-content .section-description {
+  text-align: left;
+  max-width: 100%;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .estudio-promo-wrapper {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .estudio-promo-content .section-description {
+    text-align: center;
+  }
+
+  .estudio-promo-content .section-tag::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* ======================================
    SCROLL ANIMATIONS
    ====================================== */
 
