@@ -798,9 +798,8 @@ function openModal(obraId) {
                         <div class="modal-carousel-item ${index === 0 ? 'active' : ''}" data-index="${index}">
                             ${item.type === 'image'
                     ? `<picture>
-                         <source srcset="${generateSrcset(`assets/images/${item.src}`).avif}" type="image/avif">
-                         <source srcset="${generateSrcset(`assets/images/${item.src}`).webp}" type="image/webp">
-                         <img src="${generateSrcset(`assets/images/${item.src}`).fallback}" 
+                         <source srcset="${generateSrcset(item.src).webp}" type="image/webp">
+                         <img src="${generateSrcset(item.src).fallback}" 
                               alt="${getObraField(obra, 'nombre')}" 
                               loading="lazy" decoding="async">
                        </picture>`
@@ -897,8 +896,8 @@ function openModal(obraId) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // Store current carousel index
-    window.currentModalCarouselIndex = 0;
+    // Reset carousel index for the new modal
+    currentModalCarouselIndex = 0;
 }
 
 // Modal carousel navigation
@@ -910,9 +909,18 @@ function modalCarouselNav(direction) {
 
     if (items.length === 0) return;
 
+    // Clamp index to valid range
+    if (currentModalCarouselIndex >= items.length) {
+        currentModalCarouselIndex = 0;
+    }
+
     // Remove active class from current item
-    items[currentModalCarouselIndex].classList.remove('active');
-    dots[currentModalCarouselIndex].classList.remove('active');
+    if (items[currentModalCarouselIndex]) {
+        items[currentModalCarouselIndex].classList.remove('active');
+    }
+    if (dots[currentModalCarouselIndex]) {
+        dots[currentModalCarouselIndex].classList.remove('active');
+    }
 
     // Calculate new index
     currentModalCarouselIndex += direction;
@@ -925,8 +933,12 @@ function modalCarouselNav(direction) {
     }
 
     // Add active class to new item
-    items[currentModalCarouselIndex].classList.add('active');
-    dots[currentModalCarouselIndex].classList.add('active');
+    if (items[currentModalCarouselIndex]) {
+        items[currentModalCarouselIndex].classList.add('active');
+    }
+    if (dots[currentModalCarouselIndex]) {
+        dots[currentModalCarouselIndex].classList.add('active');
+    }
 }
 
 function modalCarouselGoTo(index) {
@@ -936,15 +948,23 @@ function modalCarouselGoTo(index) {
     if (items.length === 0 || index < 0 || index >= items.length) return;
 
     // Remove active class from current item
-    items[currentModalCarouselIndex].classList.remove('active');
-    dots[currentModalCarouselIndex].classList.remove('active');
+    if (items[currentModalCarouselIndex]) {
+        items[currentModalCarouselIndex].classList.remove('active');
+    }
+    if (dots[currentModalCarouselIndex]) {
+        dots[currentModalCarouselIndex].classList.remove('active');
+    }
 
     // Set new index
     currentModalCarouselIndex = index;
 
     // Add active class to new item
-    items[currentModalCarouselIndex].classList.add('active');
-    dots[currentModalCarouselIndex].classList.add('active');
+    if (items[currentModalCarouselIndex]) {
+        items[currentModalCarouselIndex].classList.add('active');
+    }
+    if (dots[currentModalCarouselIndex]) {
+        dots[currentModalCarouselIndex].classList.add('active');
+    }
 }
 
 // Close modal
