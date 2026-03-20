@@ -12,3 +12,15 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "/web"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/web/*"
+  to = "/"
+  status = 301
+  force = true
