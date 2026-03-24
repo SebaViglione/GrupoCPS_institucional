@@ -2,13 +2,13 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <!-- Sitemap Principal -->
     <sitemap>
-        <loc>https://grupocps.com.uy/web/sitemap-main.xml</loc>
+        <loc>https://grupocps.com.uy/sitemap-main.xml</loc>
         <lastmod>2025-01-21</lastmod>
     </sitemap>
 
     <!-- Sitemap de Imágenes -->
     <sitemap>
-        <loc>https://grupocps.com.uy/web/sitemap-images.xml</loc>
+        <loc>https://grupocps.com.uy/sitemap-images.xml</loc>
         <lastmod>2025-01-21</lastmod>
     </sitemap>
 </sitemapindex>

@@ -20,9 +20,9 @@ Disallow: /package-lock.json
 Disallow: /postcss.config.js
 
 # Sitemaps
-Sitemap: https://grupocps.com.uy/web/sitemap.xml
-Sitemap: https://grupocps.com.uy/web/sitemap-main.xml
-Sitemap: https://grupocps.com.uy/web/sitemap-images.xml
+Sitemap: https://grupocps.com.uy/sitemap.xml
+Sitemap: https://grupocps.com.uy/sitemap-main.xml
+Sitemap: https://grupocps.com.uy/sitemap-images.xml
 
 # Crawl delay (1 segundo entre requests)
 Crawl-delay: 1

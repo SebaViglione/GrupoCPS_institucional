@@ -1,15 +1,15 @@
 const CACHE_NAME = 'grupocps-v2';
 const ASSETS_TO_CACHE = [
-  '/web/',
-  '/web/index.html',
-  '/web/obras.html',
-  '/web/css/styles.min.css',
-  '/web/js/main.min.js',
-  '/web/js/obras.min.js',
-  '/web/js/i18n.min.js',
-  '/web/js/web-vitals-tracker.js',
-  '/web/assets/images/logos-optimized/logo-navbar.webp',
-  '/web/assets/images/logos-optimized/favicon.webp'
+  '/',
+  '/index.html',
+  '/obras.html',
+  '/css/styles.min.css',
+  '/js/main.min.js',
+  '/js/obras.min.js',
+  '/js/i18n.min.js',
+  '/js/web-vitals-tracker.js',
+  '/assets/images/logos-optimized/logo-navbar.webp',
+  '/assets/images/logos-optimized/favicon.webp'
 ];
 
 // Instalación: Cachear recursos estáticos
@@ -54,7 +54,7 @@ self.addEventListener('fetch', (event) => {
           return caches.match(event.request)
             .then((response) => {
               if (response) return response;
-              return caches.match('/web/index.html'); // Fallback a home
+              return caches.match('/index.html'); // Fallback a home
             });
         })
     );
