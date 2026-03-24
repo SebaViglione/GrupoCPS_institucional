@@ -2,7 +2,7 @@
   "name": "Grupo CPS - Construcción y Aluminio",
   "short_name": "Grupo CPS",
   "description": "Líderes en construcción en seco y aberturas de aluminio en Uruguay.",
-  "start_url": "/",
+  "start_url": "/web/",
   "display": "standalone",
   "background_color": "#0d0f12",
   "theme_color": "#ef8a1e",
