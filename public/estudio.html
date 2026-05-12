@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
+    <meta name="description" data-i18n="estudioPage.meta.description"
         content="Servicio integral de arquitectura: anteproyecto, permisos, proyecto ejecutivo y dirección de obra. Grupo CPS, Montevideo, Uruguay.">
-    <title>Estudio Arquitectónico | Grupo CPS Uruguay</title>
+    <title data-i18n="estudioPage.meta.title">Estudio Arquitectónico | Grupo CPS Uruguay</title>
     <link rel="icon" type="image/webp" href="assets/images/logos-optimized/favicon.webp">
     <link rel="icon" type="image/x-icon" sizes="32x32" href="assets/images/logos-optimized/favicon.ico">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/images/icon-512_alternative.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="assets/images/icon-512_alternative.png">
+    <meta name="theme-color" content="#ef8a1e">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/styles.css">
@@ -50,8 +53,8 @@
         <div class="container">
             <div class="nav-content">
                 <div class="logo">
-                    <img src="assets/images/logos-optimized/logo-navbar.webp" alt="Grupo CPS Logo" class="logo-img"
-                        width="300" height="100">
+                    <img src="assets/images/logos-optimized/logo-navbar-estudio.webp" alt="Grupo CPS Logo"
+                        class="logo-img" width="160" height="160">
                     <h1><a href="index.html" style="text-decoration: none; color: inherit;">GRUPO <span
                                 class="highlight">CPS</span></a></h1>
                 </div>
@@ -64,7 +67,7 @@
                     <li><a href="index.html" class="nav-link" data-i18n="nav.home">Inicio</a></li>
                     <li><a href="index.html#nosotros" class="nav-link" data-i18n="nav.about">Nosotros</a></li>
                     <li><a href="obras.html" class="nav-link" data-i18n="nav.projects">Obras</a></li>
-                    <li><a href="estudio.html" class="nav-link active">Estudio</a></li>
+                    <li><a href="estudio.html" class="nav-link active" data-i18n="nav.studio">Estudio</a></li>
                     <li><a href="index.html#contacto" class="nav-link" data-i18n="nav.contact">Contacto</a></li>
                     <li class="lang-selector">
                         <button class="lang-btn active" data-lang="es">ES</button>
@@ -80,17 +83,19 @@
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h2 class="hero-subtitle fade-in-up">ESTUDIO ARQUITECTÓNICO</h2>
-            <h1 class="hero-title fade-in-up delay-1">De la idea a la<br>llave en mano.</h1>
+            <h2 class="hero-subtitle fade-in-up" data-i18n="estudioPage.hero.tag">ESTUDIO ARQUITECTÓNICO</h2>
+            <h1 class="hero-title fade-in-up delay-1" data-i18n="estudioPage.hero.title">De la idea a la
+                llave en mano.</h1>
             <div class="hero-cta fade-in-up delay-2">
-                <a href="#servicios" class="btn btn-primary">Nuestros servicios</a>
+                <a href="#servicios" class="btn btn-primary" data-i18n="estudioPage.hero.servicesCta">Nuestros
+                    servicios</a>
                 <a href="https://edificiogalicia.com.uy" target="_blank" rel="noopener noreferrer"
-                    class="btn btn-secondary">Ver proyecto real</a>
+                    class="btn btn-secondary" data-i18n="estudioPage.hero.projectCta">Ver proyecto real</a>
             </div>
         </div>
         <div class="scroll-indicator">
             <div class="mouse"></div>
-            <span>Desliza</span>
+            <span data-i18n="estudioPage.hero.scroll">Desliza</span>
         </div>
     </section>
 
@@ -98,8 +103,8 @@
     <section class="estudio-servicios" id="servicios">
         <div class="container">
             <div class="section-header center">
-                <span class="section-tag">Nuestros Servicios</span>
-                <h2 class="section-title">Un proceso integral</h2>
+                <span class="section-tag" data-i18n="estudioPage.services.tag">Nuestros Servicios</span>
+                <h2 class="section-title" data-i18n="estudioPage.services.title">Un proceso integral</h2>
             </div>
 
             <div class="servicios-cascade">
@@ -108,8 +113,9 @@
                     <div class="cascade-content">
                         <div class="cascade-number">01</div>
                         <div class="cascade-text">
-                            <h3>Asesoramiento inicial</h3>
-                            <p>Analizamos tu terreno, necesidades y presupuesto para definir la viabilidad del proyecto
+                            <h3 data-i18n="estudioPage.services.steps.initial.title">Asesoramiento inicial</h3>
+                            <p data-i18n="estudioPage.services.steps.initial.description">Analizamos tu terreno,
+                                necesidades y presupuesto para definir la viabilidad del proyecto
                                 antes de comprometer recursos.</p>
                         </div>
                     </div>
@@ -147,8 +153,9 @@
                     <div class="cascade-content">
                         <div class="cascade-number">02</div>
                         <div class="cascade-text">
-                            <h3>Anteproyecto</h3>
-                            <p>Propuesta arquitectónica inicial: volumetría, distribución espacial, orientación y
+                            <h3 data-i18n="estudioPage.services.steps.concept.title">Anteproyecto</h3>
+                            <p data-i18n="estudioPage.services.steps.concept.description">Propuesta arquitectónica
+                                inicial: volumetría, distribución espacial, orientación y
                                 materialidad.</p>
                         </div>
                     </div>
@@ -163,8 +170,9 @@
                     <div class="cascade-content">
                         <div class="cascade-number">03</div>
                         <div class="cascade-text">
-                            <h3>Trámites y permisos</h3>
-                            <p>Gestionamos expedientes ante la Intendencia de Montevideo. Permisos de construcción,
+                            <h3 data-i18n="estudioPage.services.steps.permits.title">Trámites y permisos</h3>
+                            <p data-i18n="estudioPage.services.steps.permits.description">Gestionamos expedientes ante
+                                la Intendencia de Montevideo. Permisos de construcción,
                                 certificados y habilitaciones.</p>
                         </div>
                     </div>
@@ -204,8 +212,9 @@
                     <div class="cascade-content">
                         <div class="cascade-number">04</div>
                         <div class="cascade-text">
-                            <h3>Proyecto ejecutivo</h3>
-                            <p>Documentación técnica completa: planos de arquitectura, estructura, instalaciones
+                            <h3 data-i18n="estudioPage.services.steps.executive.title">Proyecto ejecutivo</h3>
+                            <p data-i18n="estudioPage.services.steps.executive.description">Documentación técnica
+                                completa: planos de arquitectura, estructura, instalaciones
                                 sanitarias y eléctricas.</p>
                         </div>
                     </div>
@@ -220,8 +229,9 @@
                     <div class="cascade-content">
                         <div class="cascade-number">05</div>
                         <div class="cascade-text">
-                            <h3>Dirección de obra</h3>
-                            <p>Un arquitecto supervisa la ejecución en campo, controla calidades, plazos y fidelidad al
+                            <h3 data-i18n="estudioPage.services.steps.supervision.title">Dirección de obra</h3>
+                            <p data-i18n="estudioPage.services.steps.supervision.description">Un arquitecto supervisa
+                                la ejecución en campo, controla calidades, plazos y fidelidad al
                                 proyecto.</p>
                         </div>
                     </div>
@@ -256,8 +266,9 @@
                     <div class="cascade-content">
                         <div class="cascade-number">06</div>
                         <div class="cascade-text">
-                            <h3>Llave en mano</h3>
-                            <p>Tu proyecto termina cuando recibís las llaves de una obra terminada, habilitada y lista
+                            <h3 data-i18n="estudioPage.services.steps.turnkey.title">Llave en mano</h3>
+                            <p data-i18n="estudioPage.services.steps.turnkey.description">Tu proyecto termina cuando
+                                recibís las llaves de una obra terminada, habilitada y lista
                                 para usar.</p>
                         </div>
                     </div>
@@ -271,23 +282,26 @@
         <div class="container">
             <div class="cta-wrapper">
                 <div class="cta-text">
-                    <span class="section-tag">Caso Real</span>
-                    <h2 class="cta-title">Edificio Galicia — De la idea al hormigón.</h2>
-                    <p class="cta-description">
+                    <span class="section-tag" data-i18n="estudioPage.caseStudy.tag">Caso Real</span>
+                    <h2 class="cta-title" data-i18n="estudioPage.caseStudy.title">Edificio Galicia — De la idea al
+                        hormigón.</h2>
+                    <p class="cta-description" data-i18n="estudioPage.caseStudy.description">
                         Un ejemplo concreto de nuestro proceso integral: anteproyecto, gestión de permisos ante la
                         Intendencia de Montevideo, proyecto ejecutivo y dirección de obra. 46 unidades habitacionales en
                         Cordón.
                     </p>
                     <a href="https://edificiogalicia.com.uy" target="_blank" rel="noopener noreferrer"
                         class="btn btn-primary">
-                        Ver el proyecto <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
+                        <span data-i18n="estudioPage.caseStudy.cta">Ver el proyecto</span>
+                        <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
                     </a>
                 </div>
                 <div class="cta-image-wrapper">
                     <img src="assets/images/estudio/edificio-galicia.webp"
                         alt="Edificio Galicia - Proyecto integral de Grupo CPS" loading="lazy">
                     <div class="cta-image-overlay"></div>
-                    <span class="cta-image-label">Edificio Galicia — Cordón, Montevideo</span>
+                    <span class="cta-image-label" data-i18n="estudioPage.caseStudy.imageLabel">Edificio Galicia —
+                        Cordón, Montevideo</span>
                 </div>
             </div>
         </div>
@@ -306,7 +320,7 @@
                     <a href="index.html" data-i18n="nav.home">Inicio</a>
                     <a href="index.html#nosotros" data-i18n="nav.about">Nosotros</a>
                     <a href="obras.html" data-i18n="nav.projects">Obras</a>
-                    <a href="estudio.html">Estudio</a>
+                    <a href="estudio.html" data-i18n="nav.studio">Estudio</a>
                     <a href="index.html#contacto" data-i18n="nav.contact">Contacto</a>
                 </div>
             </div>

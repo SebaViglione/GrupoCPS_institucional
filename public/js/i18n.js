@@ -8,6 +8,7 @@ const translations = {
             home: "Inicio",
             projects: "Obras",
             services: "Servicios",
+            studio: "Estudio",
             about: "Nosotros",
             contact: "Contacto"
         },
@@ -178,6 +179,57 @@ const translations = {
             of: "de",
             projects: "obras"
         },
+        // Estudio Page (estudio.html)
+        estudioPage: {
+            meta: {
+                title: "Estudio Arquitectónico | Grupo CPS Uruguay",
+                description: "Servicio integral de arquitectura: anteproyecto, permisos, proyecto ejecutivo y dirección de obra. Grupo CPS, Montevideo, Uruguay."
+            },
+            hero: {
+                tag: "ESTUDIO ARQUITECTÓNICO",
+                title: "De la idea a la llave en mano.",
+                servicesCta: "Nuestros servicios",
+                projectCta: "Ver proyecto real",
+                scroll: "Desliza"
+            },
+            services: {
+                tag: "Nuestros Servicios",
+                title: "Un proceso integral",
+                steps: {
+                    initial: {
+                        title: "Asesoramiento inicial",
+                        description: "Analizamos tu terreno, necesidades y presupuesto para definir la viabilidad del proyecto antes de comprometer recursos."
+                    },
+                    concept: {
+                        title: "Anteproyecto",
+                        description: "Propuesta arquitectónica inicial: volumetría, distribución espacial, orientación y materialidad."
+                    },
+                    permits: {
+                        title: "Trámites y permisos",
+                        description: "Gestionamos expedientes ante la Intendencia de Montevideo. Permisos de construcción, certificados y habilitaciones."
+                    },
+                    executive: {
+                        title: "Proyecto ejecutivo",
+                        description: "Documentación técnica completa: planos de arquitectura, estructura, instalaciones sanitarias y eléctricas."
+                    },
+                    supervision: {
+                        title: "Dirección de obra",
+                        description: "Un arquitecto supervisa la ejecución en campo, controla calidades, plazos y fidelidad al proyecto."
+                    },
+                    turnkey: {
+                        title: "Llave en mano",
+                        description: "Tu proyecto termina cuando recibís las llaves de una obra terminada, habilitada y lista para usar."
+                    }
+                }
+            },
+            caseStudy: {
+                tag: "Caso Real",
+                title: "Edificio Galicia — De la idea al hormigón.",
+                description: "Un ejemplo concreto de nuestro proceso integral: anteproyecto, gestión de permisos ante la Intendencia de Montevideo, proyecto ejecutivo y dirección de obra. 46 unidades habitacionales en Cordón.",
+                cta: "Ver el proyecto",
+                imageLabel: "Edificio Galicia — Cordón, Montevideo"
+            }
+        },
         // Contact Section
         contact: {
             tag: "Contacto",
@@ -259,6 +311,7 @@ const translations = {
             home: "Home",
             projects: "Projects",
             services: "Services",
+            studio: "Studio",
             about: "About Us",
             contact: "Contact"
         },
@@ -432,6 +485,57 @@ const translations = {
             of: "of",
             projects: "projects"
         },
+        // Estudio Page (estudio.html)
+        estudioPage: {
+            meta: {
+                title: "Architecture Studio | Grupo CPS Uruguay",
+                description: "Integrated architecture service: concept design, permits, construction documentation and construction supervision. Grupo CPS, Montevideo, Uruguay."
+            },
+            hero: {
+                tag: "ARCHITECTURE STUDIO",
+                title: "From idea to turnkey delivery.",
+                servicesCta: "Our services",
+                projectCta: "View real project",
+                scroll: "Scroll"
+            },
+            services: {
+                tag: "Our Services",
+                title: "An integrated process",
+                steps: {
+                    initial: {
+                        title: "Initial consulting",
+                        description: "We analyze your site, needs and budget to define project feasibility before committing resources."
+                    },
+                    concept: {
+                        title: "Concept design",
+                        description: "Initial architectural proposal: volume, spatial layout, orientation and materiality."
+                    },
+                    permits: {
+                        title: "Permits and approvals",
+                        description: "We manage filings with the Municipality of Montevideo, including building permits, certificates and approvals."
+                    },
+                    executive: {
+                        title: "Construction documentation",
+                        description: "Complete technical documentation: architectural, structural, plumbing and electrical drawings."
+                    },
+                    supervision: {
+                        title: "Construction supervision",
+                        description: "An architect supervises on-site execution, controlling quality, timelines and fidelity to the design."
+                    },
+                    turnkey: {
+                        title: "Turnkey delivery",
+                        description: "Your project is complete when you receive the keys to a finished, approved space ready to use."
+                    }
+                }
+            },
+            caseStudy: {
+                tag: "Real Case",
+                title: "Edificio Galicia — From idea to concrete.",
+                description: "A concrete example of our integrated process: concept design, permit management with the Municipality of Montevideo, construction documentation and construction supervision. 46 residential units in Cordón.",
+                cta: "View project",
+                imageLabel: "Edificio Galicia — Cordón, Montevideo"
+            }
+        },
         // Contact Section
         contact: {
             tag: "Contact",
@@ -548,6 +652,8 @@ function setLanguage(lang) {
 
         if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
             element.placeholder = translation;
+        } else if (element.tagName === 'META') {
+            element.setAttribute('content', translation);
         } else {
             element.textContent = translation;
         }
