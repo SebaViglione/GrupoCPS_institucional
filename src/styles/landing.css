@@ -595,7 +595,8 @@
   animation: clients-marquee 40s linear infinite;
 }
 
-.clients-track:hover {
+.clients-track:hover,
+.clients-track:focus-within {
   animation-play-state: paused;
 }
 

@@ -251,11 +251,11 @@ body {
   font-family: var(--font-secondary);
 }
 
-/* Gradiente dark -> color (AA sobre texto blanco; el legacy usaba color -> dark) */
+/* Fondo sólido primary-dark: blanco sobre --primary-color no cumple AA
+   (3.19:1 en azul, 2.52:1 en el naranja del estudio); sobre --primary-dark
+   sí (4.6:1 / 4.5:1). El acento de color queda en el glow del hover. */
 .btn-primary {
-  background: linear-gradient(135deg,
-      var(--primary-dark),
-      var(--primary-color));
+  background: var(--primary-dark);
   color: var(--white);
   box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
 }
@@ -617,12 +617,19 @@ body {
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
-    transition: right var(--transition-normal);
+    /* visibility saca los links del orden de tabulación mientras el menú
+       está cerrado; el delay evita que desaparezca antes de terminar el slide */
+    visibility: hidden;
+    transition:
+      right var(--transition-normal),
+      visibility 0s 0.3s;
     backdrop-filter: blur(10px);
   }
 
   .nav-links.active {
     right: 0;
+    visibility: visible;
+    transition: right var(--transition-normal);
   }
 
   .menu-toggle {

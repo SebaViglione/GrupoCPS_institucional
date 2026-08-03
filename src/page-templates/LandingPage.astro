@@ -41,9 +41,8 @@ const jsonLd = [
   <ClientsMarquee {locale} />
   <EstudioPromo {locale} />
   <ContactForm {locale} />
-</Base>
 
-<script>
+  <script>
   // Scroll-reveal (paridad con revealOnScroll del legacy).
   // La clase .reveal se agrega desde JS: sin JS todo queda visible.
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -68,4 +67,5 @@ const jsonLd = [
       io.observe(el);
     });
   }
-</script>
+  </script>
+</Base>

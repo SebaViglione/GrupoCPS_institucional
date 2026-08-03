@@ -127,6 +127,7 @@ export const es = {
       en_progreso: 'En Progreso',
     },
     results: '{n} obras',
+    resultsOne: '1 obra',
     noResultsTitle: 'No se encontraron obras',
     noResultsText:
       'No hay obras que coincidan con los filtros seleccionados. Prueba con otros criterios de búsqueda.',
@@ -351,6 +352,7 @@ export const en: Dictionary = {
       en_progreso: 'In Progress',
     },
     results: '{n} projects',
+    resultsOne: '1 project',
     noResultsTitle: 'No projects found',
     noResultsText:
       'There are no projects matching the selected filters. Try different search criteria.',

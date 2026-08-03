@@ -13,7 +13,7 @@ const t = useTranslations(locale);
  * Poster del primer clip. La página que use este hero debe precargarlo en el
  * <head> (slot="head"): <link rel="preload" as="image" href={HERO_POSTER} fetchpriority="high" />
  */
-export const HERO_POSTER = '/assets/videos/posters/poster-video1.webp';
+export const HERO_POSTER = '/assets/videos/posters/poster-video1-v2.webp';
 
 const stats = [t.hero.stats.years, t.hero.stats.aberturas, t.hero.stats.clients];
 ---
@@ -27,12 +27,12 @@ const stats = [t.hero.stats.years, t.hero.stats.aberturas, t.hero.stats.clients]
       muted
       playsinline
       preload="none"
-      poster="/assets/videos/posters/poster-video1.webp"
+      poster="/assets/videos/posters/poster-video1-v2.webp"
       width="1920"
       height="1080"
       aria-hidden="true"
     >
-      <source src="/assets/videos/video1-v2.webm" type="video/webm" />
+      <source src="/assets/videos/video1-v2.webm" type='video/webm; codecs="av01.0.08M.08"' />
       <source src="/assets/videos/video1-v2.mp4" type="video/mp4" />
     </video>
     <div class="video-overlay"></div>
@@ -40,7 +40,7 @@ const stats = [t.hero.stats.years, t.hero.stats.aberturas, t.hero.stats.clients]
 
   <div class="hero-content">
     <div class="hero-text">
-      <h2 class="hero-subtitle fade-in-up">{t.hero.subtitle}</h2>
+      <p class="hero-subtitle fade-in-up">{t.hero.subtitle}</p>
       <h1 class="hero-title fade-in-up delay-1">{t.hero.title}</h1>
       <p class="hero-location fade-in-up delay-2">
         <Icon name="map-pin" size={20} />
@@ -52,7 +52,7 @@ const stats = [t.hero.stats.years, t.hero.stats.aberturas, t.hero.stats.clients]
           stats.map((stat) => (
             <div class="stat-item">
               <span class="stat-number" data-target={stat.value}>
-                {stat.value}
+                {stat.value}+
               </span>
               <span class="stat-label">{stat.label}</span>
             </div>
@@ -102,7 +102,11 @@ const stats = [t.hero.stats.years, t.hero.stats.aberturas, t.hero.stats.clients]
       video.load();
     } else {
       const mobile = window.matchMedia('(max-width: 768px)').matches;
-      const canWebm = !mobile && video.canPlayType('video/webm') !== '';
+      // Los .webm son AV1: hay que chequear el códec, no el contenedor.
+      // Safari de escritorio reproduce WebM (VP8/VP9) pero no decodifica AV1
+      // salvo con hardware M3+/A17+; sin este chequeo el hero queda congelado.
+      let canWebm =
+        !mobile && video.canPlayType('video/webm; codecs="av01.0.08M.08"') !== '';
       const clips = [1, 2, 4];
       const srcFor = (n: number) =>
         mobile
@@ -138,6 +142,18 @@ const stats = [t.hero.stats.years, t.hero.stats.aberturas, t.hero.stats.clients]
 
       video.addEventListener('ended', () => {
         index = (index + 1) % clips.length;
+        video.src = srcFor(clips[index]);
+        video.play().catch(() => {});
+      });
+
+      // Si un clip falla (decode/red), reintentar el mismo clip en mp4;
+      // si ya era mp4, pasar al siguiente para no matar la rotación.
+      video.addEventListener('error', () => {
+        if (canWebm && video.currentSrc.endsWith('.webm')) {
+          canWebm = false;
+        } else {
+          index = (index + 1) % clips.length;
+        }
         video.src = srcFor(clips[index]);
         video.play().catch(() => {});
       });

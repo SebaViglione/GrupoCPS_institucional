@@ -2,7 +2,7 @@
 import { Picture } from 'astro:assets';
 import Icon from '../Icon.astro';
 import { useTranslations, localePath, type Locale } from '../../i18n';
-import { CATEGORIAS, obraImage } from '../../lib/obras';
+import { CATEGORIAS, categoriesWithObras, obraImage } from '../../lib/obras';
 import { mosaicImages } from '../../data/mosaic';
 
 interface Props {
@@ -16,12 +16,18 @@ const t = useTranslations(locale);
 const tag = locale === 'es' ? 'Sectores' : 'Sectors';
 const obrasHref = localePath(locale, '/obras/');
 
+const withObras = new Set(categoriesWithObras());
+
 const tiles = CATEGORIAS.map((cat) => {
   const relPath = mosaicImages[cat];
   return {
     cat,
     label: t.categories[cat],
     image: relPath ? obraImage(relPath) : null,
+    // Una categoría sin obras todavía (instalaciones eléctricas) no puede
+    // prometer un filtro vacío: su tile lleva a contacto. Cuando la primera
+    // obra entre al JSON, el link al filtro aparece solo.
+    href: withObras.has(cat) ? `${obrasHref}?categoria=${cat}` : `${localePath(locale, '/')}#contacto`,
   };
 });
 ---
@@ -37,10 +43,10 @@ const tiles = CATEGORIAS.map((cat) => {
 
   <div class="mosaic-grid">
     {
-      tiles.map(({ cat, label, image }) => (
+      tiles.map(({ cat, label, image, href }) => (
         <a
           class:list={['mosaic-item', { 'mosaic-item--no-photo': !image }]}
-          href={`${obrasHref}?categoria=${cat}`}
+          href={href}
           data-category={cat}
         >
           {image && (
@@ -50,7 +56,7 @@ const tiles = CATEGORIAS.map((cat) => {
               formats={['avif', 'webp']}
               fallbackFormat="webp"
               sizes="(min-width:1024px) 17vw, (min-width:640px) 33vw, 50vw"
-              alt={label}
+              alt=""
               loading="lazy"
               class="mosaic-bg"
             />

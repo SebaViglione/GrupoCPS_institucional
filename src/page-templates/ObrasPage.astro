@@ -79,7 +79,7 @@ const jsonLd = [
       <div id="obrasGrid" class="obras-grid">
         {obras.map((obra, index) => <ObraCard {obra} {locale} eager={index < 3} />)}
         <div id="noResults" class="no-obras-message" hidden>
-          <h3>{t.obrasPage.noResultsTitle}</h3>
+          <h2>{t.obrasPage.noResultsTitle}</h2>
           <p>{t.obrasPage.noResultsText}</p>
         </div>
       </div>
@@ -87,6 +87,6 @@ const jsonLd = [
   </section>
 
   <ObraModal {locale} />
-</Base>
 
-<script src="../scripts/obras-page.ts"></script>
+  <script src="../scripts/obras-page.ts"></script>
+</Base>

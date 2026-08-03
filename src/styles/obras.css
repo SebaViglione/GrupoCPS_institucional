@@ -267,7 +267,7 @@
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  color: var(--light-gray);
+  color: var(--text-muted);
   pointer-events: none;
   transition: transform 0.3s ease;
 }
@@ -695,7 +695,7 @@
   padding: 4rem 2rem;
 }
 
-.no-obras-message h3 {
+.no-obras-message h2 {
   font-size: 1.8rem;
   color: var(--white);
   margin-bottom: 1rem;

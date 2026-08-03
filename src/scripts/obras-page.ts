@@ -34,7 +34,10 @@ function applyFilters(): void {
   }
 
   if (counter) {
-    const template = counter.dataset.resultsTemplate ?? '{n}';
+    const template =
+      visibles === 1
+        ? (counter.dataset.resultsOne ?? counter.dataset.resultsTemplate ?? '{n}')
+        : (counter.dataset.resultsTemplate ?? '{n}');
     counter.textContent = template.replace('{n}', String(visibles));
   }
   if (noResults) noResults.hidden = visibles > 0;

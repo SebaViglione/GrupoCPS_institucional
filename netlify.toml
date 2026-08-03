@@ -19,11 +19,23 @@
   status = 301
   force = true
 
-# URLs legacy con ?lang=en -> rutas EN estáticas
+# URLs legacy con ?lang=en -> rutas EN estáticas.
+# force = true es OBLIGATORIO cuando existe un archivo en el from
+# (dist/index.html): sin force, Netlify sirve el archivo y la regla es letra
+# muerta. La condición de query sigue gateando el match, así que las visitas
+# sin ?lang=en no se ven afectadas.
 [[redirects]]
   from = "/"
   to = "/en/"
   status = 301
+  force = true
+  query = { lang = "en" }
+
+[[redirects]]
+  from = "/index.html"
+  to = "/en/"
+  status = 301
+  force = true
   query = { lang = "en" }
 
 [[redirects]]
@@ -43,6 +55,7 @@
   from = "/index.html"
   to = "/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/obras.html"
@@ -69,22 +82,17 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Videos con nombres versionados (-v2): cache inmutable
+# Videos y posters con nombres versionados (-v2): cache inmutable.
+# OJO: el splat cruza subdirectorios (cubre /posters/); todo archivo acá
+# adentro DEBE llevar sufijo de versión en el nombre.
 [[headers]]
   for = "/assets/videos/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# HTML siempre revalida
-[[headers]]
-  for = "/*.html"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-
-[[headers]]
-  for = "/"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+# Para el resto (HTML incluido) rige el default de Netlify:
+# ETag + max-age=0, must-revalidate. No hace falta regla propia y el
+# patrón "/*.html" no es válido en headers de Netlify.
 
 # El service worker debe poder actualizarse siempre (kill-switch)
 [[headers]]
