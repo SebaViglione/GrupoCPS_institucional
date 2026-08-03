@@ -1,0 +1,92 @@
+---
+// Página de Obras (compartida ES/EN). Port de legacy/obras.html.
+// El hero reemplaza los 10 preloads random del legacy por 3 imágenes curadas:
+// la primera renderizada (LCP) y las otras 2 rotadas por script post-load.
+import '../styles/obras.css';
+import { Picture, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ObraCard from '../components/obras/ObraCard.astro';
+import ObrasFilter from '../components/obras/ObrasFilter.astro';
+import ObraModal from '../components/obras/ObraModal.astro';
+import { useTranslations, localePath, type Locale } from '../i18n';
+import { obras, obraImage } from '../lib/obras';
+import { SITE } from '../lib/site';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const heroMain = obraImage('summum-wtc/1.webp');
+const heroRotate = await Promise.all(
+  ['hospital-cerro/1.webp', 'proa-carrasco/1.webp'].map((path) =>
+    getImage({ src: obraImage(path), width: 1600, format: 'webp' })
+  )
+);
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: t.nav.inicio, url: SITE.url + localePath(locale, '/') },
+    { name: t.nav.obras, url: SITE.url + localePath(locale, '/obras/') },
+  ]),
+];
+---
+
+<Base
+  {locale}
+  pagePath="/obras/"
+  title={t.seo.obras.title}
+  description={t.seo.obras.description}
+  {jsonLd}
+>
+  <section class="obras-hero" id="obrasHero">
+    <div
+      class="hero-background-images"
+      data-rotate={JSON.stringify(heroRotate.map((image) => image.src))}
+    >
+      <Picture
+        src={heroMain}
+        widths={[960, 1600, 1920]}
+        formats={['avif', 'webp']}
+        fallbackFormat="webp"
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+        alt=""
+        class="hero-bg-image active"
+      />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="obras-hero-content">
+        <h1 class="hero-title fade-in-up">{t.obrasPage.heroTitle}</h1>
+        <p class="hero-description fade-in-up delay-1">{t.obrasPage.heroDescription}</p>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="mouse"></div>
+      <span>{t.hero.scrollHint}</span>
+    </div>
+  </section>
+
+  <ObrasFilter {locale} />
+
+  <section class="obras-section">
+    <div class="container">
+      <div id="obrasGrid" class="obras-grid">
+        {obras.map((obra, index) => <ObraCard {obra} {locale} eager={index < 3} />)}
+        <div id="noResults" class="no-obras-message" hidden>
+          <h3>{t.obrasPage.noResultsTitle}</h3>
+          <p>{t.obrasPage.noResultsText}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ObraModal {locale} />
+</Base>
+
+<script src="../scripts/obras-page.ts"></script>

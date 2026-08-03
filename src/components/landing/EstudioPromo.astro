@@ -1,0 +1,48 @@
+---
+import { useTranslations, localePath, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="estudio-promo-section">
+  <div class="container">
+    <div class="estudio-promo-wrapper">
+      <div class="estudio-promo-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <rect x="8" y="8" width="48" height="48" rx="2"></rect>
+          <line x1="8" y1="24" x2="56" y2="24"></line>
+          <line x1="24" y1="24" x2="24" y2="56"></line>
+          <path d="M32 36 L44 36 L44 48 L32 48 Z"></path>
+          <path d="M28 16 L36 16"></path>
+          <circle cx="16" cy="16" r="3"></circle>
+        </svg>
+      </div>
+      <div class="estudio-promo-content">
+        <span class="section-tag">{t.estudioPromo.tag}</span>
+        <h2 class="section-title">{t.estudioPromo.title}</h2>
+        <p class="section-description">{t.estudioPromo.description}</p>
+        <a href={localePath(locale, '/estudio/')} class="btn btn-primary">{t.estudioPromo.cta}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* El legacy metía este margen con style inline en el CTA. */
+  .estudio-promo-content .btn {
+    margin-top: 1rem;
+  }
+</style>

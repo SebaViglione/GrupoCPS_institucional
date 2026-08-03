@@ -1,33 +1,12 @@
-# robots.txt for Grupo CPS Uruguay
+# robots.txt — Grupo CPS Uruguay
 # https://grupocps.com.uy
 
 User-agent: *
 Allow: /
 
-# Disallow scripts y node_modules
-Disallow: /scripts/
-Disallow: /node_modules/
-Disallow: /docker/
-Disallow: /docs/
+Sitemap: https://grupocps.com.uy/sitemap-index.xml
 
-# Disallow archivos JSON (data)
-Disallow: /assets/data/*.json$
-Disallow: /*.json$
-
-# Disallow archivos de build
-Disallow: /package*.json
-Disallow: /package-lock.json
-Disallow: /postcss.config.js
-
-# Sitemaps
-Sitemap: https://grupocps.com.uy/sitemap.xml
-Sitemap: https://grupocps.com.uy/sitemap-main.xml
-Sitemap: https://grupocps.com.uy/sitemap-images.xml
-
-# Crawl delay (1 segundo entre requests)
-Crawl-delay: 1
-
-# No permitir crawlers agresivos
+# Crawlers agresivos
 User-agent: MJ12bot
 Disallow: /
 

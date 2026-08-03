@@ -1,0 +1,100 @@
+---
+// Card de obra. Port del template legacy obras.js:216-283 (clases conservadas),
+// sin onclick inline: el botón lleva .js-open-modal y el script de página delega.
+import { Picture, getImage } from 'astro:assets';
+import Icon from '../Icon.astro';
+import { useTranslations, type Locale } from '../../i18n';
+import { obraImage, estadoSlug, localizedObra, type Obra } from '../../lib/obras';
+
+interface Props {
+  obra: Obra;
+  locale: Locale;
+  /** true en las primeras cards (above the fold): loading eager. */
+  eager?: boolean;
+}
+
+const { obra, locale, eager = false } = Astro.props;
+const t = useTranslations(locale);
+const loc = localizedObra(obra, locale);
+const slug = estadoSlug(obra.estado);
+const estadoLabel =
+  obra.estado === 'Completada' ? t.obrasPage.estados.completada : t.obrasPage.estados.en_progreso;
+
+// URLs webp 800w para el hover-carousel (la primera coincide con la variante
+// 800/webp del <Picture>, Astro dedupea la transformación).
+const hoverUrls = await Promise.all(
+  obra.imagenes
+    .slice(0, 5)
+    .map((img) => getImage({ src: obraImage(img), width: 800, format: 'webp' }))
+);
+---
+
+<article
+  class="obra-card"
+  data-categoria={obra.categoria}
+  data-estado={slug}
+  data-obra-id={obra.id}
+>
+  <div class="obra-image" data-images={JSON.stringify(hoverUrls.map((u) => u.src))}>
+    <Picture
+      src={obraImage(obra.imagenes[0])}
+      widths={[400, 800, 1200]}
+      formats={['avif', 'webp']}
+      fallbackFormat="webp"
+      sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+      loading={eager ? 'eager' : 'lazy'}
+      alt={loc.nombre}
+      class="obra-img-main"
+    />
+    <span class:list={['obra-status-badge', `status-${slug}`]}>{estadoLabel}</span>
+  </div>
+  <div class="obra-content">
+    <div class="obra-header">
+      <span class="obra-categoria">{t.categories[obra.categoria]}</span>
+      <h3 class="obra-nombre">{loc.nombre}</h3>
+    </div>
+    <div class="obra-details">
+      <div class="obra-detail-item">
+        <span class="detail-label">
+          <Icon name="map-pin" size={14} />
+          {t.obrasPage.modal.ubicacion}
+        </span>
+        <span class="detail-value">{loc.ubicacion}</span>
+      </div>
+      <div class="obra-detail-item">
+        <span class="detail-label">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+            ><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline
+              points="9 22 9 12 15 12 15 22"></polyline></svg
+          >
+          {t.obrasPage.modal.superficie}
+        </span>
+        <span class="detail-value">{obra.superficie}</span>
+      </div>
+    </div>
+    <div class="obra-cta">
+      <button type="button" class="btn-ver-mas js-open-modal">{t.common.viewDetails}</button>
+    </div>
+  </div>
+</article>
+
+<style is:global>
+  /* Íconos de los labels de la card (el legacy no los tenía acá; acento primario
+     como en .obra-cliente svg). Global porque el svg de <Icon> no recibe scope. */
+  .obra-card .detail-label svg {
+    vertical-align: -2px;
+    margin-right: 0.35rem;
+    stroke: var(--primary-color);
+  }
+</style>

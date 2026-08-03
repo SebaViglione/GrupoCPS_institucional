@@ -1,0 +1,102 @@
+---
+// Toolbar de filtros. Port de legacy/obras.html:114-163 sin el view-toggle
+// grid/list (feature muerta) y con contador de resultados accesible.
+import { useTranslations, type Locale } from '../../i18n';
+import { obras, categoriesWithObras } from '../../lib/obras';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const categorias = categoriesWithObras();
+const initialCount = t.obrasPage.results.replace('{n}', String(obras.length));
+---
+
+<section class="obras-filter">
+  <div class="container">
+    <div class="filter-toolbar">
+      <div class="filter-group">
+        <div class="select-wrapper">
+          <label class="visually-hidden" for="categoryFilter">
+            {t.obrasPage.filterCategoryLabel}
+          </label>
+          <select id="categoryFilter" class="filter-select">
+            <option value="todas">{t.obrasPage.filterAll}</option>
+            {categorias.map((cat) => <option value={cat}>{t.categories[cat]}</option>)}
+          </select>
+          <svg
+            class="select-arrow"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+
+        <div class="select-wrapper">
+          <label class="visually-hidden" for="statusFilter">
+            {t.obrasPage.filterStatusLabel}
+          </label>
+          <select id="statusFilter" class="filter-select">
+            <option value="todas">{t.obrasPage.statusAll}</option>
+            <option value="Completada">{t.obrasPage.estados.completada}</option>
+            <option value="En Progreso">{t.obrasPage.estados.en_progreso}</option>
+          </select>
+          <svg
+            class="select-arrow"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <p class="obras-count" role="status" data-results-template={t.obrasPage.results}>
+        {initialCount}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Elemento nuevo (no existía en el legacy): mismo tono que .load-more-info. */
+  .obras-count {
+    margin: 0;
+    color: var(--lighter-gray);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 992px) {
+    .obras-count {
+      text-align: center;
+    }
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

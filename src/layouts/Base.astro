@@ -22,9 +22,10 @@ interface Props {
   ogImage?: string;
   theme?: 'estudio';
   jsonLd?: Record<string, unknown>[];
+  noindex?: boolean;
 }
 
-const { locale, pagePath, title, description, ogImage, theme, jsonLd } = Astro.props;
+const { locale, pagePath, title, description, ogImage, theme, jsonLd, noindex } = Astro.props;
 const t = useTranslations(locale);
 ---
 
@@ -33,12 +34,12 @@ const t = useTranslations(locale);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <SEO {locale} {pagePath} {title} {description} {ogImage} {theme} {jsonLd} />
+    <SEO {locale} {pagePath} {title} {description} {ogImage} {theme} {jsonLd} {noindex} />
     <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">{t.common.skipToContent}</a>
-    <Navbar {locale} {pagePath} />
+    <Navbar {locale} {pagePath} {theme} />
     <main id="main">
       <slot />
     </main>

@@ -1,0 +1,43 @@
+---
+import Icon from './Icon.astro';
+import { useTranslations, localePath, type Locale } from '../i18n';
+import { SITE } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const home = localePath(locale, '/');
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>GRUPO <span class="highlight">CPS</span></h3>
+        <p>{t.footer.description}</p>
+      </div>
+      <div class="footer-links">
+        <a href={`${home}#inicio`}>{t.nav.inicio}</a>
+        <a href={`${home}#nosotros`}>{t.nav.nosotros}</a>
+        <a href={localePath(locale, '/obras/')}>{t.nav.obras}</a>
+        <a href={localePath(locale, '/estudio/')}>{t.nav.estudio}</a>
+        <a href={`${home}#contacto`}>{t.nav.contacto}</a>
+      </div>
+      <div class="footer-social">
+        <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <Icon name="instagram" />
+        </a>
+        <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <Icon name="linkedin" />
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {year} Grupo CPS Uruguay. {t.footer.rights}.</p>
+    </div>
+  </div>
+</footer>

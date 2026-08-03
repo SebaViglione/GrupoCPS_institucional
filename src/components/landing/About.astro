@@ -1,0 +1,64 @@
+---
+import Icon from '../Icon.astro';
+import { useTranslations, type Locale } from '../../i18n';
+import type { IconName } from '../Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// El diccionario no tiene el tag de la sección: copy del legacy (i18n.js about.tag).
+const tag = locale === 'es' ? 'Sobre Nosotros' : 'About Us';
+
+const features: { icon: IconName; title: string; text: string }[] = [
+  { icon: 'shield', ...t.about.features.calidad },
+  { icon: 'award', ...t.about.features.experiencia },
+  { icon: 'zap', ...t.about.features.innovacion },
+];
+---
+
+<section class="about-section" id="nosotros">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">{tag}</span>
+      <h2 class="section-title">{t.about.title}</h2>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p class="lead">{t.about.lead}</p>
+        <p>{t.about.description}</p>
+        <div class="about-features">
+          {
+            features.map((feature) => (
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <Icon name={feature.icon} size={28} />
+                </div>
+                <div class="feature-text">
+                  <h3>{feature.title}</h3>
+                  <p>{feature.text}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* El legacy usaba h4 tras el h2 de sección; acá es h3 (jerarquía correcta).
+     landing.css solo estila .feature-text h4, así que se replica para h3. */
+  .feature-text h3 {
+    font-size: 1.25rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    font-family: var(--font-secondary);
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero, { HERO_POSTER } from '../components/landing/Hero.astro';
+import About from '../components/landing/About.astro';
+import SectorsMosaic from '../components/landing/SectorsMosaic.astro';
+import EcommerceSection from '../components/landing/EcommerceSection.astro';
+import ClientsMarquee from '../components/landing/ClientsMarquee.astro';
+import EstudioPromo from '../components/landing/EstudioPromo.astro';
+import ContactForm from '../components/landing/ContactForm.astro';
+import { useTranslations, type Locale } from '../i18n';
+import { organizationJsonLd, localBusinessJsonLd, webSiteJsonLd } from '../lib/jsonld';
+import '../styles/landing.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const jsonLd = [
+  organizationJsonLd(t.seo.landing.description),
+  localBusinessJsonLd(),
+  webSiteJsonLd(),
+];
+---
+
+<Base
+  {locale}
+  pagePath="/"
+  title={t.seo.landing.title}
+  description={t.seo.landing.description}
+  {jsonLd}
+>
+  <link slot="head" rel="preload" as="image" href={HERO_POSTER} fetchpriority="high" />
+
+  <Hero {locale} />
+  <About {locale} />
+  <SectorsMosaic {locale} />
+  <EcommerceSection {locale} />
+  <ClientsMarquee {locale} />
+  <EstudioPromo {locale} />
+  <ContactForm {locale} />
+</Base>
+
+<script>
+  // Scroll-reveal (paridad con revealOnScroll del legacy).
+  // La clase .reveal se agrega desde JS: sin JS todo queda visible.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const elements = document.querySelectorAll(
+      '.about-section, .feature-item, .ecommerce-section, .contact-info'
+    );
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -120px 0px' }
+    );
+
+    elements.forEach((el) => {
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+  }
+</script>

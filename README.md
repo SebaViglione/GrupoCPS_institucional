@@ -1,101 +1,74 @@
-# Grupo CPS - Sitio Web Institucional
+# Grupo CPS — Sitio Web Institucional
 
-Sitio web corporativo de Grupo CPS Uruguay, especialistas en carpintería de aluminio, vidriería y construcción.
+Sitio corporativo de Grupo CPS Uruguay (carpintería de aluminio, vidriería, construcción e instalaciones eléctricas), construido con [Astro 5](https://astro.build) y desplegado en Netlify.
 
-## 📁 Estructura del Proyecto
+## Stack
+
+- **Astro 5** — sitio 100% estático, bilingüe (ES en `/`, EN en `/en/`)
+- **astro:assets** — las imágenes de obras generan avif/webp responsive en build
+- **Netlify** — build `npm run build`, publica `dist/`; formulario de contacto con Netlify Forms
+- Sin frameworks de JS: los scripts de cliente son vanilla TS bundleado por Astro
+
+## Estructura
 
 ```
-/
-├── public/               # Contenido público servido por el servidor web
-│   ├── assets/           # Recursos estáticos
-│   │   ├── css/          # Estilos CSS
-│   │   ├── js/           # JavaScript
-│   │   ├── images/       # Imágenes y logos
-│   │   ├── videos/       # Videos del hero
-│   │   └── data/         # JSON data (obras, clientes)
-│   ├── php/              # Scripts PHP (contact form)
-│   ├── index.html        # Página principal
-│   ├── obras.html        # Portfolio de obras
-│   ├── robots.txt        # SEO
-│   └── sitemap.xml       # SEO
-├── docker/               # Configuración Docker
-│   ├── Dockerfile
-│   └── docker-compose.yml
-├── docs/                 # Documentación del proyecto
-├── scripts/              # Scripts de utilidades (optimización, etc.)
-├── .env.example          # Ejemplo de variables de entorno
-├── composer.json         # Dependencias PHP
-└── package.json          # Dependencias Node.js
+src/
+├── pages/            # Rutas: index, obras, estudio, 404 + en/{index,obras,estudio}
+├── page-templates/   # Cuerpo de cada página, parametrizado por idioma
+├── components/       # Navbar, Footer, SEO, Icon + landing/ + obras/
+├── layouts/          # Base.astro (head, navbar, footer, tema)
+├── i18n/             # dictionaries.ts (ES/EN tipados) + helpers
+├── data/             # obras.json, clients.json, mosaic.ts
+├── lib/              # obras.ts (schema + validación), jsonld.ts, site.ts
+├── assets/           # Imágenes fuente (obras/, estudio/, clients/, ecommerce/)
+└── styles/           # tokens.css, global.css + css por página
+public/               # Passthrough: videos, favicons, robots, manifest, og
+scripts/              # prep-obras, make-og, encode-videos
 ```
 
-## 🚀 Inicio Rápido
-
-### Con Docker (Recomendado)
+## Desarrollo
 
 ```bash
-cd docker
-UID=$(id -u) GID=$(id -g) docker compose up -d
+npm install
+npm run dev       # http://localhost:4321
+npm run build     # genera dist/
+npm run check     # typecheck (astro check)
 ```
 
-El sitio estará disponible en: http://localhost:3000
+## Cómo agregar una obra
 
-### Sin Docker
+1. **Fotos**: crear `src/assets/obras/<slug>/` (slug en kebab-case, p. ej. `torre-nueva`) con las fotos numeradas `1.webp`, `2.webp`… Si son muy pesadas o no son webp, correr `npm run prep-obra <slug>` (las convierte a webp ≤2000px).
+2. **Datos**: agregar un objeto al final de `src/data/obras.json`:
+   - `id`: el siguiente entero libre
+   - `categoria`: uno de `salud`, `educacion`, `vivienda`, `obras_publicas`, `corporativo`, `instalaciones_electricas`
+   - `estado`: `"Completada"` o `"En Progreso"` (exacto)
+   - `nombre/descripcion/cliente/ubicacion` y sus variantes `_en` (obligatorias)
+   - `superficie`: p. ej. `"2500 m²"`
+   - `imagenes`: `["<slug>/1.webp", "<slug>/2.webp"]`
+3. **Validar**: `npm run build` — si falta un campo o una imagen no existe, el build falla con un mensaje claro.
+4. **Publicar**: commit → push → revisar el Deploy Preview del PR → merge a `main` (deploy automático).
 
-Requiere un servidor web (Apache/Nginx) con PHP 8.2+
+Notas:
+- La **primera obra de una categoría nueva** hace aparecer sola la opción en el filtro de `/obras/`.
+- La foto del tile del mosaico en la landing se elige en `src/data/mosaic.ts` (para `instalaciones_electricas` está en `null` → el tile muestra gradiente + ícono hasta que haya foto).
 
-```bash
-# Instalar dependencias PHP
-composer install
+## Editar textos
 
-# Servir desde la carpeta public/
-php -S localhost:3000 -t public
-```
+Todo el copy vive en `src/i18n/dictionaries.ts`. ES y EN son obligatorios — TypeScript falla el build si falta una clave en EN. Los datos de contacto/redes están en `src/lib/site.ts`.
 
-## 🌐 Características
+## Agregar un logo de cliente
 
-- ✅ **Multiidioma**: Español e Inglés con sistema de traducción dinámico
-- ✅ **Responsive**: Optimizado para todos los dispositivos
-- ✅ **SEO Optimizado**: Meta tags, sitemap, robots.txt
-- ✅ **Performance**: Lazy loading, optimización de imágenes
-- ✅ **Portfolio Dinámico**: Carga de obras desde JSON
-- ✅ **Formulario de Contacto**: Con PHPMailer
+1. Archivo webp/svg en `src/assets/clients/<categoria>/`.
+2. Entrada en `src/data/clients.json` con `nombre` y `logo` (path relativo dentro de `clients/`).
 
-## 🛠️ Desarrollo
+## Videos del hero
 
-### Estructura de Traducciones
+Los videos servidos viven en `public/assets/videos/` (`video{N}-v2.mp4/webm` + posters). Para regenerarlos desde nuevas fuentes: colocar los originales en `public/assets/videos/optimizados/` como `Video<N>_1080p.mp4` y correr `npm run encode-videos` (requiere ffmpeg con libx264 y libsvtav1). La playlist del hero se define en el script del componente Hero.
 
-El sistema de traducción está en `public/js/i18n.js`. Las traducciones se aplican automáticamente usando atributos `data-i18n`.
+## Deploy
 
-Ver `docs/TRADUCCION_DINAMICA.md` para más detalles.
+Netlify buildea automáticamente:
+- Push a cualquier branch con PR → **Deploy Preview** (URL temporal)
+- Merge a `main` → producción (grupocps.com.uy)
 
-### Agregar Nueva Obra
-
-Editar `public/assets/data/obras.json` y agregar un nuevo objeto con:
-
-```json
-{
-  "id": 999,
-  "nombre": "Nombre de la obra",
-  "nombre_en": "Project name",
-  "descripcion": "Descripción en español",
-  "descripcion_en": "Description in English",
-  "categoria": "salud|educacion|vivienda|obras_publicas|corporativo",
-  "estado": "Completada|En Progreso",
-  "imagenes": ["obras-optimized/carpeta/imagen.webp"],
-  "superficie": "1000 m²",
-  "ubicacion": "Ciudad, Uruguay",
-  "ubicacion_en": "City, Uruguay",
-  "cliente": "Nombre del cliente",
-  "cliente_en": "Client name"
-}
-```
-
-### Scripts Útiles
-
-- `scripts/optimize-images.js` - Optimizar imágenes de obras
-- `scripts/upscale-images.js` - Aumentar resolución de imágenes
-- `scripts/optimizar_videos.sh` - Comprimir videos
-
-## 📝 Licencia
-
-© 2025 Grupo CPS Uruguay. Todos los derechos reservados.
+Los redirects 301 de las URLs viejas (`/obras.html` → `/obras/`, `?lang=en` → `/en/`) y los headers de cache están en `netlify.toml`.

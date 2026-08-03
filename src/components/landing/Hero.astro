@@ -1,0 +1,199 @@
+---
+import Icon from '../Icon.astro';
+import { useTranslations, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+/**
+ * Poster del primer clip. La página que use este hero debe precargarlo en el
+ * <head> (slot="head"): <link rel="preload" as="image" href={HERO_POSTER} fetchpriority="high" />
+ */
+export const HERO_POSTER = '/assets/videos/posters/poster-video1.webp';
+
+const stats = [t.hero.stats.years, t.hero.stats.aberturas, t.hero.stats.clients];
+---
+
+<section class="hero" id="inicio">
+  <div class="video-container">
+    <video
+      id="heroVideo"
+      class="hero-video"
+      autoplay
+      muted
+      playsinline
+      preload="none"
+      poster="/assets/videos/posters/poster-video1.webp"
+      width="1920"
+      height="1080"
+      aria-hidden="true"
+    >
+      <source src="/assets/videos/video1-v2.webm" type="video/webm" />
+      <source src="/assets/videos/video1-v2.mp4" type="video/mp4" />
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <h2 class="hero-subtitle fade-in-up">{t.hero.subtitle}</h2>
+      <h1 class="hero-title fade-in-up delay-1">{t.hero.title}</h1>
+      <p class="hero-location fade-in-up delay-2">
+        <Icon name="map-pin" size={20} />
+        {t.hero.location}
+      </p>
+      <p class="hero-description fade-in-up delay-3">{t.hero.description}</p>
+      <div class="hero-stats fade-in-up delay-4">
+        {
+          stats.map((stat) => (
+            <div class="stat-item">
+              <span class="stat-number" data-target={stat.value}>
+                {stat.value}
+              </span>
+              <span class="stat-label">{stat.label}</span>
+            </div>
+          ))
+        }
+      </div>
+      <div class="hero-cta fade-in-up delay-5">
+        <a href="#contacto" class="btn btn-primary">{t.hero.ctaContact}</a>
+        <a href="#nosotros" class="btn btn-secondary">{t.hero.ctaAbout}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="mouse"></div>
+    <span>{t.hero.scrollHint}</span>
+  </div>
+</section>
+
+<style>
+  .hero-location :global(svg) {
+    vertical-align: -0.2em;
+    margin-right: 0.4rem;
+    color: var(--primary-color);
+  }
+</style>
+
+<script>
+  // ======================================
+  // ROTACIÓN DE VIDEOS DEL HERO
+  // Playlist fija; sin atributo loop: en 'ended' pasa al siguiente clip.
+  // El siguiente clip se precarga en un <video> detached (double-buffer via HTTP cache).
+  // ======================================
+
+  const video = document.getElementById('heroVideo') as HTMLVideoElement | null;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (video) {
+    const saveData =
+      (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData ===
+      true;
+
+    if (reducedMotion || saveData) {
+      // Sin video: queda el poster estático.
+      video.querySelectorAll('source').forEach((s) => s.remove());
+      video.removeAttribute('autoplay');
+      video.load();
+    } else {
+      const mobile = window.matchMedia('(max-width: 768px)').matches;
+      const canWebm = !mobile && video.canPlayType('video/webm') !== '';
+      const clips = [1, 2, 4];
+      const srcFor = (n: number) =>
+        mobile
+          ? `/assets/videos/video${n}-720-v2.mp4`
+          : canWebm
+            ? `/assets/videos/video${n}-v2.webm`
+            : `/assets/videos/video${n}-v2.mp4`;
+
+      let index = 0;
+
+      // A partir de acá se maneja todo por video.src (los <source> quedan obsoletos).
+      video.querySelectorAll('source').forEach((s) => s.remove());
+      video.preload = 'auto';
+      video.src = srcFor(clips[index]);
+      video.play().catch(() => {});
+
+      // Precarga del siguiente clip cerca del final del actual.
+      const buffer = document.createElement('video');
+      buffer.muted = true;
+      buffer.preload = 'auto';
+      let preloadedFor = -1;
+
+      video.addEventListener('timeupdate', () => {
+        if (
+          preloadedFor !== index &&
+          video.duration > 0 &&
+          video.duration - video.currentTime < 5
+        ) {
+          preloadedFor = index;
+          buffer.src = srcFor(clips[(index + 1) % clips.length]);
+        }
+      });
+
+      video.addEventListener('ended', () => {
+        index = (index + 1) % clips.length;
+        video.src = srcFor(clips[index]);
+        video.play().catch(() => {});
+      });
+
+      // Pausar fuera de viewport
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) video.play().catch(() => {});
+            else video.pause();
+          }
+        },
+        { threshold: 0.25 }
+      );
+      io.observe(video);
+    }
+  }
+
+  // ======================================
+  // CONTADOR DE STATS
+  // Un solo IntersectionObserver + requestAnimationFrame.
+  // ======================================
+
+  const heroStats = document.querySelector('.hero-stats');
+
+  if (heroStats) {
+    const numbers = heroStats.querySelectorAll<HTMLElement>('.stat-number');
+    const DURATION = 2000;
+
+    const statsObserver = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        statsObserver.disconnect();
+
+        numbers.forEach((el) => {
+          const target = parseInt(el.dataset.target ?? '', 10) || 0;
+
+          if (reducedMotion) {
+            el.textContent = `${target}+`;
+            return;
+          }
+
+          let start: number | null = null;
+          const step = (ts: number) => {
+            if (start === null) start = ts;
+            const progress = Math.min((ts - start) / DURATION, 1);
+            el.textContent =
+              progress < 1 ? `${Math.floor(target * progress)}+` : `${target}+`;
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    statsObserver.observe(heroStats);
+  }
+</script>

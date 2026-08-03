@@ -1,0 +1,207 @@
+---
+import Icon from '../Icon.astro';
+import { useTranslations, type Locale } from '../../i18n';
+import { SITE } from '../../lib/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const es = locale === 'es';
+
+// No están en el diccionario: copy del legacy (i18n.js contact.tag / contact.info.title).
+const tag = es ? 'Contacto' : 'Contact';
+const infoTitle = es ? 'Información de contacto' : 'Contact information';
+const mapTitle = es
+  ? `Mapa de ubicación: ${SITE.address.display}`
+  : `Location map: ${SITE.address.display}`;
+
+const mapSrc =
+  'https://maps.google.com/maps?q=Camino+Corrales+2867,Montevideo&t=&z=15&ie=UTF8&iwloc=&output=embed';
+---
+
+<section class="contact-section" id="contacto">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-tag">{tag}</span>
+      <h2 class="section-title">{t.contact.title}</h2>
+    </div>
+    <div class="contact-content-wrapper">
+      <div class="contact-top-row">
+        <div class="contact-info">
+          <h3>{infoTitle}</h3>
+          <p>{t.contact.description}</p>
+          <div class="contact-item">
+            <Icon name="whatsapp" />
+            <span>
+              <a
+                href={SITE.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-link"
+              >
+                {SITE.phoneDisplay}
+              </a>
+            </span>
+          </div>
+          <div class="contact-item">
+            <Icon name="mail" />
+            <span><a href={`mailto:${SITE.email}`} class="contact-link">{SITE.email}</a></span>
+          </div>
+          <div class="contact-item">
+            <Icon name="map-pin" />
+            <span>{SITE.address.display}</span>
+          </div>
+        </div>
+
+        <div class="contact-form-container">
+          <div class="contact-form">
+            <form
+              id="contactForm"
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              data-msg-sending={t.contact.form.sending}
+              data-msg-success={t.contact.form.success}
+              data-msg-error={t.contact.form.error}
+            >
+              <input type="hidden" name="form-name" value="contact" />
+              <p class="hidden-field" aria-hidden="true">
+                <label>
+                  {t.contact.form.honeypotLabel}
+                  <input name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+                </label>
+              </p>
+
+              <div class="form-group">
+                <label for="nombre">{t.contact.form.name}</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  required
+                  autocomplete="name"
+                  placeholder={t.contact.form.name}
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email">{t.contact.form.email}</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  placeholder={t.contact.form.email}
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="mensaje">{t.contact.form.message}</label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  rows="5"
+                  required
+                  placeholder={t.contact.form.message}></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">{t.contact.form.submit}</button>
+
+              <p class="form-response form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-map-row">
+        <div class="contact-map">
+          <iframe
+            src={mapSrc}
+            title={mapTitle}
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Honeypot: fuera de la vista, presente en el DOM para Netlify. */
+  .hidden-field {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Colores de estado (el legacy los seteaba con JS inline). */
+  .form-response[data-state='sending'] {
+    color: var(--primary-color);
+  }
+
+  .form-response[data-state='success'] {
+    color: #9be37b;
+  }
+
+  .form-response[data-state='error'] {
+    color: #ff8b8b;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+
+  if (form) {
+    const statusEl = form.querySelector<HTMLElement>('.form-status');
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    const setStatus = (state: 'sending' | 'success' | 'error', message: string) => {
+      if (!statusEl) return;
+      statusEl.dataset.state = state;
+      statusEl.textContent = message;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (button) button.disabled = true;
+      setStatus('sending', form.dataset.msgSending ?? '');
+
+      try {
+        const body = new URLSearchParams(
+          new FormData(form) as unknown as Record<string, string>
+        ).toString();
+
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body,
+        });
+
+        if (res.ok) {
+          setStatus('success', form.dataset.msgSuccess ?? '');
+          form.reset();
+        } else {
+          setStatus('error', form.dataset.msgError ?? '');
+        }
+      } catch {
+        setStatus('error', form.dataset.msgError ?? '');
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
+  }
+</script>

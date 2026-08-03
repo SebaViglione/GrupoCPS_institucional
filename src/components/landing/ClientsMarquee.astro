@@ -1,0 +1,112 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { useTranslations, type Locale } from '../../i18n';
+import clientsData from '../../data/clients.json';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// El diccionario no tiene el tag de la sección: copy del legacy (i18n.js clients.tag).
+const tag = locale === 'es' ? 'Nuestros Clientes' : 'Our Clients';
+
+const logoModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/clients/**/*.{webp,svg}',
+  { eager: true }
+);
+
+const LOGO_HEIGHT = 60;
+
+const clients = clientsData.clientes.map((c) => {
+  const mod = logoModules[`../../assets/clients/${c.logo}`];
+  if (!mod) {
+    throw new Error(`clients.json referencia un logo inexistente: src/assets/clients/${c.logo}`);
+  }
+  const logo = mod.default;
+  return {
+    nombre: c.nombre,
+    clase: (c as { clase?: string }).clase,
+    logo,
+    width: Math.round((logo.width / logo.height) * LOGO_HEIGHT),
+  };
+});
+---
+
+<section class="clients-section" id="clientes">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-tag">{tag}</span>
+      <h2 class="section-title">{t.clients.title}</h2>
+      <p class="section-description">{t.clients.description}</p>
+    </div>
+    <div class="clients-carousel-wrapper">
+      <div class="clients-track">
+        <div class="clients-strip">
+          {
+            clients.map((client) => (
+              <div class:list={['client-logo-item', client.clase]}>
+                <Image
+                  src={client.logo}
+                  alt={client.nombre}
+                  width={client.width}
+                  height={LOGO_HEIGHT}
+                  loading="lazy"
+                />
+              </div>
+            ))
+          }
+        </div>
+        <div class="clients-strip" aria-hidden="true">
+          {
+            clients.map((client) => (
+              <div class:list={['client-logo-item', client.clase]}>
+                <Image
+                  src={client.logo}
+                  alt=""
+                  width={client.width}
+                  height={LOGO_HEIGHT}
+                  loading="lazy"
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* El track anima translateX(-50%): para que el loop sea exacto, cada mitad
+     debe medir lo mismo. Los strips llevan el gap interno + padding de cierre;
+     el gap del track se anula (mayor especificidad que las media queries de landing.css). */
+  .clients-section .clients-track {
+    gap: 0;
+  }
+
+  .clients-strip {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    padding-right: 4rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .clients-strip {
+      gap: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .clients-strip {
+      gap: 2rem;
+      padding-right: 2rem;
+    }
+  }
+</style>

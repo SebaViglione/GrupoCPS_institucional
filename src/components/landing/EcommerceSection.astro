@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../Icon.astro';
+import { useTranslations, type Locale } from '../../i18n';
+import { SITE } from '../../lib/site';
+import laptopMockup from '../../assets/ecommerce/laptop.png';
+import mobileMockup from '../../assets/ecommerce/mobile.png';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const es = locale === 'es';
+
+// El diccionario no tiene el tag de la sección: copy del legacy (i18n.js ecommerce.tag).
+const tag = es ? 'Tienda Online' : 'Online Store';
+const altLaptop = es
+  ? 'Laptop mostrando la tienda online de Grupo CPS'
+  : 'Laptop showing the Grupo CPS online store';
+const altMobile = es
+  ? 'Celular mostrando la tienda online de Grupo CPS'
+  : 'Mobile phone showing the Grupo CPS online store';
+---
+
+<section class="ecommerce-section" id="ecommerce">
+  <div class="ecommerce-bg-shape shape-1"></div>
+  <div class="ecommerce-bg-shape shape-2"></div>
+  <div class="container">
+    <div class="ecommerce-content-wrapper">
+      <div class="ecommerce-text">
+        <span class="section-tag">{tag}</span>
+        <h2 class="section-title">{t.ecommerce.title}</h2>
+        <p class="section-description">{t.ecommerce.description}</p>
+        <ul class="ecommerce-benefits">
+          <li>
+            <Icon name="truck" />
+            <span>{t.ecommerce.benefits.delivery}</span>
+          </li>
+          <li>
+            <Icon name="shield" />
+            <span>{t.ecommerce.benefits.warranty}</span>
+          </li>
+          <li>
+            <Icon name="monitor" />
+            <span>{t.ecommerce.benefits.brand}</span>
+          </li>
+        </ul>
+        <a href={SITE.shopUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          {t.ecommerce.cta}
+        </a>
+      </div>
+      <div class="ecommerce-mockups">
+        <div class="mockup-container laptop-mockup">
+          <Image
+            src={laptopMockup}
+            format="webp"
+            widths={[600, 900, 1400]}
+            sizes="(max-width: 992px) 85vw, 45vw"
+            alt={altLaptop}
+            loading="lazy"
+          />
+        </div>
+        <div class="mockup-container mobile-mockup">
+          <Image
+            src={mobileMockup}
+            format="webp"
+            widths={[400, 600, 900]}
+            sizes="(max-width: 992px) 50vw, 30vw"
+            alt={altMobile}
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

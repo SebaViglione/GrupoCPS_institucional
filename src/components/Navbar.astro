@@ -1,0 +1,176 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { useTranslations, localePath, type Locale } from '../i18n';
+import logoDefault from '../assets/logo-navbar.webp';
+import logoEstudio from '../assets/logo-navbar-estudio.webp';
+
+interface Props {
+  locale: Locale;
+  /** Ruta sin prefijo de idioma, con barra final: '/', '/obras/', '/estudio/'. */
+  pagePath: string;
+  theme?: 'estudio';
+}
+
+const { locale, pagePath, theme } = Astro.props;
+const t = useTranslations(locale);
+const logo = theme === 'estudio' ? logoEstudio : logoDefault;
+const home = localePath(locale, '/');
+
+// No existe en el diccionario: string de UI accesible, no copy visible.
+const menuLabel = locale === 'es' ? 'Menú de navegación' : 'Navigation menu';
+
+const links = [
+  { href: `${home}#inicio`, label: t.nav.inicio, hash: '#inicio' },
+  { href: `${home}#nosotros`, label: t.nav.nosotros, hash: '#nosotros' },
+  { href: localePath(locale, '/obras/'), label: t.nav.obras, page: '/obras/' },
+  { href: localePath(locale, '/estudio/'), label: t.nav.estudio, page: '/estudio/' },
+  { href: `${home}#contacto`, label: t.nav.contacto, hash: '#contacto' },
+] as const;
+---
+
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="nav-content">
+      <div class="logo">
+        <a href={home}>
+          <Image src={logo} alt="" width={100} height={100} loading="eager" class="logo-img" />
+          <span class="logo-text">GRUPO <span class="highlight">CPS</span></span>
+        </a>
+      </div>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label={menuLabel}
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >
+        <Icon name="menu" size={28} class="icon-menu" />
+        <Icon name="x" size={28} class="icon-close" />
+      </button>
+      <ul class="nav-links" id="navLinks">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class:list={['nav-link', { active: pagePath === '/' && 'hash' in link && link.hash === '#inicio' }]}
+                aria-current={'page' in link && link.page === pagePath ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="lang-selector">
+          <a
+            class:list={['lang-btn', { active: locale === 'es' }]}
+            href={localePath('es', pagePath)}
+            aria-current={locale === 'es' ? 'true' : undefined}
+            hreflang="es"
+            lang="es"
+          >
+            ES
+          </a>
+          <a
+            class:list={['lang-btn', { active: locale === 'en' }]}
+            href={localePath('en', pagePath)}
+            aria-current={locale === 'en' ? 'true' : undefined}
+            hreflang="en"
+            lang="en"
+          >
+            EN
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* El logo pasó a ser un <a>: replica el layout flex del .logo legacy. */
+  .logo a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Swap menú/cerrar según aria-expanded (los SVG vienen de <Icon>, por eso :global). */
+  .menu-toggle :global(.icon-close) {
+    display: none;
+  }
+
+  .menu-toggle[aria-expanded='true'] :global(.icon-close) {
+    display: block;
+  }
+
+  .menu-toggle[aria-expanded='true'] :global(.icon-menu) {
+    display: none;
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const toggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  // Fondo sólido al scrollear
+  const onScroll = () => {
+    navbar?.classList.toggle('scrolled', window.scrollY > 100);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Menú mobile
+  const closeMenu = () => {
+    navLinks?.classList.remove('active');
+    toggle?.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle?.addEventListener('click', () => {
+    const open = navLinks?.classList.toggle('active') ?? false;
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  // Cerrar el menú al navegar
+  navLinks?.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Scroll-spy: solo si los anchors apuntan a secciones de ESTA página.
+  // Siempre queda un item activo (fallback: el primero), a diferencia del legacy.
+  const spyTargets = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('.nav-link[href*="#"]')
+  )
+    .filter((link) => link.pathname === location.pathname && link.hash)
+    .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+    .filter((item): item is { link: HTMLAnchorElement; section: HTMLElement } => !!item.section);
+
+  if (spyTargets.length > 0) {
+    const allLinks = document.querySelectorAll('.nav-link');
+    let ticking = false;
+
+    const spy = () => {
+      ticking = false;
+      const pos = window.scrollY + 140;
+      let current = spyTargets[0];
+      for (const item of spyTargets) {
+        if (item.section.offsetTop <= pos) current = item;
+      }
+      allLinks.forEach((l) => l.classList.toggle('active', l === current.link));
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(spy);
+        }
+      },
+      { passive: true }
+    );
+    spy();
+  }
+</script>

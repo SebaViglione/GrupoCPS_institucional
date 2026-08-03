@@ -1,0 +1,730 @@
+/*
+ * Estilos globales compartidos por todas las páginas.
+ * Port del CSS legacy (legacy/css/styles.css) conservando nombres de clase.
+ * Los tokens (:root) viven en tokens.css — acá no se redefine :root.
+ * Variables legacy eliminadas se reemplazaron por sus valores directos:
+ *   --spacing-xs 0.5rem / -sm 1rem / -md 2rem / -lg 4rem / -xl 6rem
+ *   --dark-gray #141418
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-height);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--bg-dark);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ======================================
+   SKIP LINK (visually hidden hasta :focus)
+   ====================================== */
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  transform: translateY(-150%);
+  background: var(--primary-dark);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: var(--font-secondary);
+  letter-spacing: 0.5px;
+  transition: transform var(--transition-fast);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ======================================
+   NAVIGATION
+   ====================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all var(--transition-normal);
+  background: transparent;
+}
+
+.navbar.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  transition: transform var(--transition-normal);
+  border-radius: 8px;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* El texto del logo ya no es <h1> (único h1 = hero); .logo-text es el nombre nuevo. */
+.logo h1,
+.logo .logo-text {
+  font-family: var(--font-secondary);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--white);
+}
+
+.logo .highlight {
+  color: var(--primary-color);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+      var(--primary-color),
+      var(--primary-light));
+  transition: width var(--transition-normal);
+}
+
+.nav-link:hover,
+.nav-link.active,
+.nav-link[aria-current='page'] {
+  color: var(--primary-color);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after,
+.nav-link[aria-current='page']::after {
+  width: 100%;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--white);
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 2px;
+  background: var(--white);
+  transition: all var(--transition-normal);
+}
+
+.menu-toggle svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Selector de idioma */
+.lang-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--bg-card);
+  padding: 0.3rem;
+  border-radius: 25px;
+  border: 2px solid var(--medium-gray);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--lighter-gray);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  letter-spacing: 0.5px;
+  font-family: var(--font-secondary);
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Estado activo: clase legacy o atributos ARIA del toggle nuevo */
+.lang-btn.active,
+.lang-btn[aria-pressed='true'],
+.lang-btn[aria-current] {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.3);
+  transform: scale(1.05);
+}
+
+.lang-btn:hover:not(.active):not([aria-pressed='true']):not([aria-current]) {
+  background: var(--medium-gray);
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+/* ======================================
+   BOTONES
+   ====================================== */
+
+.btn {
+  padding: 1rem 2.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all var(--transition-normal);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+  font-family: var(--font-secondary);
+}
+
+/* Gradiente dark -> color (AA sobre texto blanco; el legacy usaba color -> dark) */
+.btn-primary {
+  background: linear-gradient(135deg,
+      var(--primary-dark),
+      var(--primary-color));
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(var(--primary-rgb), 0.5);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+/* ======================================
+   SECTION HEADERS
+   ====================================== */
+
+.section-header {
+  margin-bottom: 4rem;
+}
+
+.section-header.center {
+  text-align: center;
+}
+
+.section-header.center .section-description {
+  text-align: center;
+}
+
+.section-tag {
+  display: inline-block;
+  color: var(--primary-color);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1.2rem;
+  font-family: var(--font-secondary);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.section-tag::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.section-title {
+  font-family: var(--font-secondary);
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+
+/* Sin text-align: justify (legibilidad); centrado via .section-header.center */
+.section-description {
+  font-size: 1.15rem;
+  color: var(--lighter-gray);
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.9;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  text-wrap: pretty;
+}
+
+.section-description .highlight {
+  color: var(--primary-color);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.section-description .highlight:hover {
+  color: var(--primary-light);
+}
+
+.highlight {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* ======================================
+   SCROLL INDICATOR (hero de todas las páginas)
+   ====================================== */
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.7;
+  animation: float 3s ease-in-out infinite;
+}
+
+.mouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
+  position: relative;
+}
+
+.mouse::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: var(--primary-color);
+  border-radius: 2px;
+  animation: scroll 2s ease-in-out infinite;
+}
+
+.scroll-indicator span {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--lighter-gray);
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(16px);
+  }
+}
+
+/* ======================================
+   ANIMACIONES DE ENTRADA
+   ====================================== */
+
+.fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.delay-3 {
+  animation-delay: 0.6s;
+}
+
+.delay-4 {
+  animation-delay: 0.8s;
+}
+
+.delay-5 {
+  animation-delay: 1s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ======================================
+   FOOTER
+   ====================================== */
+
+.footer {
+  background: var(--black);
+  padding: 3rem 0 1.5rem;
+  border-top: 1px solid var(--medium-gray);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-brand h3 {
+  font-family: var(--font-secondary);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.footer-brand p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--lighter-gray);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-family: var(--font-secondary);
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+}
+
+.footer-social {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.footer-social a {
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+.footer-social svg {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--medium-gray);
+}
+
+.footer-bottom p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+
+/* ======================================
+   BOTÓN FLOTANTE DE WHATSAPP
+   ====================================== */
+
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.whatsapp-float:hover {
+  background-color: #128c7e;
+  transform: scale(1.1);
+}
+
+.whatsapp-float svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* ======================================
+   RESPONSIVE
+   ====================================== */
+
+@media (max-width: 1100px) {
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 70%;
+    max-width: 300px;
+    background: rgba(10, 10, 10, 0.98);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    transition: right var(--transition-normal);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .menu-toggle {
+    display: flex;
+    z-index: 1001;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.2rem;
+  }
+
+  .logo-img {
+    height: 40px;
+  }
+
+  .logo h1,
+  .logo .logo-text {
+    font-size: 1.4rem;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  .lang-selector {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .lang-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-img {
+    height: 35px;
+  }
+
+  .logo h1,
+  .logo .logo-text {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    text-align: left;
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+}
+
+/* ======================================
+   PREFERS-REDUCED-MOTION
+   Las animaciones de entrada terminan visibles; nada queda invisible.
+   ====================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .fade-in-up,
+  .reveal,
+  .obra-card {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .scroll-indicator,
+  .mouse::before {
+    animation: none !important;
+  }
+}

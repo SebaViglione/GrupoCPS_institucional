@@ -36,10 +36,17 @@ const themeColor = theme === 'estudio' ? '#ef8a1e' : '#2199d5';
 <meta name="description" content={description} />
 {noindex && <meta name="robots" content="noindex" />}
 
-<link rel="canonical" href={canonical} />
-<link rel="alternate" hreflang="es" href={esUrl} />
-<link rel="alternate" hreflang="en" href={enUrl} />
-<link rel="alternate" hreflang="x-default" href={esUrl} />
+{
+  /* Una página noindex (404) no lleva canonical ni hreflang */
+  !noindex && (
+    <>
+      <link rel="canonical" href={canonical} />
+      <link rel="alternate" hreflang="es" href={esUrl} />
+      <link rel="alternate" hreflang="en" href={enUrl} />
+      <link rel="alternate" hreflang="x-default" href={esUrl} />
+    </>
+  )
+}
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Grupo CPS" />

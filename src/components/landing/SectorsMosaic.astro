@@ -1,0 +1,73 @@
+---
+import { Picture } from 'astro:assets';
+import Icon from '../Icon.astro';
+import { useTranslations, localePath, type Locale } from '../../i18n';
+import { CATEGORIAS, obraImage } from '../../lib/obras';
+import { mosaicImages } from '../../data/mosaic';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// El diccionario no tiene el tag de la sección: copy del legacy (i18n.js mosaic.tag).
+const tag = locale === 'es' ? 'Sectores' : 'Sectors';
+const obrasHref = localePath(locale, '/obras/');
+
+const tiles = CATEGORIAS.map((cat) => {
+  const relPath = mosaicImages[cat];
+  return {
+    cat,
+    label: t.categories[cat],
+    image: relPath ? obraImage(relPath) : null,
+  };
+});
+---
+
+<section class="sectors-mosaic" id="obras">
+  <div class="container">
+    <div class="section-header center">
+      <span class="section-tag">{tag}</span>
+      <h2 class="section-title">{t.mosaic.title}</h2>
+      <p class="section-description">{t.mosaic.description}</p>
+    </div>
+  </div>
+
+  <div class="mosaic-grid">
+    {
+      tiles.map(({ cat, label, image }) => (
+        <a
+          class:list={['mosaic-item', { 'mosaic-item--no-photo': !image }]}
+          href={`${obrasHref}?categoria=${cat}`}
+          data-category={cat}
+        >
+          {image && (
+            <Picture
+              src={image}
+              widths={[400, 800]}
+              formats={['avif', 'webp']}
+              fallbackFormat="webp"
+              sizes="(min-width:1024px) 17vw, (min-width:640px) 33vw, 50vw"
+              alt={label}
+              loading="lazy"
+              class="mosaic-bg"
+            />
+          )}
+          <div class="mosaic-overlay" />
+          <div class="mosaic-content">
+            {!image && <Icon name="zap" size={48} />}
+            <span class="mosaic-tag">{label}</span>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="container">
+    <div class="obras-preview-cta">
+      <a href={obrasHref} class="btn btn-primary">{t.mosaic.cta}</a>
+    </div>
+  </div>
+</section>
