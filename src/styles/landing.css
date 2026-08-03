@@ -104,6 +104,14 @@
   animation: glow-text 2.5s ease-in-out infinite alternate;
 }
 
+/* Cuando el título entra con fade-in-up, ambas animaciones deben convivir:
+   una sola declaración de animation pisa a la otra y deja el h1 en opacity 0 */
+.hero-title.fade-in-up {
+  animation:
+    fadeInUp 1s ease forwards,
+    glow-text 2.5s ease-in-out infinite alternate;
+}
+
 @keyframes glow-text {
   from {
     filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.3));
@@ -341,12 +349,16 @@
 .mosaic-tag {
   color: var(--white);
   font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 4px;
+  /* Con 6 tiles el ancho por celda baja a ~213px: el tamaño debe escalar
+     y permitir wrap ("Instalaciones Eléctricas" ocupa dos líneas) */
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  letter-spacing: 2px;
   text-transform: uppercase;
   font-family: var(--font-secondary);
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
   display: block;
+  text-align: center;
+  padding: 0 0.75rem;
 }
 
 /* Tile sin foto (instalaciones eléctricas): gradiente + ícono centrado */

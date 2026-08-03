@@ -121,6 +121,14 @@
   animation: glow-text 2.5s ease-in-out infinite alternate;
 }
 
+/* fade-in-up y glow deben convivir: una sola declaración de animation
+   pisa a la otra y deja el título en opacity 0 */
+.obras-hero-content .hero-title.fade-in-up {
+  animation:
+    fadeInUp 1s ease forwards,
+    glow-text 2.5s ease-in-out infinite alternate;
+}
+
 @keyframes glow-text {
   from {
     filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.3));

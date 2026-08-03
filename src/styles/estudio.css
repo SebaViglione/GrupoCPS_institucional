@@ -57,7 +57,8 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 2rem;
+  /* el navbar es fijo: sin este padding el subtítulo queda debajo de él */
+  padding: calc(var(--navbar-height) + 1rem) 2rem 2rem;
   width: 100%;
   max-width: 1180px;
   display: flex;
@@ -93,6 +94,14 @@
   margin-bottom: 2.5rem;
   line-height: 1.1;
   animation: glow-text 2.5s ease-in-out infinite alternate;
+}
+
+/* fade-in-up y glow deben convivir: una sola declaración de animation
+   pisa a la otra y deja el título en opacity 0 */
+.estudio-hero .hero-title.fade-in-up {
+  animation:
+    fadeInUp 1s ease forwards,
+    glow-text 2.5s ease-in-out infinite alternate;
 }
 
 @keyframes glow-text {
