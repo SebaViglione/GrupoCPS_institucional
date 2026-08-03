@@ -1,26 +1,93 @@
 [build]
-  publish = "public"
+  command = "npm run build"
+  publish = "dist"
 
-# Opcional: headers de seguridad y cache
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
+[build.environment]
+  NODE_VERSION = "22"
 
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+# --- Redirects (primer match gana; query-rules antes que las reglas .html genéricas) ---
 
 [[redirects]]
   from = "/web"
   to = "/"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from = "/web/*"
   to = "/"
-  status = 302
+  status = 301
   force = true
+
+# URLs legacy con ?lang=en -> rutas EN estáticas
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 301
+  query = { lang = "en" }
+
+[[redirects]]
+  from = "/obras.html"
+  to = "/en/obras/"
+  status = 301
+  query = { lang = "en" }
+
+[[redirects]]
+  from = "/estudio.html"
+  to = "/en/estudio/"
+  status = 301
+  query = { lang = "en" }
+
+# URLs .html indexadas -> URLs limpias
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/obras.html"
+  to = "/obras/"
+  status = 301
+
+[[redirects]]
+  from = "/estudio.html"
+  to = "/estudio/"
+  status = 301
+
+# --- Headers ---
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Assets de build con hash en el nombre: cache inmutable
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Videos con nombres versionados (-v2): cache inmutable
+[[headers]]
+  for = "/assets/videos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML siempre revalida
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# El service worker debe poder actualizarse siempre (kill-switch)
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

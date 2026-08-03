@@ -1,5 +1,26 @@
 {
+  "name": "grupocps-institucional",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "prep-obra": "node scripts/prep-obras.mjs",
+    "make-og": "node scripts/make-og.mjs",
+    "encode-videos": "bash scripts/encode-videos.sh"
+  },
   "dependencies": {
-    "sharp": "^0.34.5"
+    "@astrojs/sitemap": "^3.4.1",
+    "@fontsource-variable/montserrat": "^5.2.6",
+    "@fontsource/poppins": "^5.2.6",
+    "astro": "^5.13.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "sharp": "^0.34.5",
+    "typescript": "^5.9.2"
   }
 }

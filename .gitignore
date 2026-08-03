@@ -1,37 +1,25 @@
-# Dependencias de Composer
-/vendor/
-composer.phar
+# Build
+dist/
+.astro/
+node_modules/
 
-# Archivos de configuración local
+# Config local
 .env
 .env.local
 
 # Logs
 *.log
 
-# Archivos temporales
+# SO / IDE
 .DS_Store
 Thumbs.db
-
-# Node modules
-node_modules/
-
-# Archivos de Docker
-docker-compose.override.yml
-
-# Archivos de IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Carpetas de imagenes temporales (ignoramos todo menos obras-optimized)
-public/assets/images/obras/
-public/assets/images/obras-upscaled/
-public/assets/images/obras-*/
-
-# Pero permitir obras-optimized
-!public/assets/images/obras-optimized/
+# Carpetas de trabajo del pipeline de medios (solo se commitean las fuentes finales)
+media-work/
 
 # Cache
 .cache/

@@ -1,0 +1,45 @@
+/*
+ * Design tokens. Mantiene los nombres de variables del CSS legacy para que
+ * el port de estilos sea 1:1; se eliminaron las variables sin uso.
+ * El tema naranja aplica SOLO a la página del Estudio via [data-theme="estudio"].
+ */
+:root {
+  /* Marca (azul) */
+  --primary-color: #2199d5;
+  --primary-dark: #1a7cad;
+  --primary-light: #4bb3e3;
+  --primary-rgb: 33, 153, 213;
+
+  /* Neutros */
+  --black: #0a0a0a;
+  --medium-gray: #1f1f24;
+  --light-gray: #50505a; /* solo bordes/decoración: no cumple AA como texto */
+  --lighter-gray: #8a8a94;
+  --very-light-gray: #d7d7db;
+  --white: #ffffff;
+  --text-muted: #9a9aa3; /* texto secundario sobre fondos oscuros (AA ~7:1) */
+
+  /* Fondos */
+  --bg-dark: #0d0f12;
+  --bg-section: #15181d;
+  --bg-card: #1c1f26;
+
+  /* Tipografía */
+  --font-primary: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-secondary: 'Montserrat Variable', 'Montserrat', system-ui, sans-serif;
+
+  /* Transiciones y sombras */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --shadow-glow: 0 0 20px rgba(var(--primary-rgb), 0.35);
+
+  --navbar-height: 80px;
+}
+
+[data-theme='estudio'] {
+  --primary-color: #ef8a1e;
+  --primary-dark: #b85f00;
+  --primary-light: #ffb45c;
+  --primary-rgb: 239, 138, 30;
+}

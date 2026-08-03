@@ -1,0 +1,97 @@
+{
+  "clientes": [
+    {
+      "nombre": "Arca",
+      "logo": "constructoras/Arca.webp",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "CIEMSA",
+      "logo": "constructoras/CIEMSA.webp",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "Ebital",
+      "logo": "constructoras/Ebital.webp",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "Enkel",
+      "logo": "constructoras/Enkel.svg",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "Stiler",
+      "logo": "constructoras/Stiler.webp",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "Teyma",
+      "logo": "constructoras/Teyma.svg",
+      "categoria": "Constructoras"
+    },
+    {
+      "nombre": "Fecovi",
+      "logo": "cooperativas/Fecovi.webp",
+      "categoria": "Cooperativas"
+    },
+    {
+      "nombre": "ASSE",
+      "logo": "estado/ASSE.webp",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "Antel",
+      "logo": "estado/Antel.svg",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "BSE",
+      "logo": "estado/BSE.webp",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "MSP",
+      "logo": "estado/MSP.webp",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "MTOP",
+      "logo": "estado/MTOP.webp",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "MTSS",
+      "logo": "estado/MTSS.webp",
+      "categoria": "Estado",
+      "clase": "wide"
+    },
+    {
+      "nombre": "Mides",
+      "logo": "estado/Mides.webp",
+      "categoria": "Estado"
+    },
+    {
+      "nombre": "UDELAR",
+      "logo": "estado/UDELAR.webp",
+      "categoria": "Estado",
+      "clase": "compact"
+    },
+    {
+      "nombre": "Proa Carrasco",
+      "logo": "privados/Proa Carrasco.webp",
+      "categoria": "Privados",
+      "clase": "wide"
+    },
+    {
+      "nombre": "Sinergia",
+      "logo": "privados/Sinergia.webp",
+      "categoria": "Privados"
+    },
+    {
+      "nombre": "Summum",
+      "logo": "privados/Summum.webp",
+      "categoria": "Privados"
+    }
+  ]
+}
